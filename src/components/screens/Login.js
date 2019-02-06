@@ -6,7 +6,7 @@ export default class Login extends React.Component {
 
   onLoginPress = () => {
     // do nothing
-  };
+  }; 
 
   render() {
     return (
