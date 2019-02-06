@@ -15,7 +15,7 @@ export default class Login extends React.Component {
         <Text style={styles.logo_text}>ALZ-BYE-MER</Text>
         <Image
           style={styles.logo_image}
-          source={require('../assets/img/logo_icon.png')}
+          source={require('../../../assets/img/logo_icon.png')}
           resizeMode={'contain'}
         />
 

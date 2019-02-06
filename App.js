@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import Login from './pages/Login';
+import Login from './src/components/screens/Login';
 
 export default class App extends React.Component {
 
