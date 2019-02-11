@@ -1,14 +1,16 @@
-import React from 'react';
-import { View } from 'react-native';
-import Login from './src/components/screens/Login';
+// This is a root where navigation setting takes place.
 
-export default class App extends React.Component {
+import { createStackNavigator, createAppContainer } from 'react-navigation';
+import Expo from 'expo';
 
-  render() {
-    return (
-      <View styles={{flex:1}}>
-        <Login />
-      </View>
-    );
-  }
-}
+// import all screens for navigation here:
+import Login from './src/screens/Login';
+import HomeScreen from './src/screens/HomeScreen';
+
+// add screens to be navigated here:
+const Navigation = createStackNavigator({
+  Login: { screen: Login },
+  HomeScreen: { screen: HomeScreen},
+});
+
+export default createAppContainer(Navigation);
