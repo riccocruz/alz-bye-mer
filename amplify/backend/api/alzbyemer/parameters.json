@@ -1,0 +1,13 @@
+{
+    "AppSyncApiName": "alzbyemer",
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authcognito097a7981",
+            "Outputs.UserPoolId"
+        ]
+    },
+    "schemaGraphql": "s3://a-20190205161137-deployment/amplify-appsync-files/schema.graphql.1549924371010",
+    "ResolverBucket": "a-20190205161137-deployment",
+    "ResolverRootKey": "amplify-appsync-files",
+    "DeploymentTimestamp": "1549924371010"
+}

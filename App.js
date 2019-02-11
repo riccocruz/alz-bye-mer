@@ -1,5 +1,7 @@
 // This is a root where navigation setting takes place.
 
+// AWS Management Console account ID: 689668396068
+
 import React from 'react';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import Expo from 'expo';
