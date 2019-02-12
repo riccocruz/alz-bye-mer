@@ -42,7 +42,7 @@ class App extends React.Component {
 export default withAuthenticator(
   App,
   {
-    includeGreetings: true,
+    // includeGreetings: true,
     signUpConfig: {
       hiddenDefaults: ['phone_number']
     }
