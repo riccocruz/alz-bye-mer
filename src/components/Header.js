@@ -2,7 +2,7 @@ import React from "React";
 import { View, Text, StyleSheet, StatusBar, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from "@expo/vector-icons";
 
-const Header = () => {
+const Header = ({navigate}) => {
   return (
     <View style={styles.container} backgroundColor="#c43235">
         <Text style={styles.text}>ALZ-BYE-MER</Text>
