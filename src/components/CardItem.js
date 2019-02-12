@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-const CardItem = ({ title, link, image }) => {
+const CardItem = ({ title, onPress, image, navigate, username }) => {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={()=>navigate(onPress, {username: username})}>
       <View style={{justifyContent:'center', alignItems:'center'}}>
         <Image
           style={styles.image}

@@ -1,8 +1,8 @@
-// This is a root where navigation setting takes place.
+// This is a root where navigation setting and aws-amplify auth setup takes place.
 
 import React from 'react';
+import { View } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
-import Expo from 'expo';
 
 // AWS Amplify
 import Amplify from 'aws-amplify';
@@ -13,16 +13,31 @@ import { withAuthenticator } from 'aws-amplify-react-native';
 import AWSConfig from './aws-exports';
 
 // import all screens for navigation here:
-import Login from './src/screens/Login';
+import Header from './src/commons/Header';
 import HomeScreen from './src/screens/HomeScreen';
+import UserProfile from './src/screens/UserProfile';
 
 // add screens to be navigated here:
 const Navigation = createStackNavigator(
   {
     HomeScreen: { screen: HomeScreen},
+    UserProfile: { screen: UserProfile},
   },
   {
-    initialRouteName: 'HomeScreen'
+    initialRouteName: 'HomeScreen',
+    defaultNavigationOptions: {
+      headerTitleStyle: {
+        flex:1,
+        textAlign:'center',
+        marginRight: 56,
+      },
+      headerStyle: {
+        height: 50,
+      },
+      headerForceInset: {
+        vertical: 'never'
+      }
+    }
   }
 );
 
@@ -32,8 +47,23 @@ Amplify.configure(AWSConfig);
 // App Container
 const AppContainer = createAppContainer(Navigation);
 class App extends React.Component {
+  // signOut to be passed down to Header
+  handleSignOut = () => {
+    Auth.signOut()
+        .then(() => {
+          this.props.onStateChange('signedOut', null);
+          console.log(this.props.navigate);
+        })
+        .catch(err => {console.log(err)});
+  }
+
   render() {
-    return <AppContainer />
+    return (
+      <View style={{flex:1}}>
+        <Header handleSignOut={this.handleSignOut} />
+        <AppContainer />
+      </View>
+    )
   }
 }
 
@@ -41,7 +71,6 @@ class App extends React.Component {
 export default withAuthenticator(
   App,
   {
-    includeGreetings: true,
     signUpConfig: {
       hiddenDefaults: ['phone_number']
     }
