@@ -1,12 +1,20 @@
 import React from "React";
 import { View, Text, StyleSheet, StatusBar, TouchableOpacity } from 'react-native';
-import { MaterialIcons } from "@expo/vector-icons";
+import { MaterialIcons, FontAwesome } from "@expo/vector-icons";
+
+import { Auth } from 'aws-amplify';
 
 const Header = ({navigate}) => {
+  const signOut = () => {
+    Auth.signOut();
+  }
   return (
     <View style={styles.container} backgroundColor="#c43235">
         <Text style={styles.text}>ALZ-BYE-MER</Text>
       <View style={{flexDirection:"row"}}>
+        <TouchableOpacity onPress={signOut}>
+          <FontAwesome name="sign-out" size={32} style={styles.icon}/>
+        </TouchableOpacity>
         <TouchableOpacity>
           <MaterialIcons name="notifications" size={32} style={styles.icon}/>
         </TouchableOpacity>

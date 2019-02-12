@@ -9,7 +9,7 @@ export default class HomeScreen extends React.Component {
     super(props);
     this.state = {
       step: 2537,
-      distance: 3.23,
+      distance: 1.12,
       dailyCompletd: false,
       cognitiveTodoCompleted: true,
       physicalTodoCompleted: false,
