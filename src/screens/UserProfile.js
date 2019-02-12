@@ -3,6 +3,7 @@ import { TextInput, Text, View, TouchableOpacity, ScrollView } from 'react-nativ
 
 import TextField from '../commons/TextField';
 import CustomPicker from '../commons/CustomPicker';
+import RadioButton from '../commons/RadioButton';
 
 export default class UserProfile extends Component {
   constructor(props) {
@@ -11,6 +12,7 @@ export default class UserProfile extends Component {
       text: '',
       ethnicity: '',
       age: '',
+      gender: '',
     };
   };
 
@@ -57,6 +59,15 @@ export default class UserProfile extends Component {
                   {label: '75-79', value: '75-79'},
                   {label: '80-84', value: '80-84'},
                   {label: '85 or older', value: '>=85'}]}
+        />
+        <RadioButton
+          label="Gender"
+          options={[
+            {id: 0, label: 'Male'},
+            {id: 1, label: 'Female'},
+          ]}
+          onChange={option=>this.setState({gender:option.label})}
+          horizontal
         />
       </ScrollView>
     );
