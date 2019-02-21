@@ -2,7 +2,7 @@ import React from 'react';
 import { TextInput, View, Text, StyleSheet } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 
-const TextField = ({ label, placeholder, value, onChangeText }) => {
+const TextField = ({ label, placeholder, value, onChangeText, keyboardType }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
@@ -13,6 +13,7 @@ const TextField = ({ label, placeholder, value, onChangeText }) => {
         style={styles.input}
         selectionColor={'#428AF8'}
         underlineColorAndroid={'#428AF8'}
+        keyboardType={keyboardType? keyboardType:'default'}
       />
     </View>
   );
