@@ -10,10 +10,14 @@ export default class UserProfile extends Component {
     super(props);
     this.state = {
       text: '',
+      // birthday: new Date(),
       ethnicity: '',
       age: '',
       gender: '',
     };
+
+    // this.shouldComponentUpdate()
+
   };
 
   static navigationOptions = {
@@ -39,6 +43,13 @@ export default class UserProfile extends Component {
           value={this.state.text}
           onChangeText={(text)=>this.setState({text})}
         />
+
+        {/* <CustomPicker
+          label={"Birthday"}
+          selectedValue={this.state.birthday}
+          onValueChange={birthday=>this.setState({birthday})}
+        /> */}
+
         <CustomPicker
           label={"Ethnicity"}
           selectedValue={this.state.ethnicity}
