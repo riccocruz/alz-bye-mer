@@ -16,12 +16,14 @@ import AWSConfig from './aws-exports';
 import Header from './src/commons/Header';
 import HomeScreen from './src/screens/HomeScreen';
 import UserProfile from './src/screens/UserProfile';
+import UserAssessment from './src/screens/UserAssessment';
 
 // add screens to be navigated here:
 const Navigation = createStackNavigator(
   {
     HomeScreen: { screen: HomeScreen},
     UserProfile: { screen: UserProfile},
+    UserAssessment: { screen: UserAssessment },
   },
   {
     initialRouteName: 'HomeScreen',

@@ -45,10 +45,12 @@ export default class UserProfile extends Component {
   }
 
   componentDidUpdate() {
+
     console.log(this.state);
   }
 
-  onPressUpdate = () => {
+  onPressNext = () => {
+    const username = this.props.navigation.getParam('username');
     // this is where all local states will be posted to the database
     // for now, hardcoded some timeOut in place of actual request
     this.setState({
@@ -59,11 +61,13 @@ export default class UserProfile extends Component {
       this.setState({
         isSubmitting: false,
       });
-    }, 2500);
+      this.props.navigation.navigate('UserAssessment', {username: username});
+    }, 1500);
   }
 
   render() {
-    const { navigate } = this.props.navigation;
+    const { ethnicity, age, gender, height, weight, familyHistory, smoking, highBloodPressure, diabetes } = this.state;
+
     const gender_options = [
       {id: 0, label: 'Male'},
       {id: 1, label: 'Female'},
@@ -145,12 +149,12 @@ export default class UserProfile extends Component {
           horizontal
         />
         <Button
-          title="Update"
+          title="Next"
           containerStyle={{width:'50%', alignSelf:'center', marginTop: 20}}
           raised
           loading={this.state.isSubmitting}
-          disabled={this.state.isSubmitting}
-          onPress={this.onPressUpdate}
+          disabled={this.state.isSubmitting||ethnicity==''||age==''||gender==null||height==''||weight==''||familyHistory==null||smoking==null||highBloodPressure==null||diabetes==null}
+          onPress={this.onPressNext}
         />
       </ScrollView>
     );
