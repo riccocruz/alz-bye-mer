@@ -17,6 +17,7 @@ import Header from './src/commons/Header';
 import HomeScreen from './src/screens/HomeScreen';
 import UserProfile from './src/screens/UserProfile';
 import UserAssessment from './src/screens/UserAssessment';
+import CognitiveStat from './src/screens/CognitiveStat';
 
 // add screens to be navigated here:
 const Navigation = createStackNavigator(
@@ -24,6 +25,7 @@ const Navigation = createStackNavigator(
     HomeScreen: { screen: HomeScreen},
     UserProfile: { screen: UserProfile},
     UserAssessment: { screen: UserAssessment },
+    CognitiveStat: { screen: CognitiveStat },
   },
   {
     initialRouteName: 'HomeScreen',
