@@ -18,6 +18,7 @@ import HomeScreen from './src/screens/HomeScreen';
 import UserProfile from './src/screens/UserProfile';
 import UserAssessment from './src/screens/UserAssessment';
 import CognitiveStat from './src/screens/CognitiveStat';
+import PhysicalStat from './src/screens/PhysicalStat';
 
 // add screens to be navigated here:
 const Navigation = createStackNavigator(
@@ -26,6 +27,7 @@ const Navigation = createStackNavigator(
     UserProfile: { screen: UserProfile},
     UserAssessment: { screen: UserAssessment },
     CognitiveStat: { screen: CognitiveStat },
+    PhysicalStat: { screen: PhysicalStat },
   },
   {
     initialRouteName: 'HomeScreen',
@@ -60,11 +62,10 @@ class App extends React.Component {
         })
         .catch(err => {console.log(err)});
   }
-
   render() {
     return (
       <View style={{flex:1}}>
-        <Header handleSignOut={this.handleSignOut} />
+        <Header handleSignOut={this.handleSignOut}/>
         <AppContainer />
       </View>
     )
