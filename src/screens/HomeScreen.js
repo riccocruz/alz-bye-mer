@@ -1,8 +1,9 @@
 import React from 'react';
-import { ScrollView, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Linking } from 'react-native';
 import { Auth } from 'aws-amplify';
 
 import HomeCard from '../components/HomeCard';
+import { Button } from 'react-native-elements';
 
 export default class HomeScreen extends React.Component {
   constructor(props) {
@@ -26,6 +27,7 @@ export default class HomeScreen extends React.Component {
       flex: 1,
       textAlign: 'center'
     }
+    
   };
 
   componentDidMount() {
@@ -68,6 +70,14 @@ export default class HomeScreen extends React.Component {
             navigate={navigate}
             username={this.state.username}
           />
+
+          <Button
+            onPress={ ()=>{ Linking.openURL('https://www.nia.nih.gov/health/what-alzheimers-disease')}}
+            title="About AD"
+            color ="#ffa07a"
+            containerStyle={{width:'50%', paddingLeft: 20, marginTop: 10}}
+          />
+
         </ScrollView>
     )
   }

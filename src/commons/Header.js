@@ -4,7 +4,8 @@ import { MaterialIcons, FontAwesome } from "@expo/vector-icons";
 import { ifIphoneX } from 'react-native-iphone-x-helper';
 
 
-const Header = ({handleSignOut}) => {
+const Header = ({handleSignOut, navigation}) => {
+
   return (
     <View style={styles.container} backgroundColor="#c43235">
         <Text style={styles.text}>ALZ-BYE-MER</Text>
