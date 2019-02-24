@@ -1,5 +1,6 @@
 import { Pedometer } from "expo";
 import { StyleSheet, Text, View } from "react-native";
+import React from 'react';
 
 export default class PedometerSensor extends React.Component {
   constructor(props) {
@@ -23,6 +24,10 @@ export default class PedometerSensor extends React.Component {
     title: 'My Profile',
   };
 
+  getPastStepCount() {
+    return this.pastStepCount;
+  }
+  
   _subscribe = () => {
     this._subscription = Pedometer.watchStepCount(result => {
       this.setState({
