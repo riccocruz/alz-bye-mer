@@ -78,6 +78,13 @@ export default class HomeScreen extends React.Component {
             containerStyle={{width:'50%', paddingLeft: 20, marginTop: 10}}
           />
 
+          <Button 
+            onPress={ ()=> navigate('Settings', {username: this.state.username})}
+            title="Settings"
+            color ="#ffa07a"
+            containerStyle={{width:'50%', paddingLeft: 20, marginTop: 10}}
+          />
+
         </ScrollView>
     )
   }
