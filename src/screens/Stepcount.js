@@ -92,4 +92,8 @@ const styles = StyleSheet.create({
   }
 });
 
+<<<<<<< HEAD
 Expo.registerRootComponent(PedometerSensor);
+=======
+Expo.registerRootComponent(PedometerSensor);
+>>>>>>> master

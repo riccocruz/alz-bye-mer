@@ -47,7 +47,6 @@ export default class HomeScreen extends React.Component {
   getPastStepCount() {
     return this.pastStepCount;
   }
-  
   _subscribe = () => {
     this._subscription = Pedometer.watchStepCount(result => {
       this.setState({
@@ -115,6 +114,7 @@ export default class HomeScreen extends React.Component {
             title={"Physical Challenge"}
             item1={{title: 'View Stat', onPress: 'PhysicalStat', image: require('../../assets/img/bar_graph.png')}}
             item2={{title: `${this.state.pastStepCount}/10000 steps`, onPress: 'Stepcount', image: require('../../assets/img/walking.png')}}
+            item2={{title: `${this.state.pastStepCount}/10000 steps`, onPress: 'StepCount', image: require('../../assets/img/walking.png')}}
             item3={{title: `${this.state.distance} Miles`, onPress: 'DistanceTraveled', image: require('../../assets/img/distance.png')}}
             backgroundColor={this.state.PhysicalChallengeCompleted? 'rgba(123, 239, 178, 0.75)' : 'rgba(247, 202, 24, 0.5)'}
             navigate={navigate}
