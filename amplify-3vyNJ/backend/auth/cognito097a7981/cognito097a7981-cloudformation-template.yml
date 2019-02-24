@@ -1,17 +1,6 @@
 AWSTemplateFormatVersion: 2010-09-09
 
 Parameters:
-  env:
-    Type: String
-  authRoleName:
-    Type: String
-  unauthRoleName:
-    Type: String
-  authRoleArn:
-    Type: String
-  unauthRoleArn:
-    Type: String
-
     
   identityPoolName:
     Type: String
@@ -124,7 +113,13 @@ Parameters:
   unAuthRoleName:
     Type: String
             
+  authRoleName:
+    Type: String
+            
   unAuthRoleArn:
+    Type: String
+            
+  authRoleArn:
     Type: String
             
   resourceName:
@@ -133,9 +128,6 @@ Parameters:
   authSelections:
     Type: String
           
-Conditions:
-  ShouldNotCreateEnvResources: !Equals [ !Ref env, NONE ]
-
 Resources:
   
   # BEGIN SNS ROLE RESOURCE
@@ -143,7 +135,7 @@ Resources:
   # Created to allow the UserPool SMS Config to publish via the Simple Notification Service during MFA Process
     Type: AWS::IAM::Role
     Properties:
-      RoleName: !If [ShouldNotCreateEnvResources, !Ref roleName, !Join ['',[!Ref roleName, '-', !Ref env]]]
+      RoleName: !Ref roleName
       AssumeRolePolicyDocument: 
         Version: "2012-10-17"
         Statement: 
@@ -172,9 +164,8 @@ Resources:
   # Created upon user selection
   # Depends on SNS Role for Arn if MFA is enabled
     Type: AWS::Cognito::UserPool
-    UpdateReplacePolicy: Retain
     Properties:
-      UserPoolName: !If [ShouldNotCreateEnvResources, !Ref userPoolName, !Join ['',[!Ref userPoolName, '-', !Ref env]]]
+      UserPoolName: !Ref userPoolName
       Schema: 
         
         -
@@ -228,7 +219,7 @@ Resources:
   # Created to execute Lambda which gets userpool app client config values
     Type: 'AWS::IAM::Role'
     Properties:
-      RoleName: !If [ShouldNotCreateEnvResources, !Ref userpoolClientLambdaRole, !Join ['',[!Ref userpoolClientLambdaRole, '-', !Ref env]]]
+      RoleName: !Ref userpoolClientLambdaRole     
       AssumeRolePolicyDocument:
         Version: '2012-10-17'
         Statement:
@@ -284,7 +275,7 @@ Resources:
     Properties:
       PolicyName: !Ref userpoolClientLambdaPolicy
       Roles: 
-        - !If [ShouldNotCreateEnvResources, !Ref userpoolClientLambdaRole, !Join ['',[!Ref userpoolClientLambdaRole, '-', !Ref env]]]
+        - !Ref userpoolClientLambdaRole
       PolicyDocument:
         Version: '2012-10-17'
         Statement:
@@ -301,7 +292,7 @@ Resources:
     Properties:
       PolicyName: !Ref userpoolClientLogPolicy
       Roles: 
-        - !If [ShouldNotCreateEnvResources, !Ref userpoolClientLambdaRole, !Join ['',[!Ref userpoolClientLambdaRole, '-', !Ref env]]]
+        - !Ref userpoolClientLambdaRole
       PolicyDocument:
         Version: 2012-10-17
         Statement:
@@ -334,7 +325,7 @@ Resources:
   # Always created
     Type: AWS::Cognito::IdentityPool
     Properties: 
-      IdentityPoolName: !If [ShouldNotCreateEnvResources, 'cognito097a7981_identitypool_097a7981', !Join ['',['cognito097a7981_identitypool_097a7981', '__', !Ref env]]]
+      IdentityPoolName: cognito097a7981_identitypool_097a7981
       
       CognitoIdentityProviders:
         - ClientId:  !Ref UserPoolClient
@@ -359,7 +350,7 @@ Resources:
     Properties: 
       IdentityPoolId: !Ref IdentityPool
       Roles:
-          unauthenticated: !Ref unauthRoleArn
+          unauthenticated: !Ref unAuthRoleArn
           authenticated: !Ref authRoleArn
     DependsOn: IdentityPool
   
