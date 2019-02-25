@@ -1,28 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image} from 'react-native';
 import { Auth } from 'aws-amplify';
-import PhotoUpload from 'react-native-photo-upload'
-
-<PhotoUpload
-   onPhotoSelect={avatar => {
-     if (avatar) {
-       console.log('Image base64 string: ', avatar)
-     }
-   }}
- >
-   <Image
-     style={{
-       paddingVertical: 30,
-       width: 150,
-       height: 150,
-       borderRadius: 75
-     }}
-     resizeMode='cover'
-     source={{
-       uri: 'https://www.sparklabs.com/forum/styles/comboot/theme/images/default_avatar.jpg'
-     }}
-   />
- </PhotoUpload>
 
 export default class ProfileSetting extends Component {
     static navigationOptions = {
@@ -52,7 +30,7 @@ export default class ProfileSetting extends Component {
                 <Text style={styles.TextStyle}> User ID </Text>
                 <Text style={styles.ProfileTextStyle}> {this.state.username} </Text>
             </View>
-            <View style={styles.Separator} />
+            <View style = {styles.Separator} />
             <View style = {styles.ViewStyle}>
                 <Text style={styles.TextStyle}> User Picture </Text>
 
@@ -72,15 +50,17 @@ export default class ProfileSetting extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex:1,
+        flex:0.3,
         flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'stretch',
         marginBottom: 10,
     },
 
     ViewStyle: {
         flex: 1,
         flexDirection: 'row',
-        // justifyContent: 'space-between',
+        justifyContent: 'space-between',
     }, 
 
     TextStyle: {
@@ -101,7 +81,7 @@ const styles = StyleSheet.create({
     Separator: {
         width: "100%",
         height: 4,
-        backgroundColor: '#0000'
+        color: '#afafaf'
         
     },
 })
