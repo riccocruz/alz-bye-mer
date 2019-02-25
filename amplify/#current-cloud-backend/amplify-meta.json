@@ -9,6 +9,11 @@
 			"UnauthRoleName": "alz-bye-mer-20190225113955-unauthRole",
 			"StackName": "alz-bye-mer-20190225113955",
 			"StackId": "arn:aws:cloudformation:us-west-2:763327914732:stack/alz-bye-mer-20190225113955/21c3f0d0-3935-11e9-b38f-0adcdede1372"
+		},
+		"categories": {
+			"auth": {
+				"cognito62890894": {}
+			}
 		}
 	},
 	"auth": {
@@ -19,7 +24,7 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/alz-bye-mer-20190225113955-deployment/amplify-cfn-templates/auth/cognito62890894-cloudformation-template.yml",
 				"logicalId": "authcognito62890894"
 			},
-			"lastPushTimeStamp": "2019-02-25T19:49:04.626Z",
+			"lastPushTimeStamp": "2019-02-25T20:09:36.270Z",
 			"output": {
 				"AppClientSecret": "p9an85bt39cp90mqc52b0fjr9cgooceof4dj7jqqi99e9me6bvb",
 				"UserPoolId": "us-west-2_Bg93Nlrvp",
@@ -47,8 +52,8 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/alz-bye-mer-20190225113955-deployment/amplify-cfn-templates/api/cloudformation-template.json",
 				"logicalId": "apialzbyemer"
 			},
-			"lastPushTimeStamp": "2019-02-25T19:49:04.626Z",
-			"lastPushDirHash": "aOAuFTyl8tujtzwlMNcj2j/kHHM="
+			"lastPushTimeStamp": "2019-02-25T20:09:36.270Z",
+			"lastPushDirHash": "I9M/LTfwmJbUiDA4YFWZeZCroyo="
 		}
 	}
 }
