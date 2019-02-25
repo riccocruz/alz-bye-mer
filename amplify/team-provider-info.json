@@ -9,6 +9,11 @@
             "UnauthRoleName": "a-20190205161137-unauthRole",
             "StackName": "a-20190205161137",
             "StackId": "arn:aws:cloudformation:us-west-2:689668396068:stack/a-20190205161137/c3a37bb0-29a3-11e9-81c6-0a97e291c068"
+        },
+        "categories": {
+            "auth": {
+                "cognitoccc2841b": {}
+            }
         }
     }
 }
