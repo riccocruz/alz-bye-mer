@@ -1,33 +1,33 @@
 {
 	"providers": {
 		"awscloudformation": {
-			"AuthRoleName": "a-20190205161137-authRole",
-			"UnauthRoleArn": "arn:aws:iam::689668396068:role/a-20190205161137-unauthRole",
-			"AuthRoleArn": "arn:aws:iam::689668396068:role/a-20190205161137-authRole",
+			"AuthRoleName": "alz-bye-mer-20190225113955-authRole",
+			"UnauthRoleArn": "arn:aws:iam::763327914732:role/alz-bye-mer-20190225113955-unauthRole",
+			"AuthRoleArn": "arn:aws:iam::763327914732:role/alz-bye-mer-20190225113955-authRole",
 			"Region": "us-west-2",
-			"DeploymentBucketName": "a-20190205161137-deployment",
-			"UnauthRoleName": "a-20190205161137-unauthRole",
-			"StackName": "a-20190205161137",
-			"StackId": "arn:aws:cloudformation:us-west-2:689668396068:stack/a-20190205161137/c3a37bb0-29a3-11e9-81c6-0a97e291c068"
+			"DeploymentBucketName": "alz-bye-mer-20190225113955-deployment",
+			"UnauthRoleName": "alz-bye-mer-20190225113955-unauthRole",
+			"StackName": "alz-bye-mer-20190225113955",
+			"StackId": "arn:aws:cloudformation:us-west-2:763327914732:stack/alz-bye-mer-20190225113955/21c3f0d0-3935-11e9-b38f-0adcdede1372"
 		}
 	},
 	"auth": {
-		"cognitoccc2841b": {
+		"cognito62890894": {
 			"service": "Cognito",
 			"providerPlugin": "awscloudformation",
 			"providerMetadata": {
-				"s3TemplateURL": "https://s3.amazonaws.com/a-20190205161137-deployment/amplify-cfn-templates/auth/cognitoccc2841b-cloudformation-template.yml",
-				"logicalId": "authcognitoccc2841b"
+				"s3TemplateURL": "https://s3.amazonaws.com/alz-bye-mer-20190225113955-deployment/amplify-cfn-templates/auth/cognito62890894-cloudformation-template.yml",
+				"logicalId": "authcognito62890894"
 			},
-			"lastPushTimeStamp": "2019-02-25T18:35:03.270Z",
+			"lastPushTimeStamp": "2019-02-25T19:49:04.626Z",
 			"output": {
-				"AppClientSecret": "1j0a025q3imhpmgp71e3bc59dnetap4u1tbh2v3j2c2ijtlf7k13",
-				"UserPoolId": "us-west-2_2xHlJkRni",
-				"AppClientIDWeb": "6ijg214ije1m272d6h53ngu5q4",
-				"AppClientID": "d6nb7e299b2gpff2lu5c2mamm",
-				"UserPoolName": "alzbyemerccc2841b_userpool_ccc2841b"
+				"AppClientSecret": "p9an85bt39cp90mqc52b0fjr9cgooceof4dj7jqqi99e9me6bvb",
+				"UserPoolId": "us-west-2_Bg93Nlrvp",
+				"AppClientIDWeb": "17jl2k3bqp7qdlnksfslaafr73",
+				"AppClientID": "5b6c7t2mgtir1ds5dit10c9m93",
+				"UserPoolName": "alz_bye_mer62890894_userpool_62890894"
 			},
-			"lastPushDirHash": "TRhKKKcz5+KdVlbwjTjuBaDbGmo="
+			"lastPushDirHash": "7YMHzC6ZeCpkqKn43Bizm6v7syA="
 		}
 	},
 	"api": {
@@ -36,19 +36,19 @@
 			"providerPlugin": "awscloudformation",
 			"output": {
 				"securityType": "AMAZON_COGNITO_USER_POOLS",
-				"GraphQLAPIIdOutput": "3eicrz6ywjbo3innzi4eglwut4",
-				"GraphQLAPIEndpointOutput": "https://dcooinfsyjgcvb63nv7qfx5b2e.appsync-api.us-west-2.amazonaws.com/graphql",
-				"GraphQLAPIKeyOutput": "da2-3vt76qityvdrlozq4sadfj4r3u",
-				"AuthCognitoUserPoolIdOutput": "us-west-2_2xHlJkRni",
-				"AuthCognitoUserPoolNativeClientId": "See UserPool: us-west-2_2xHlJkRni",
-				"AuthCognitoUserPoolJSClientId": "See UserPool: us-west-2_2xHlJkRni"
+				"GraphQLAPIIdOutput": "fhd66uu6njao5ewhmc4camtlwu",
+				"GraphQLAPIEndpointOutput": "https://k6m7q6p75nfwllm36a3i54elqq.appsync-api.us-west-2.amazonaws.com/graphql",
+				"GraphQLAPIKeyOutput": "da2-syhm5ku325bedcg55lavb3cawq",
+				"AuthCognitoUserPoolIdOutput": "us-west-2_Bg93Nlrvp",
+				"AuthCognitoUserPoolNativeClientId": "See UserPool: us-west-2_Bg93Nlrvp",
+				"AuthCognitoUserPoolJSClientId": "See UserPool: us-west-2_Bg93Nlrvp"
 			},
 			"providerMetadata": {
-				"s3TemplateURL": "https://s3.amazonaws.com/a-20190205161137-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+				"s3TemplateURL": "https://s3.amazonaws.com/alz-bye-mer-20190225113955-deployment/amplify-cfn-templates/api/cloudformation-template.json",
 				"logicalId": "apialzbyemer"
 			},
-			"lastPushTimeStamp": "2019-02-25T18:35:03.270Z",
-			"lastPushDirHash": "fqvqiaK5BssIS6UJbZp/OwH7xYE="
+			"lastPushTimeStamp": "2019-02-25T19:49:04.626Z",
+			"lastPushDirHash": "aOAuFTyl8tujtzwlMNcj2j/kHHM="
 		}
 	}
 }

@@ -1,5 +1,7 @@
 // This is a root where navigation setting and aws-amplify auth setup takes place.
 
+// AWS Management Console account ID: 689668396068
+
 import React from 'react';
 import { View } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
