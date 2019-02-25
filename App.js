@@ -24,6 +24,8 @@ import CognitiveStat from './src/screens/CognitiveStat';
 import PhysicalStat from './src/screens/PhysicalStat';
 import Settings from './src/screens/Settings';
 import ProfileSetting from './src/screens/ProfileSetting';
+import NotificationSetting from './src/screens/NotificationSetting';
+
 
 // add screens to be navigated here:
 const Navigation = createStackNavigator(
@@ -35,7 +37,9 @@ const Navigation = createStackNavigator(
     CognitiveStat: { screen: CognitiveStat },
     PhysicalStat: { screen: PhysicalStat },
     Settings: {screen: Settings},
-    ProfileSetting: { screen: ProfileSetting }
+    ProfileSetting: { screen: ProfileSetting },
+    NotificationSetting: { screen: NotificationSetting },
+
 
   },
   {

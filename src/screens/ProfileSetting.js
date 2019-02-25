@@ -31,9 +31,8 @@ export default class ProfileSetting extends Component {
                 <Text style={styles.ProfileTextStyle}> {this.state.username} </Text>
             </View>
             <View style = {styles.Separator} />
-            <View style = {styles.ViewStyle}>
-                <Text style={styles.TextStyle}> User Picture </Text>
-
+            <View style={styles.ViewStyle}>
+                <Text style={styles.TextStyle}> Email Address </Text>
             </View>
             <View style={styles.Separator} />
             <View style = {styles.ViewStyle}>
@@ -50,7 +49,7 @@ export default class ProfileSetting extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex:0.3,
+        flex:0.4,
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'stretch',

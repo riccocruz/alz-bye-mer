@@ -27,7 +27,9 @@ export default class Settings extends Component {
             < Text style ={styles.TextStyle}> Profile Setting </Text>
 
         </TouchableOpacity>
-        <TouchableOpacity style = {styles.ButtonStyle} activeOpacity={0.5}>
+        <TouchableOpacity 
+            onPress={()=>navigate('NotificationSetting')}
+            style = {styles.ButtonStyle} activeOpacity={0.5}>
             <Image
                 source={require('../../assets/img/reminder.png')}
                 style={styles.ImageIconStyle}
