@@ -1,8 +1,6 @@
 # ALZ-BYE-MER
 A personalized health app that will monitor the user's Alzheimer's Disease risk level and provide recommendations and cognitive exercises.
 
-[comment]: <> (![alt text](/assets/icon.png))
-
 ### Mission Statement
 
 The app will focus on Alzheimer's Prevention.
