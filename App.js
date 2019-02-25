@@ -1,5 +1,7 @@
 // This is a root where navigation setting and aws-amplify auth setup takes place.
 
+// AWS Management Console account ID: 689668396068
+
 import React from 'react';
 import { View } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
@@ -17,6 +19,7 @@ import Header from './src/commons/Header';
 import HomeScreen from './src/screens/HomeScreen';
 import UserProfile from './src/screens/UserProfile';
 import UserAssessment from './src/screens/UserAssessment';
+import Stepcount from './src/screens/Stepcount';
 import CognitiveStat from './src/screens/CognitiveStat';
 import PhysicalStat from './src/screens/PhysicalStat';
 import Settings from './src/screens/Settings';
@@ -28,6 +31,7 @@ const Navigation = createStackNavigator(
     HomeScreen: { screen: HomeScreen},
     UserProfile: { screen: UserProfile},
     UserAssessment: { screen: UserAssessment },
+    Stepcount: { screen: Stepcount },
     CognitiveStat: { screen: CognitiveStat },
     PhysicalStat: { screen: PhysicalStat },
     Settings: {screen: Settings},

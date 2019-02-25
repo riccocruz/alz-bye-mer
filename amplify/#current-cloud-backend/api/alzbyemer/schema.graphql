@@ -1,0 +1,24 @@
+type User @model {
+  id: ID!
+  username: String!
+  email: String
+  emailVerified: Boolean
+  age: Int
+  ethnicity: String
+  familyHistory: Boolean
+  smoking: Boolean
+  drinking: Boolean
+  highBloodPressure: Boolean
+  diabetes: Boolean
+  height: Int
+  weight: Int
+  assessmentScore: Int
+  physicals: [Physical] @connection(name: "UserPhysicals")
+}
+
+type Physical @model {
+  id: ID!
+  steps: [Int]
+  distance: [Float]
+  user: User @connection(name: "UserPhysicals")
+}

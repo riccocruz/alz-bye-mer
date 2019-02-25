@@ -1,0 +1,204 @@
+type User {
+  id: ID!
+  username: String!
+  email: String
+  emailVerified: Boolean
+  age: Int
+  ethnicity: String
+  familyHistory: Boolean
+  smoking: Boolean
+  drinking: Boolean
+  highBloodPressure: Boolean
+  diabetes: Boolean
+  height: Int
+  weight: Int
+  assessmentScore: Int
+  physicals(filter: ModelPhysicalFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelPhysicalConnection
+}
+
+type Physical {
+  id: ID!
+  steps: [Int]
+  distance: [Float]
+  user: User
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelUserConnection {
+  items: [User]
+  nextToken: String
+}
+
+input ModelStringFilterInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+}
+
+input ModelIDFilterInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+}
+
+input ModelIntFilterInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  contains: Int
+  notContains: Int
+  between: [Int]
+}
+
+input ModelFloatFilterInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  contains: Float
+  notContains: Float
+  between: [Float]
+}
+
+input ModelBooleanFilterInput {
+  ne: Boolean
+  eq: Boolean
+}
+
+input ModelUserFilterInput {
+  id: ModelIDFilterInput
+  username: ModelStringFilterInput
+  email: ModelStringFilterInput
+  emailVerified: ModelBooleanFilterInput
+  age: ModelIntFilterInput
+  ethnicity: ModelStringFilterInput
+  familyHistory: ModelBooleanFilterInput
+  smoking: ModelBooleanFilterInput
+  drinking: ModelBooleanFilterInput
+  highBloodPressure: ModelBooleanFilterInput
+  diabetes: ModelBooleanFilterInput
+  height: ModelIntFilterInput
+  weight: ModelIntFilterInput
+  assessmentScore: ModelIntFilterInput
+  and: [ModelUserFilterInput]
+  or: [ModelUserFilterInput]
+  not: ModelUserFilterInput
+}
+
+type Query {
+  getUser(id: ID!): User
+  listUsers(filter: ModelUserFilterInput, limit: Int, nextToken: String): ModelUserConnection
+  getPhysical(id: ID!): Physical
+  listPhysicals(filter: ModelPhysicalFilterInput, limit: Int, nextToken: String): ModelPhysicalConnection
+}
+
+input CreateUserInput {
+  id: ID
+  username: String!
+  email: String
+  emailVerified: Boolean
+  age: Int
+  ethnicity: String
+  familyHistory: Boolean
+  smoking: Boolean
+  drinking: Boolean
+  highBloodPressure: Boolean
+  diabetes: Boolean
+  height: Int
+  weight: Int
+  assessmentScore: Int
+}
+
+input UpdateUserInput {
+  id: ID!
+  username: String
+  email: String
+  emailVerified: Boolean
+  age: Int
+  ethnicity: String
+  familyHistory: Boolean
+  smoking: Boolean
+  drinking: Boolean
+  highBloodPressure: Boolean
+  diabetes: Boolean
+  height: Int
+  weight: Int
+  assessmentScore: Int
+}
+
+input DeleteUserInput {
+  id: ID
+}
+
+type Mutation {
+  createUser(input: CreateUserInput!): User
+  updateUser(input: UpdateUserInput!): User
+  deleteUser(input: DeleteUserInput!): User
+  createPhysical(input: CreatePhysicalInput!): Physical
+  updatePhysical(input: UpdatePhysicalInput!): Physical
+  deletePhysical(input: DeletePhysicalInput!): Physical
+}
+
+type Subscription {
+  onCreateUser: User @aws_subscribe(mutations: ["createUser"])
+  onUpdateUser: User @aws_subscribe(mutations: ["updateUser"])
+  onDeleteUser: User @aws_subscribe(mutations: ["deleteUser"])
+  onCreatePhysical: Physical @aws_subscribe(mutations: ["createPhysical"])
+  onUpdatePhysical: Physical @aws_subscribe(mutations: ["updatePhysical"])
+  onDeletePhysical: Physical @aws_subscribe(mutations: ["deletePhysical"])
+}
+
+type ModelPhysicalConnection {
+  items: [Physical]
+  nextToken: String
+}
+
+input ModelPhysicalFilterInput {
+  id: ModelIDFilterInput
+  steps: ModelIntFilterInput
+  distance: ModelFloatFilterInput
+  and: [ModelPhysicalFilterInput]
+  or: [ModelPhysicalFilterInput]
+  not: ModelPhysicalFilterInput
+}
+
+input CreatePhysicalInput {
+  id: ID
+  steps: [Int]
+  distance: [Float]
+  physicalUserId: ID
+}
+
+input UpdatePhysicalInput {
+  id: ID!
+  steps: [Int]
+  distance: [Float]
+  physicalUserId: ID
+}
+
+input DeletePhysicalInput {
+  id: ID
+}
