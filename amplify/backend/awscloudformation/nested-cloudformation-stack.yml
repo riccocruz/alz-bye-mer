@@ -78,18 +78,18 @@
 				}
 			}
 		},
-		"authcognitoccc2841b": {
+		"authcognito62890894": {
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/a-20190205161137-deployment/amplify-cfn-templates/auth/cognitoccc2841b-cloudformation-template.yml",
+				"TemplateURL": "https://s3.amazonaws.com/alz-bye-mer-20190225113955-deployment/amplify-cfn-templates/auth/cognito62890894-cloudformation-template.yml",
 				"Parameters": {
-					"userPoolName": "alzbyemerccc2841b_userpool_ccc2841b",
+					"userPoolName": "alz_bye_mer62890894_userpool_62890894",
 					"autoVerifiedAttributes": "email",
 					"mfaConfiguration": "OFF",
 					"mfaTypes": "SMS Text Message",
-					"roleName": "cognitoccc2841b_sns-role",
-					"roleExternalId": "cognitoccc2841b_role_external_id",
-					"policyName": "cognitoccc2841b-sns-policy",
+					"roleName": "cognito62890894_sns-role",
+					"roleExternalId": "cognito62890894_role_external_id",
+					"policyName": "cognito62890894-sns-policy",
 					"smsAuthenticationMessage": "Your authentication code is {####}",
 					"smsVerificationMessage": "Your verification code is {####}",
 					"emailVerificationSubject": "Your verification code",
@@ -98,21 +98,21 @@
 					"passwordPolicyMinLength": 8,
 					"passwordPolicyCharacters": "",
 					"requiredAttributes": "email",
-					"userpoolClientName": "cognitoccc2841b_app_client",
+					"userpoolClientName": "cognito62890894_app_client",
 					"userpoolClientGenerateSecret": true,
 					"userpoolClientRefreshTokenValidity": 30,
 					"userpoolClientReadAttributes": "email",
-					"mfaLambdaRole": "cognitoccc2841b_totp_lambda_role",
-					"mfaLambdaLogPolicy": "cognitoccc2841b_totp_lambda_log_policy",
-					"mfaPassRolePolicy": "cognitoccc2841b_totp_pass_role_policy",
-					"mfaLambdaIAMPolicy": "cognitoccc2841b_totp_lambda_iam_policy",
-					"userpoolClientLambdaRole": "cognitoccc2841b_userpoolclient_lambda_role",
-					"userpoolClientLogPolicy": "cognitoccc2841b_userpoolclient_lambda_log_policy",
-					"userpoolClientLambdaPolicy": "cognitoccc2841b_userpoolclient_lambda_iam_policy",
+					"mfaLambdaRole": "cognito62890894_totp_lambda_role",
+					"mfaLambdaLogPolicy": "cognito62890894_totp_lambda_log_policy",
+					"mfaPassRolePolicy": "cognito62890894_totp_pass_role_policy",
+					"mfaLambdaIAMPolicy": "cognito62890894_totp_lambda_iam_policy",
+					"userpoolClientLambdaRole": "cognito62890894_userpoolclient_lambda_role",
+					"userpoolClientLogPolicy": "cognito62890894_userpoolclient_lambda_log_policy",
+					"userpoolClientLambdaPolicy": "cognito62890894_userpoolclient_lambda_iam_policy",
 					"userpoolClientSetAttributes": false,
 					"useDefault": "manual",
 					"authSelections": "userPoolOnly",
-					"resourceName": "cognitoccc2841b",
+					"resourceName": "cognito62890894",
 					"authRoleName": {
 						"Ref": "AuthRoleName"
 					},
@@ -131,45 +131,26 @@
 							"Arn"
 						]
 					},
-					"env": "NONE"
+					"env": "alzbyemer"
 				}
 			}
 		},
 		"apialzbyemer": {
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/a-20190205161137-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+				"TemplateURL": "https://s3.amazonaws.com/alz-bye-mer-20190225113955-deployment/amplify-cfn-templates/api/cloudformation-template.json",
 				"Parameters": {
 					"AppSyncApiName": "alzbyemer",
 					"DynamoDBBillingMode": "PAY_PER_REQUEST",
 					"AuthCognitoUserPoolId": {
 						"Fn::GetAtt": [
-							"authcognitoccc2841b",
+							"authcognito62890894",
 							"Outputs.UserPoolId"
 						]
 					},
-					"S3DeploymentBucket": "a-20190205161137-deployment",
-					"S3DeploymentRootKey": "amplify-appsync-files/e514da28d74924a6416052cc7fbc3ab82d51e0d4",
-					"env": "NONE"
-				}
-			}
-		},
-		"apialzbyemer": {
-			"Type": "AWS::CloudFormation::Stack",
-			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/a-20190205161137-deployment/amplify-cfn-templates/api/cloudformation-template.json",
-				"Parameters": {
-					"AppSyncApiName": "alzbyemer",
-					"AuthCognitoUserPoolId": {
-						"Fn::GetAtt": [
-							"authcognito097a7981",
-							"Outputs.UserPoolId"
-						]
-					},
-					"schemaGraphql": "s3://a-20190205161137-deployment/amplify-appsync-files/schema.graphql.1549924371010",
-					"ResolverBucket": "a-20190205161137-deployment",
-					"ResolverRootKey": "amplify-appsync-files",
-					"DeploymentTimestamp": "1549924371010"
+					"S3DeploymentBucket": "alz-bye-mer-20190225113955-deployment",
+					"S3DeploymentRootKey": "amplify-appsync-files/8845bec15aa6e2ef9b28c46a75767c5c5b6c1718",
+					"env": "alzbyemer"
 				}
 			}
 		}

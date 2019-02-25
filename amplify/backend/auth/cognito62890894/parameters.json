@@ -1,5 +1,5 @@
 {
-    "userPoolName": "alzbyemerccc2841b_userpool_ccc2841b",
+    "userPoolName": "alz_bye_mer62890894_userpool_62890894",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -7,9 +7,9 @@
     "mfaTypes": [
         "SMS Text Message"
     ],
-    "roleName": "cognitoccc2841b_sns-role",
-    "roleExternalId": "cognitoccc2841b_role_external_id",
-    "policyName": "cognitoccc2841b-sns-policy",
+    "roleName": "cognito62890894_sns-role",
+    "roleExternalId": "cognito62890894_role_external_id",
+    "policyName": "cognito62890894-sns-policy",
     "smsAuthenticationMessage": "Your authentication code is {####}",
     "smsVerificationMessage": "Your verification code is {####}",
     "emailVerificationSubject": "Your verification code",
@@ -20,23 +20,23 @@
     "requiredAttributes": [
         "email"
     ],
-    "userpoolClientName": "cognitoccc2841b_app_client",
+    "userpoolClientName": "cognito62890894_app_client",
     "userpoolClientGenerateSecret": true,
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "mfaLambdaRole": "cognitoccc2841b_totp_lambda_role",
-    "mfaLambdaLogPolicy": "cognitoccc2841b_totp_lambda_log_policy",
-    "mfaPassRolePolicy": "cognitoccc2841b_totp_pass_role_policy",
-    "mfaLambdaIAMPolicy": "cognitoccc2841b_totp_lambda_iam_policy",
-    "userpoolClientLambdaRole": "cognitoccc2841b_userpoolclient_lambda_role",
-    "userpoolClientLogPolicy": "cognitoccc2841b_userpoolclient_lambda_log_policy",
-    "userpoolClientLambdaPolicy": "cognitoccc2841b_userpoolclient_lambda_iam_policy",
+    "mfaLambdaRole": "cognito62890894_totp_lambda_role",
+    "mfaLambdaLogPolicy": "cognito62890894_totp_lambda_log_policy",
+    "mfaPassRolePolicy": "cognito62890894_totp_pass_role_policy",
+    "mfaLambdaIAMPolicy": "cognito62890894_totp_lambda_iam_policy",
+    "userpoolClientLambdaRole": "cognito62890894_userpoolclient_lambda_role",
+    "userpoolClientLogPolicy": "cognito62890894_userpoolclient_lambda_log_policy",
+    "userpoolClientLambdaPolicy": "cognito62890894_userpoolclient_lambda_iam_policy",
     "userpoolClientSetAttributes": false,
     "useDefault": "manual",
     "authSelections": "userPoolOnly",
-    "resourceName": "cognitoccc2841b",
+    "resourceName": "cognito62890894",
     "authRoleName": {
         "Ref": "AuthRoleName"
     },

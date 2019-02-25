@@ -1,0 +1,22 @@
+
+link to login to console: https://763327914732.signin.aws.amazon.com/console
+
+SEAN
+username: sean
+access key: AKIAI57RTU4UF6NCUNKQ
+secret access key: 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
+
+BILLY
+username: billy
+access key: AKIAJGYXM6RVFZSPF4EQ
+secret access key: 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
+
+JENNIFER
+username: jennifer
+access key: AKIAJUPAUQNW3GONP5MQ
+secret access key: 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
+
+RICCO
+username: ricco
+access key: AKIAJEM6APIWOTTNKEGQ
+secret access key: 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
