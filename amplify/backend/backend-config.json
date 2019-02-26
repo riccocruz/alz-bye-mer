@@ -1,8 +1,17 @@
 {
-    "auth": {
-        "cognito097a7981": {
-            "service": "Cognito",
-            "providerPlugin": "awscloudformation"
-        }
-    }
+	"auth": {
+		"cognito62890894": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation"
+		}
+	},
+	"api": {
+		"alzbyemer": {
+			"service": "AppSync",
+			"providerPlugin": "awscloudformation",
+			"output": {
+				"securityType": "AMAZON_COGNITO_USER_POOLS"
+			}
+		}
+	}
 }
