@@ -3,9 +3,11 @@ import { ScrollView, View, Text, StyleSheet } from 'react-native';
 import { BarChart, YAxis, XAxis, Grid } from 'react-native-svg-charts';
 import * as shape from 'd3-shape';
 
+import { Pedometer } from 'expo';
+
 export default class PhysicalStat extends React.Component {
   static navigationOptions = {
-    title: 'Cognitive Statistics',
+    title: 'Physical Statistics',
   };
 
   constructor(props) {
@@ -13,7 +15,36 @@ export default class PhysicalStat extends React.Component {
     this.state = {
       weekly_data: [80, 75, 85, 82, 78, 45, 83],
       dates: ["2/15", "2/16", "2/17", "2/18", "2/19", "2/20", "2/21"],
+      pastTotalStepCount: 0,
+      pastStepCount: 0,
     }
+  }
+
+  componentWillMount() {
+    const end = new Date();
+    const start = new Date();
+    start.setDate(end.getDate() - 7);
+    Pedometer.getStepCountAsync(start, end).then(
+      result => {
+        this.setState({ pastTotalStepCount: result.steps });
+      },
+      error => {
+        this.setState({
+          pastTotalStepCount: "Could not get stepCount: " + error
+        });
+      }
+    );
+    start.setDate(end.getDate() - 1);
+    Pedometer.getStepCountAsync(start, end).then(
+      result => {
+        this.setState({ pastStepCount: result.steps });
+      },
+      error => {
+        this.setState({
+          pastStepCount: "Could not get stepCount: " + error
+        });
+      }
+    );
   }
 
   renderDates = () => {
@@ -61,11 +92,11 @@ export default class PhysicalStat extends React.Component {
             <Text style={{marginTop: 10, fontWeight:'bold'}}>Steps:</Text>
             <View style={{flexDirection:'row', paddingTop: 5}}>
               <Text style={{flex: 1}}>Steps Taken Today:</Text>
-              <Text style={{flex: 1, textAlign:'right'}}>1234 Steps</Text>
+              <Text style={{flex: 1, textAlign:'right'}}>{this.state.pastStepCount} Steps</Text>
             </View>
             <View style={{flexDirection:'row', paddingTop: 5}}>
               <Text style={{flex: 1}}>Average per Day:</Text>
-              <Text style={{flex: 1, textAlign:'right'}}>4245 Steps</Text>
+              <Text style={{flex: 1, textAlign:'right'}}>{Math.round(this.state.pastTotalStepCount/7)} Steps</Text>
             </View>
           </View>
 

@@ -4,7 +4,7 @@
 
 import React from 'react';
 import { View } from 'react-native';
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { createStackNavigator, createAppContainer, SafeAreaView } from 'react-navigation';
 
 // AWS Amplify
 import Amplify from 'aws-amplify';
@@ -22,7 +22,15 @@ import UserAssessment from './src/screens/UserAssessment';
 import Stepcount from './src/screens/Stepcount';
 import CognitiveStat from './src/screens/CognitiveStat';
 import PhysicalStat from './src/screens/PhysicalStat';
+<<<<<<< HEAD
 import DailyChallenge from './src/screens/DailyChallenge';
+=======
+import Settings from './src/screens/Settings';
+import ProfileSetting from './src/screens/ProfileSetting';
+import NotificationSetting from './src/screens/NotificationSetting';
+import Todo_Rec from './src/screens/Todo_Rec';
+import CognitiveExercises from './src/screens/CognitiveExercises';
+>>>>>>> 96f6d5148bebd4a60e3164e7062a95f21d1a2060
 
 // add screens to be navigated here:
 const Navigation = createStackNavigator(
@@ -33,7 +41,15 @@ const Navigation = createStackNavigator(
     Stepcount: { screen: Stepcount },
     CognitiveStat: { screen: CognitiveStat },
     PhysicalStat: { screen: PhysicalStat },
+<<<<<<< HEAD
     DailyChallenge: { screen: DailyChallenge },
+=======
+    Settings: {screen: Settings},
+    ProfileSetting: { screen: ProfileSetting },
+    NotificationSetting: { screen: NotificationSetting },
+    Todo_Rec: {screen: Todo_Rec},
+    CognitiveExercises: { screen: CognitiveExercises},
+>>>>>>> 96f6d5148bebd4a60e3164e7062a95f21d1a2060
   },
   {
     initialRouteName: 'HomeScreen',
@@ -70,10 +86,10 @@ class App extends React.Component {
   }
   render() {
     return (
-      <View style={{flex:1}}>
+      <SafeAreaView style={{flex:1}}>
         <Header handleSignOut={this.handleSignOut}/>
         <AppContainer />
-      </View>
+      </SafeAreaView>
     )
   }
 }
