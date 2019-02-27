@@ -106,12 +106,6 @@ export default class HomeScreen extends React.Component {
     this._subscription = null;
   };
 
-  reloadStep = () => {
-    console.log('a');
-    this._unsubscribe();
-    this._subscribe();
-  }
-
   render() {
     const {navigate} = this.props.navigation;
 
@@ -144,7 +138,6 @@ export default class HomeScreen extends React.Component {
             navigate={navigate}
             username={this.state.username}
           />
-          <Button title="Refresh" onPress={this.reloadStep} />
         </ScrollView>
     )
   }
