@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Button } from 'react-native';
 import { Auth } from 'aws-amplify';
 
 import HomeCard from '../components/HomeCard';
@@ -50,8 +50,10 @@ export default class HomeScreen extends React.Component {
 
   _subscribe = () => {
     this._subscription = Pedometer.watchStepCount(result => {
+      console.log(result);
+      console.log(this.state.pastStepCount);
       this.setState({
-        currentStepCount: result.steps
+        currentStepCount: this.state.pastStepCount + result.steps
       });
     });
 
@@ -89,10 +91,9 @@ export default class HomeScreen extends React.Component {
   };
 
   reloadStep = () => {
-    setInterval(() => {
-      this._unsubscribe();
-      this._subscribe();
-    }, 10000);
+    console.log('a');
+    this._unsubscribe();
+    this._subscribe();
   }
 
   render() {
@@ -100,7 +101,6 @@ export default class HomeScreen extends React.Component {
 
     return (
         <ScrollView style={{flex:1}}>
-          <Text>Hello, {this.state.username}! this text is for debugging</Text>
           <HomeCard
             title={"Cognitive Challenge"}
             item1={{title: 'View Stat', onPress: 'CognitiveStat', image: require('../../assets/img/bar_graph.png')}}
@@ -113,7 +113,7 @@ export default class HomeScreen extends React.Component {
           <HomeCard
             title={"Physical Challenge"}
             item1={{title: 'View Stat', onPress: 'PhysicalStat', image: require('../../assets/img/bar_graph.png')}}
-            item2={{title: `${this.state.pastStepCount}/10000 steps`, onPress: 'StepCount', image: require('../../assets/img/walking.png')}}
+            item2={{title: `${this.state.currentStepCount}/10000 steps`, onPress: '', image: require('../../assets/img/walking.png')}}
             item3={{title: `${this.state.distance} Miles`, onPress: 'DistanceTraveled', image: require('../../assets/img/distance.png')}}
             backgroundColor={this.state.PhysicalChallengeCompleted? 'rgba(123, 239, 178, 0.75)' : 'rgba(247, 202, 24, 0.5)'}
             navigate={navigate}
@@ -128,6 +128,7 @@ export default class HomeScreen extends React.Component {
             navigate={navigate}
             username={this.state.username}
           />
+          <Button title="Refresh" onPress={this.reloadStep} />
         </ScrollView>
     )
   }
