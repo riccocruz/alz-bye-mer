@@ -1,7 +1,7 @@
 import React from 'react';
 import { Picker, View, Text, StyleSheet, TouchableOpacity, ActionSheetIOS } from 'react-native';
 
-const IOSPicker = ({ label, items, selectedValue, onValueChange, values }) => {
+const IOSPicker = ({ label, items, selectedValue, onValueChange }) => {
 
   return (
     <View style={styles.container}>
@@ -10,7 +10,7 @@ const IOSPicker = ({ label, items, selectedValue, onValueChange, values }) => {
     </View>
   );
 };
-const renderActionSheet = (items, onValueChange, values) => {
+const renderActionSheet = (items, onValueChange) => {
   ActionSheetIOS.showActionSheetWithOptions(
     {
       options: items,
@@ -18,7 +18,8 @@ const renderActionSheet = (items, onValueChange, values) => {
       cancelButtonIndex: 0,
     },
     (buttonIndex) => {
-      onValueChange(values[buttonIndex]);
+      if(buttonIndex != 0)
+      onValueChange(items[buttonIndex]);
     },
   );
 }
