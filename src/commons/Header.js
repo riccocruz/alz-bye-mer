@@ -1,8 +1,7 @@
 import React from "React";
 import { View, Text, StyleSheet, StatusBar, TouchableOpacity } from 'react-native';
 import { MaterialIcons, FontAwesome } from "@expo/vector-icons";
-import { ifIphoneX } from 'react-native-iphone-x-helper';
-
+// import { ifIphoneX } from 'react-native-iphone-x-helper';
 
 const Header = ({handleSignOut}) => {
 
@@ -55,13 +54,13 @@ const styles = StyleSheet.create({
     paddingBottom: 8,
     paddingLeft: 5,
     paddingRight: 5,
-    ...ifIphoneX({
-      paddingTop: 50
-      }, {
-      paddingTop: 20
-      }, {
-      paddingBottom: 34
-    })
+    // ...ifIphoneX({
+    //   paddingTop: 50
+    //   }, {
+    //   paddingTop: 20
+    //   }, {
+    //   paddingBottom: 34
+    // })
 
   },
   text: {
