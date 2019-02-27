@@ -27,6 +27,8 @@ import ProfileSetting from './src/screens/ProfileSetting';
 import NotificationSetting from './src/screens/NotificationSetting';
 import Todo_Rec from './src/screens/Todo_Rec';
 import CognitiveExercises from './src/screens/CognitiveExercises';
+import DailyChallenge from './src/screens/DailyChallenge';
+
 
 // add screens to be navigated here:
 const Navigation = createStackNavigator(
@@ -42,6 +44,8 @@ const Navigation = createStackNavigator(
     NotificationSetting: { screen: NotificationSetting },
     Todo_Rec: {screen: Todo_Rec},
     CognitiveExercises: { screen: CognitiveExercises},
+    DailyChallenge: { screen: DailyChallenge },
+
   },
   {
     initialRouteName: 'HomeScreen',
