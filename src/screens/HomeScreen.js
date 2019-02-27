@@ -12,7 +12,7 @@ export default class HomeScreen extends React.Component {
     this.state = {
       username: "",
       pastStepCount: null,
-      currentStepCount: null,
+      currentStepCount: 0,
       isPedometerAvailable: "checking",
       distance: 1.12,
       dailyCompletd: false,
@@ -32,12 +32,28 @@ export default class HomeScreen extends React.Component {
     }
   };
 
+  componentWillMount() {
+    const end = new Date();
+    const start = new Date();
+    start.setDate(end.getDate() - 1);
+    Pedometer.getStepCountAsync(start, end).then(
+      result => {
+        this.setState({ currentStepCount: result.steps });
+      },
+      error => {
+        this.setState({
+          currentStepCount: "Could not get stepCount: " + error
+        });
+      }
+    );
+  }
+
   componentDidMount() {
     // store username from loggedIn user info to retrieve user-specific data from database
     Auth.currentAuthenticatedUser()
         .then(user=>this.setState({username: user.username}))
         .catch(err=>console.log(err));
-    this._subscribe();
+        this._subscribe();
   }
 
   componentWillUnmount() {
