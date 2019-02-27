@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { TextInput, Text, View, TouchableOpacity, ScrollView } from 'react-native';
+import { TextInput, Text, View, TouchableOpacity, ScrollView, Platform } from 'react-native';
 
 import TextField from '../commons/TextField';
 import CustomPicker from '../commons/CustomPicker';
+import IOSPicker from '../commons/IOSPicker';
 import RadioButton from '../commons/RadioButton';
 import { Button } from 'react-native-elements';
 
@@ -65,20 +66,30 @@ export default class UserProfile extends Component {
     }, 1500);
   }
 
-  render() {
-    const { ethnicity, age, gender, height, weight, familyHistory, smoking, highBloodPressure, diabetes } = this.state;
+  renderIOSPicker = () => {
+      return (
+        <View>
+          <IOSPicker
+            label={"Ethnicity"}
+            selectedValue={this.state.ethnicity}
+            onValueChange={ethnicity=>this.setState({ethnicity})}
+            items={['cancel', 'Asian', 'African','Caucasian', 'Hispanics', 'Others']}
+            values={['', 'asian', 'african','caucasian', 'hispanics', 'others']}
+          />
+          <IOSPicker
+            label={"Age"}
+            selectedValue={this.state.age}
+            onValueChange={age=>this.setState({age})}
+            items={['cancel', 'Less than 65', '65-69','70-74', '75-79', '80-84', '85 or older']}
+            values={['', '<65', '65-69','70-74', '75-79', '80-84', '>=85']}
+          />
+        </View>
+      );
 
-    const gender_options = [
-      {id: 0, label: 'Male'},
-      {id: 1, label: 'Female'},
-    ];
-    const yes_no = [
-      {id: 1, label: 'Yes'},
-      {id: 0, label: 'No'},
-    ];
-
+  }
+  renderAndroidPicker = () => {
     return (
-      <ScrollView>
+      <View>
         <CustomPicker
           label={"Ethnicity"}
           selectedValue={this.state.ethnicity}
@@ -100,6 +111,25 @@ export default class UserProfile extends Component {
                   {label: '80-84', value: '80-84'},
                   {label: '85 or older', value: '>=85'}]}
         />
+      </View>
+    );
+  }
+
+  render() {
+    const { ethnicity, age, gender, height, weight, familyHistory, smoking, highBloodPressure, diabetes } = this.state;
+
+    const gender_options = [
+      {id: 0, label: 'Male'},
+      {id: 1, label: 'Female'},
+    ];
+    const yes_no = [
+      {id: 1, label: 'Yes'},
+      {id: 0, label: 'No'},
+    ];
+
+    return (
+      <ScrollView>
+        {Platform.OS == 'ios'? this.renderIOSPicker():this.renderAndroidPicker()}
         <RadioButton
           label="Gender"
           options={gender_options}
