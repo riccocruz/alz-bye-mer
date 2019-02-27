@@ -11,12 +11,6 @@ const Header = ({handleSignOut}) => {
         <TouchableOpacity onPress={handleSignOut}>
           <FontAwesome name="sign-out" size={32} style={styles.icon}/>
         </TouchableOpacity>
-        <TouchableOpacity>
-          <MaterialIcons name="notifications" size={32} style={styles.icon}/>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <MaterialIcons name="settings" size = {32} style={styles.icon}/>
-        </TouchableOpacity>
       </View>
     </View>
   );

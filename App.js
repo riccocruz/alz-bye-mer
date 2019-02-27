@@ -4,7 +4,7 @@
 
 import React from 'react';
 import { View } from 'react-native';
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { createStackNavigator, createAppContainer, SafeAreaView } from 'react-navigation';
 
 // AWS Amplify
 import Amplify from 'aws-amplify';
@@ -70,10 +70,10 @@ class App extends React.Component {
   }
   render() {
     return (
-      <View style={{flex:1}}>
+      <SafeAreaView style={{flex:1}}>
         <Header handleSignOut={this.handleSignOut}/>
         <AppContainer />
-      </View>
+      </SafeAreaView>
     )
   }
 }
