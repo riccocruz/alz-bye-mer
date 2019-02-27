@@ -22,6 +22,7 @@ import UserAssessment from './src/screens/UserAssessment';
 import Stepcount from './src/screens/Stepcount';
 import CognitiveStat from './src/screens/CognitiveStat';
 import PhysicalStat from './src/screens/PhysicalStat';
+import CognitiveExercises from './src/screens/CognitiveExercises';
 
 // add screens to be navigated here:
 const Navigation = createStackNavigator(
@@ -32,6 +33,7 @@ const Navigation = createStackNavigator(
     Stepcount: { screen: Stepcount },
     CognitiveStat: { screen: CognitiveStat },
     PhysicalStat: { screen: PhysicalStat },
+    CognitiveExercises: { screen: CognitiveExercises},
   },
   {
     initialRouteName: 'HomeScreen',

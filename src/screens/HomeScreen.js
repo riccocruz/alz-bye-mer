@@ -104,7 +104,7 @@ export default class HomeScreen extends React.Component {
           <HomeCard
             title={"Cognitive Challenge"}
             item1={{title: 'View Stat', onPress: 'CognitiveStat', image: require('../../assets/img/bar_graph.png')}}
-            item2={{title: 'Exercises', onPress: 'CognitiveExercise', image: require('../../assets/img/brain_exercise.png')}}
+            item2={{title: 'Exercises', onPress: 'CognitiveExercises', image: require('../../assets/img/brain_exercise.png')}}
             item3={{title: 'Daily Challenge', onPress: 'DailyChallenge', image: this.state.dailyCompletd? require('../../assets/img/check_mark.png') : require('../../assets/img/exclamation.png')}}
             backgroundColor={this.state.cognitiveChallengeCompleted? 'rgba(123, 239, 178, 0.75)' : 'rgba(247, 202, 24, 0.5)'}
             navigate={navigate}
