@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 
 export default class Todo_Rec extends Component {
   constructor(props) {
@@ -38,15 +38,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#DDDDDD',
         padding: 10
     },
-  
-    baseText: {
-        fontFamily: 'Cochin',
-    },
+
     titleText: {
         fontSize: 20,
         fontWeight: 'bold',
     },
 });
-
-// skip this line if using Create React Native App
-AppRegistry.registerComponent('TextInANest', () => TextInANest);
