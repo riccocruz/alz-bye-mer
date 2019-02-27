@@ -131,11 +131,22 @@ export default class HomeScreen extends React.Component {
             username={this.state.username}
           />
 
+          <TouchableOpacity
+            style={styles.button}
+            onPress={this.onPress}
+            onPress={ ()=>{ Linking.openURL('https://www.nia.nih.gov/health/what-alzheimers-disease')}}
+          >
+            <Text style={styles.textStyle}>
+              About Alzheimer's Disease </Text>
+          </TouchableOpacity>
+
           <Button
             onPress={ ()=>{ Linking.openURL('https://www.nia.nih.gov/health/what-alzheimers-disease')}}
-            title="About AD"
-            color ="#ffa07a"
-            containerStyle={{width:'50%', paddingLeft: 20, marginTop: 10}}
+            title="About Alzheimer's Disease"
+            containerStyle={{color:"#ffa07a", width:'95%', paddingLeft: 20, marginTop: 10, shadowColor: '#000',
+            shadowOffset: {width:2, height:4},
+            shadowOpacity: 0.75,
+            shadowRadius: 3}}
           />
 
           <Button 
@@ -145,7 +156,35 @@ export default class HomeScreen extends React.Component {
             containerStyle={{width:'50%', paddingLeft: 20, marginTop: 10}}
           />
 
+          <Button 
+            onPress={ ()=> navigate('Todo_Rec', {username: this.state.username})}
+            title="Todo/Rec"
+            color ="#ffa07a"
+            containerStyle={{width:'50%', paddingLeft: 20, marginTop: 10}}
+          />
+
         </ScrollView>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  button: {
+    alignItems: 'center',
+    backgroundColor: '#ffa07a',
+    width:'95%',
+    height: 50, 
+    paddingLeft: 20, 
+    marginTop: 10, 
+    shadowColor: '#000',
+    shadowOffset: {width:2, height:4},
+    shadowOpacity: 0.75,
+    shadowRadius: 3
+  },
+
+  textStyle: {
+    fontSize: 30,
+    color: '#ffffff'
+  }
+
+})

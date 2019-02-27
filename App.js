@@ -25,6 +25,7 @@ import PhysicalStat from './src/screens/PhysicalStat';
 import Settings from './src/screens/Settings';
 import ProfileSetting from './src/screens/ProfileSetting';
 import NotificationSetting from './src/screens/NotificationSetting';
+import Todo_Rec from './src/screens/Todo_Rec';
 
 
 // add screens to be navigated here:
@@ -39,8 +40,7 @@ const Navigation = createStackNavigator(
     Settings: {screen: Settings},
     ProfileSetting: { screen: ProfileSetting },
     NotificationSetting: { screen: NotificationSetting },
-
-
+    Todo_Rec: {screen: Todo_Rec},
   },
   {
     initialRouteName: 'HomeScreen',

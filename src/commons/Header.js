@@ -4,7 +4,7 @@ import { MaterialIcons, FontAwesome } from "@expo/vector-icons";
 import { ifIphoneX } from 'react-native-iphone-x-helper';
 
 
-const Header = ({handleSignOut, navigation}) => {
+const Header = ({handleSignOut}) => {
 
   return (
     <View style={styles.container} backgroundColor="#c43235">
@@ -14,7 +14,7 @@ const Header = ({handleSignOut, navigation}) => {
           <FontAwesome name="sign-out" size={32} style={styles.icon}/>
         </TouchableOpacity>
         <TouchableOpacity>
-          <MaterialIcons name="notifications" size={32} style={styles.icon}/>
+          <FontAwesome name="sticky-note" size={30} style={styles.icon}/>
         </TouchableOpacity>
         <TouchableOpacity>
           <MaterialIcons name="settings" size = {32} style={styles.icon}/>
