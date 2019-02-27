@@ -11,6 +11,7 @@ export default class UserProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
+
       ethnicity: '',   // asian, african, caucasian, hispanics, others
       age: '',         // <65, 65-69, 70-74, 75-79, 80-84, >=85
       gender: null,    // 0 for Male, 1 for Female
@@ -23,6 +24,9 @@ export default class UserProfile extends Component {
 
       isSubmitting: false,
     };
+
+    // this.shouldComponentUpdate()
+
   };
 
   static navigationOptions = {
