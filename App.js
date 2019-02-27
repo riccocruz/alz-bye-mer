@@ -22,6 +22,10 @@ import UserAssessment from './src/screens/UserAssessment';
 import Stepcount from './src/screens/Stepcount';
 import CognitiveStat from './src/screens/CognitiveStat';
 import PhysicalStat from './src/screens/PhysicalStat';
+import Settings from './src/screens/Settings';
+import ProfileSetting from './src/screens/ProfileSetting';
+import NotificationSetting from './src/screens/NotificationSetting';
+import Todo_Rec from './src/screens/Todo_Rec';
 import CognitiveExercises from './src/screens/CognitiveExercises';
 
 // add screens to be navigated here:
@@ -33,6 +37,10 @@ const Navigation = createStackNavigator(
     Stepcount: { screen: Stepcount },
     CognitiveStat: { screen: CognitiveStat },
     PhysicalStat: { screen: PhysicalStat },
+    Settings: {screen: Settings},
+    ProfileSetting: { screen: ProfileSetting },
+    NotificationSetting: { screen: NotificationSetting },
+    Todo_Rec: {screen: Todo_Rec},
     CognitiveExercises: { screen: CognitiveExercises},
   },
   {
