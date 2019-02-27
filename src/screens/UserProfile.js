@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { TextInput, Text, View, TouchableOpacity, ScrollView } from 'react-native';
+import { TextInput, Text, View, TouchableOpacity, ScrollView, Platform } from 'react-native';
 
 import TextField from '../commons/TextField';
 import CustomPicker from '../commons/CustomPicker';
+import IOSPicker from '../commons/IOSPicker';
 import RadioButton from '../commons/RadioButton';
 import { Button } from 'react-native-elements';
 
@@ -65,6 +66,53 @@ export default class UserProfile extends Component {
     }, 1500);
   }
 
+  renderIOSPicker = () => {
+      return (
+        <View>
+          <IOSPicker
+            label={"Ethnicity"}
+            selectedValue={this.state.ethnicity}
+            onValueChange={ethnicity=>this.setState({ethnicity})}
+            items={['cancel', 'Asian', 'African','Caucasian', 'Hispanics', 'Others']}
+          />
+          <IOSPicker
+            label={"Age"}
+            selectedValue={this.state.age}
+            onValueChange={age=>this.setState({age})}
+            items={['cancel', 'Less than 65', '65-69','70-74', '75-79', '80-84', '85 or older']}
+          />
+        </View>
+      );
+
+  }
+  renderAndroidPicker = () => {
+    return (
+      <View>
+        <CustomPicker
+          label={"Ethnicity"}
+          selectedValue={this.state.ethnicity}
+          onValueChange={ethnicity=>this.setState({ethnicity})}
+          items={[{label: 'Asian', value: 'Asian'},
+                  {label: 'African', value: 'African'},
+                  {label: 'Caucasian', value: 'Caucasian'},
+                  {label: 'Hispanics', value: 'Hispanics'},
+                  {label: 'Others', value: 'Others'}]}
+        />
+        <CustomPicker
+          label={"Age"}
+          selectedValue={this.state.age}
+          onValueChange={age=>this.setState({age})}
+          items={[{label: 'Less than 65', value: 'Less than 65'},
+                  {label: '65-69', value: '65-69'},
+                  {label: '70-74', value: '70-74'},
+                  {label: '75-79', value: '75-79'},
+                  {label: '80-84', value: '80-84'},
+                  {label: '85 or older', value: '85 or older'}]}
+        />
+      </View>
+    );
+  }
+
   render() {
     const { ethnicity, age, gender, height, weight, familyHistory, smoking, highBloodPressure, diabetes } = this.state;
 
@@ -79,27 +127,7 @@ export default class UserProfile extends Component {
 
     return (
       <ScrollView>
-        <CustomPicker
-          label={"Ethnicity"}
-          selectedValue={this.state.ethnicity}
-          onValueChange={ethnicity=>this.setState({ethnicity})}
-          items={[{label: 'Asian', value: 'asian'},
-                  {label: 'African', value: 'african'},
-                  {label: 'Caucasian', value: 'caucasian'},
-                  {label: 'Hispanics', value: 'hispanics'},
-                  {label: 'Others', value: 'others'}]}
-        />
-        <CustomPicker
-          label={"Age"}
-          selectedValue={this.state.age}
-          onValueChange={age=>this.setState({age})}
-          items={[{label: 'Less than 65', value: '<65'},
-                  {label: '65-69', value: '65-69'},
-                  {label: '70-74', value: '70-74'},
-                  {label: '75-79', value: '75-79'},
-                  {label: '80-84', value: '80-84'},
-                  {label: '85 or older', value: '>=85'}]}
-        />
+        {Platform.OS == 'ios'? this.renderIOSPicker():this.renderAndroidPicker()}
         <RadioButton
           label="Gender"
           options={gender_options}
