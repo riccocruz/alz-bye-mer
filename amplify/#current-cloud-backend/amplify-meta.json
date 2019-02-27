@@ -20,11 +20,6 @@
 		"cognito62890894": {
 			"service": "Cognito",
 			"providerPlugin": "awscloudformation",
-			"providerMetadata": {
-				"s3TemplateURL": "https://s3.amazonaws.com/alz-bye-mer-20190225113955-deployment/amplify-cfn-templates/auth/cognito62890894-cloudformation-template.yml",
-				"logicalId": "authcognito62890894"
-			},
-			"lastPushTimeStamp": "2019-02-25T20:09:36.270Z",
 			"output": {
 				"AppClientSecret": "p9an85bt39cp90mqc52b0fjr9cgooceof4dj7jqqi99e9me6bvb",
 				"UserPoolId": "us-west-2_Bg93Nlrvp",
@@ -32,7 +27,12 @@
 				"AppClientID": "5b6c7t2mgtir1ds5dit10c9m93",
 				"UserPoolName": "alz_bye_mer62890894_userpool_62890894"
 			},
-			"lastPushDirHash": "7YMHzC6ZeCpkqKn43Bizm6v7syA="
+			"lastPushTimeStamp": "2019-02-27T01:23:55.596Z",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/alz-bye-mer-20190225113955-deployment/amplify-cfn-templates/auth/cognito62890894-cloudformation-template.yml",
+				"logicalId": "authcognito62890894"
+			},
+			"lastPushDirHash": "MJ751D5BhCoNUIq+YOgL6lCdOMs="
 		}
 	},
 	"api": {
@@ -48,12 +48,12 @@
 				"AuthCognitoUserPoolNativeClientId": "See UserPool: us-west-2_Bg93Nlrvp",
 				"AuthCognitoUserPoolJSClientId": "See UserPool: us-west-2_Bg93Nlrvp"
 			},
+			"lastPushTimeStamp": "2019-02-27T01:23:55.596Z",
 			"providerMetadata": {
 				"s3TemplateURL": "https://s3.amazonaws.com/alz-bye-mer-20190225113955-deployment/amplify-cfn-templates/api/cloudformation-template.json",
 				"logicalId": "apialzbyemer"
 			},
-			"lastPushTimeStamp": "2019-02-25T20:09:36.270Z",
-			"lastPushDirHash": "I9M/LTfwmJbUiDA4YFWZeZCroyo="
+			"lastPushDirHash": "NXozLgvP0py4t2cfuBnSaF+oO1U="
 		}
 	}
 }
