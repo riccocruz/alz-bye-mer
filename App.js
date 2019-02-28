@@ -29,6 +29,7 @@ import CognitiveExercises from './src/screens/CognitiveExercises';
 import CognitiveTodo from './src/screens/CognitiveTodo';
 import PhysicalTodo from './src/screens/PhysicalTodo';
 import Recommendation from './src/screens/Recommendation';
+import SingleExercise from './src/screens/SingleExercise';
 
 // add screens to be navigated here:
 const Navigation = createStackNavigator(
@@ -46,6 +47,7 @@ const Navigation = createStackNavigator(
     CognitiveTodo: { screen: CognitiveTodo },
     PhysicalTodo: { screen: PhysicalTodo },
     Recommendation: { screen: Recommendation },
+    SingleExercise: {screen: SingleExercise},
   },
   {
     initialRouteName: 'HomeScreen',

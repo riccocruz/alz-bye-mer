@@ -35,7 +35,7 @@ render() {
 
     return (
         <ScrollView>
-            <View style={{backgroundColor: 'gray'}}>
+            <View style={{backgroundColor: '#d3d3d3'}}>
                 <Text style={styles.titleText}> Your Progress </Text>
             </View>
             <View style={styles.dividerStyle}/>
@@ -59,41 +59,39 @@ render() {
 
             </View>
 
-            <View style={{margin: 10}}/>
+            {/* <View style={{margin: 10}}/> */}
 
-            <Text style={styles.titleText}> Our Recommendation for 
-            <Text style={{ fontWeight: '800' }}> {this.state.username}
-            </Text>
-            </Text>
+            <View style={{backgroundColor: '#d3d3d3'}}>
+                <Text style={styles.titleText}> Our Recommendations for 
+                <Text style={{ fontWeight: '800' }}> {this.state.username}
+                </Text>
+                </Text>
+            </View>
             <View style={styles.dividerStyle}/>
             
             <Text style={styles.subTitleText}> Cognitive Exercises </Text>
 
             <RecommendationCard
-                item1={{title: 'Recommendation 1', image: require('../../assets/img/bar_graph.png')}}
+                item1={{title: 'Recommendation 1', image: require('../../assets/img/brain_exercise.png')}}
                 item2={{title: 'Recommendation 2', image: require('../../assets/img/brain_exercise.png')}}
-                navigate={navigate}
                 username={this.state.username}
             />
             <RecommendationCard
-                item1={{title: 'Recommendation 3', image: require('../../assets/img/bar_graph.png')}}
+                item1={{title: 'Recommendation 3', image: require('../../assets/img/brain_exercise.png')}}
                 item2={{title: 'Recommendation 4', image: require('../../assets/img/brain_exercise.png')}}
-                navigate={navigate}
                 username={this.state.username}
             />
             
             <Text style={styles.subTitleText}> Physical Exercises </Text>
 
             <RecommendationCard
-                item1={{title: 'Recommendation 1', image: require('../../assets/img/bar_graph.png')}}
-                item2={{title: 'Recommendation 2', image: require('../../assets/img/brain_exercise.png')}}
-                navigate={navigate}
+                item1={{title: 'Recommendation 1', image: require('../../assets/img/walking.png')}}
+                item2={{title: 'Recommendation 2', image: require('../../assets/img/walking.png')}}
                 username={this.state.username}
             />
             <RecommendationCard
-                item1={{title: 'Recommendation 3', image: require('../../assets/img/bar_graph.png')}}
-                item2={{title: ''}}
-                navigate={navigate}
+                item1={{title: 'Recommendation 3', image: require('../../assets/img/walking.png')}}
+                item2={{title: 'Recommendation 4', image: require('../../assets/img/walking.png')}}
                 username={this.state.username}
             />
             
@@ -111,7 +109,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
 
     },
-    
+
     titleText: {
         fontSize: 18,
         fontWeight: 'bold',
@@ -123,7 +121,7 @@ const styles = StyleSheet.create({
     },
 
     dividerStyle: {
-        borderBottomColor: '#a9a9a9',
+        borderBottomColor: 'gray',
         borderBottomWidth: 2,
         borderRadius:0.5,
     },

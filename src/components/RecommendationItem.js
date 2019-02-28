@@ -1,10 +1,9 @@
 import React from 'react';
 import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-const RecommendationItem = ({ title, onPress, image, navigate, username }) => {
+const RecommendationItem = ({ title, image, navigate, username }) => {
   return (
-    <TouchableOpacity onPress={()=>navigate(onPress, {username: username})}>
-      <View style={{justifyContent:'center', alignItems:'center'}}>
+    <View style={styles.container}>
         <Image
           style={styles.image}
           source={image}
@@ -12,7 +11,6 @@ const RecommendationItem = ({ title, onPress, image, navigate, username }) => {
         />
         <Text style={styles.title}>{title}</Text>
       </View>
-    </TouchableOpacity>
   );
 };
 
@@ -24,6 +22,11 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 15,
     textAlign: 'center',
+  },
+  container:{
+    justifyContent:'center',
+    alignItems:'center',
+    
   }
 });
 
