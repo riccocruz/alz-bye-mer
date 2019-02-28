@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
   }, 
 
   SwitchStyle: {
-    paddingRight: 10,
+    marginRight: 10,
     margin: 20, 
     color: 'black', 
     fontWeight: 'bold', 
