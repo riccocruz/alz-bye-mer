@@ -132,8 +132,8 @@ export default class HomeScreen extends React.Component {
           />
           <HomeCard
             title={"My Profile"}
-            item1={{title: 'Cognitive', onPress: 'Todo_Rec', image: require('../../assets/img/check_mark.png')}}
-            item2={{title: 'Physical', onPress: 'Todo_Rec', image: require('../../assets/img/exclamation.png')}}
+            item1={{title: 'Cognitive', onPress: 'CognitiveTodo', image: require('../../assets/img/check_mark.png')}}
+            item2={{title: 'Physical', onPress: 'PhysicalTodo', image: require('../../assets/img/exclamation.png')}}
             item3={{title: 'Profile & Risk', onPress: 'UserProfile', image: require('../../assets/img/risk.jpg')}}
             backgroundColor={this.state.cognitiveTodoCompleted&&this.state.physicalTodoCompleted? 'rgba(123, 239, 178, 0.75)' : 'rgba(247, 202, 24, 0.5)'}
             navigate={navigate}
@@ -151,9 +151,14 @@ export default class HomeScreen extends React.Component {
 
           <TouchableOpacity 
             onPress={ ()=> navigate('Settings', {username: this.state.username})}
-            title="Settings"
           >
           <Text style = { styles.textStyle }> Settings </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity 
+            onPress={ ()=> navigate('Recommendation', {username: this.state.username})}
+          >
+          <Text style = { styles.textStyle }> Recommendation </Text>
           </TouchableOpacity>
 
         </ScrollView>
