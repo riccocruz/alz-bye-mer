@@ -30,7 +30,7 @@ export default class HomeScreen extends React.Component {
       flex: 1,
       textAlign: 'center'
     }
-    
+
   };
 
   componentWillMount() {
@@ -116,7 +116,7 @@ export default class HomeScreen extends React.Component {
             title={"Cognitive Challenge"}
             item1={{title: 'View Stat', onPress: 'CognitiveStat', image: require('../../assets/img/bar_graph.png')}}
             item2={{title: 'Exercises', onPress: 'CognitiveExercises', image: require('../../assets/img/brain_exercise.png')}}
-            item3={{title: 'Daily Challenge', onPress: 'DailyChallenge', image: this.state.dailyCompletd? require('../../assets/img/check_mark.png') : require('../../assets/img/exclamation.png')}}
+            item3={{title: 'Daily Challenge', onPress: 'SingleExercise', image: this.state.dailyCompletd? require('../../assets/img/check_mark.png') : require('../../assets/img/exclamation.png')}}
             backgroundColor={this.state.cognitiveChallengeCompleted? 'rgba(123, 239, 178, 0.75)' : 'rgba(247, 202, 24, 0.5)'}
             navigate={navigate}
             username={this.state.username}
@@ -149,7 +149,7 @@ export default class HomeScreen extends React.Component {
               About Alzheimer's Disease </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity 
+          <TouchableOpacity
             onPress={ ()=> navigate('Settings', {username: this.state.username})}
             title="Settings"
           >
@@ -166,9 +166,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#ff6347',
     width:'90%',
-    height: 40,  
+    height: 40,
     marginLeft: '5%',
-    marginTop: 10, 
+    marginTop: 10,
     opacity: 0.75,
     shadowColor: '#000',
     shadowOffset: {width:2, height:4},
