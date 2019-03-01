@@ -22,15 +22,14 @@ import UserAssessment from './src/screens/UserAssessment';
 import Stepcount from './src/screens/Stepcount';
 import CognitiveStat from './src/screens/CognitiveStat';
 import PhysicalStat from './src/screens/PhysicalStat';
-<<<<<<< HEAD
-import DailyChallenge from './src/screens/DailyChallenge';
-=======
 import Settings from './src/screens/Settings';
 import ProfileSetting from './src/screens/ProfileSetting';
 import NotificationSetting from './src/screens/NotificationSetting';
-import Todo_Rec from './src/screens/Todo_Rec';
 import CognitiveExercises from './src/screens/CognitiveExercises';
->>>>>>> 96f6d5148bebd4a60e3164e7062a95f21d1a2060
+import CognitiveTodo from './src/screens/CognitiveTodo';
+import PhysicalTodo from './src/screens/PhysicalTodo';
+import Recommendation from './src/screens/Recommendation';
+import SingleExercise from './src/screens/SingleExercise';
 
 // add screens to be navigated here:
 const Navigation = createStackNavigator(
@@ -41,15 +40,14 @@ const Navigation = createStackNavigator(
     Stepcount: { screen: Stepcount },
     CognitiveStat: { screen: CognitiveStat },
     PhysicalStat: { screen: PhysicalStat },
-<<<<<<< HEAD
-    DailyChallenge: { screen: DailyChallenge },
-=======
     Settings: {screen: Settings},
     ProfileSetting: { screen: ProfileSetting },
     NotificationSetting: { screen: NotificationSetting },
-    Todo_Rec: {screen: Todo_Rec},
     CognitiveExercises: { screen: CognitiveExercises},
->>>>>>> 96f6d5148bebd4a60e3164e7062a95f21d1a2060
+    CognitiveTodo: { screen: CognitiveTodo },
+    PhysicalTodo: { screen: PhysicalTodo },
+    Recommendation: { screen: Recommendation },
+    SingleExercise: {screen: SingleExercise},
   },
   {
     initialRouteName: 'HomeScreen',
