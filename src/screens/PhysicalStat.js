@@ -21,8 +21,8 @@ export default class PhysicalStat extends React.Component {
   }
 
   componentWillMount() {
-    const end = new Date();
-    const start = new Date();
+    let end = new Date();
+    let start = new Date();
     start.setDate(end.getDate() - 7);
     Pedometer.getStepCountAsync(start, end).then(
       result => {
@@ -45,6 +45,11 @@ export default class PhysicalStat extends React.Component {
         });
       }
     );
+  }
+
+  componentDidMount() {
+
+    console.log(this.state);
   }
 
   renderDates = () => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Button } from 'react-native';
+import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Linking, Button } from 'react-native';
 import { Auth } from 'aws-amplify';
 
 import HomeCard from '../components/HomeCard';
@@ -30,6 +30,7 @@ export default class HomeScreen extends React.Component {
       flex: 1,
       textAlign: 'center'
     }
+
   };
 
   componentWillMount() {
@@ -115,7 +116,7 @@ export default class HomeScreen extends React.Component {
             title={"Cognitive Challenge"}
             item1={{title: 'View Stat', onPress: 'CognitiveStat', image: require('../../assets/img/bar_graph.png')}}
             item2={{title: 'Exercises', onPress: 'CognitiveExercises', image: require('../../assets/img/brain_exercise.png')}}
-            item3={{title: 'Daily Challenge', onPress: 'DailyChallenge', image: this.state.dailyCompletd? require('../../assets/img/check_mark.png') : require('../../assets/img/exclamation.png')}}
+            item3={{title: 'Daily Challenge', onPress: 'SingleExercise', image: this.state.dailyCompletd? require('../../assets/img/check_mark.png') : require('../../assets/img/exclamation.png')}}
             backgroundColor={this.state.cognitiveChallengeCompleted? 'rgba(123, 239, 178, 0.75)' : 'rgba(247, 202, 24, 0.5)'}
             navigate={navigate}
             username={this.state.username}
@@ -131,14 +132,67 @@ export default class HomeScreen extends React.Component {
           />
           <HomeCard
             title={"My Profile"}
-            item1={{title: 'Cognitive', onPress: 'CognitiveProfile', image: require('../../assets/img/check_mark.png')}}
-            item2={{title: 'Physical', onPress: 'PhysicalProfile', image: require('../../assets/img/exclamation.png')}}
+            item1={{title: 'Cognitive', onPress: 'CognitiveTodo', image: require('../../assets/img/check_mark.png')}}
+            item2={{title: 'Physical', onPress: 'PhysicalTodo', image: require('../../assets/img/exclamation.png')}}
             item3={{title: 'Profile & Risk', onPress: 'UserProfile', image: require('../../assets/img/risk.jpg')}}
             backgroundColor={this.state.cognitiveTodoCompleted&&this.state.physicalTodoCompleted? 'rgba(123, 239, 178, 0.75)' : 'rgba(247, 202, 24, 0.5)'}
             navigate={navigate}
             username={this.state.username}
           />
+
+          <TouchableOpacity
+            style={styles.button}
+            onPress={this.onPress}
+            onPress={ ()=>{ Linking.openURL('https://www.nia.nih.gov/health/what-alzheimers-disease')}}
+          >
+            <Text style={styles.buttonTextStyle}>
+              About Alzheimer's Disease </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={ ()=> navigate('Settings', {username: this.state.username})}
+          >
+          <Text style = { styles.textStyle }> Settings </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity 
+            onPress={ ()=> navigate('Recommendation', {username: this.state.username})}
+          >
+          <Text style = { styles.textStyle }> Recommendation </Text>
+          </TouchableOpacity>
+
         </ScrollView>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  button: {
+    alignItems: 'center',
+    backgroundColor: '#ff6347',
+    width:'90%',
+    height: 40,
+    marginLeft: '5%',
+    marginTop: 10,
+    opacity: 0.75,
+    shadowColor: '#000',
+    shadowOffset: {width:2, height:4},
+    shadowOpacity: 0.75,
+    shadowRadius: 3
+  },
+
+  buttonTextStyle: {
+    marginTop: 5,
+    textAlign: 'center',
+    fontSize: 25,
+    color: '#ffffff'
+  },
+
+  textStyle: {
+    color: 	"#4169E1",
+    fontSize: 18,
+    textAlign: 'center',
+    margin: 15,
+  }
+
+})
