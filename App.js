@@ -25,8 +25,10 @@ import PhysicalStat from './src/screens/PhysicalStat';
 import Settings from './src/screens/Settings';
 import ProfileSetting from './src/screens/ProfileSetting';
 import NotificationSetting from './src/screens/NotificationSetting';
-import Todo_Rec from './src/screens/Todo_Rec';
 import CognitiveExercises from './src/screens/CognitiveExercises';
+import CognitiveTodo from './src/screens/CognitiveTodo';
+import PhysicalTodo from './src/screens/PhysicalTodo';
+import Recommendation from './src/screens/Recommendation';
 import SingleExercise from './src/screens/SingleExercise';
 
 // add screens to be navigated here:
@@ -41,8 +43,10 @@ const Navigation = createStackNavigator(
     Settings: {screen: Settings},
     ProfileSetting: { screen: ProfileSetting },
     NotificationSetting: { screen: NotificationSetting },
-    Todo_Rec: {screen: Todo_Rec},
     CognitiveExercises: { screen: CognitiveExercises},
+    CognitiveTodo: { screen: CognitiveTodo },
+    PhysicalTodo: { screen: PhysicalTodo },
+    Recommendation: { screen: Recommendation },
     SingleExercise: {screen: SingleExercise},
   },
   {

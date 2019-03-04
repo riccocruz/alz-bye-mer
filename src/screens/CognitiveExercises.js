@@ -31,7 +31,8 @@ export default class CognitiveExercises extends Component {
         </View>
           {
             difficulty.map((item, index) => (
-              <TouchableOpacity key={index} onPress={()=>navigate('SingleExercise', {type: 'alphanumeric', difficulty: item.name})}>
+              <TouchableOpacity key={index} onPress={()=>navigate('SingleExercise', {type: 'Alphanumeric', difficulty: item.name,
+                                                                                    icon: "numeric"})}>
                 <ListItem
                   title={item.name}
                   style={index==0? styles.list_item1 : styles.list_item}
@@ -45,7 +46,8 @@ export default class CognitiveExercises extends Component {
           </View>
             {
               difficulty.map((item, index) => (
-                <TouchableOpacity key={index} onPress={()=>navigate('SingleExercise', {type: 'figure/shape', difficulty: item.name})}>
+                <TouchableOpacity key={index} onPress={()=>navigate('SingleExercise', {type: 'Figure/shape', difficulty: item.name,
+                                                                                      icon: "shape"})}>
                   <ListItem
                     title={item.name}
                     style={index==0? styles.list_item1 : styles.list_item}
@@ -59,7 +61,8 @@ export default class CognitiveExercises extends Component {
             </View>
               {
                 difficulty.map((item, index) => (
-                  <TouchableOpacity key={index} onPress={()=>navigate('SingleExercise', {type: 'words', difficulty: item.name})}>
+                  <TouchableOpacity key={index} onPress={()=>navigate('SingleExercise', {type: 'Words', difficulty: item.name,
+                                                                                        icon: "file-word-box"})}>
                     <ListItem
                       title={item.name}
                       style={index==0? styles.list_item1 : styles.list_item}
