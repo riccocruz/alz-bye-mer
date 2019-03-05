@@ -4,8 +4,8 @@ type User {
   email: String
   emailVerified: Boolean
   age: String
-  gender: Gender
-  ethnicity: Ethnicity
+  gender: String
+  ethnicity: String
   familyHistory: Boolean
   smoking: Boolean
   drinking: Boolean
@@ -22,19 +22,6 @@ type Physical {
   steps: [Int]
   distance: [Float]
   user: User
-}
-
-enum Gender {
-  MALE
-  FEMALE
-}
-
-enum Ethnicity {
-  ASIAN
-  AFRICAN
-  CAUCASIAN
-  HISPANICS
-  OTHER
 }
 
 enum ModelSortDirection {
@@ -102,24 +89,14 @@ input ModelBooleanFilterInput {
   eq: Boolean
 }
 
-input ModelGenderFilterInput {
-  eq: Gender
-  ne: Gender
-}
-
-input ModelEthnicityFilterInput {
-  eq: Ethnicity
-  ne: Ethnicity
-}
-
 input ModelUserFilterInput {
   id: ModelIDFilterInput
   username: ModelStringFilterInput
   email: ModelStringFilterInput
   emailVerified: ModelBooleanFilterInput
   age: ModelStringFilterInput
-  gender: ModelGenderFilterInput
-  ethnicity: ModelEthnicityFilterInput
+  gender: ModelStringFilterInput
+  ethnicity: ModelStringFilterInput
   familyHistory: ModelBooleanFilterInput
   smoking: ModelBooleanFilterInput
   drinking: ModelBooleanFilterInput
@@ -146,8 +123,8 @@ input CreateUserInput {
   email: String
   emailVerified: Boolean
   age: String
-  gender: Gender
-  ethnicity: Ethnicity
+  gender: String
+  ethnicity: String
   familyHistory: Boolean
   smoking: Boolean
   drinking: Boolean
@@ -164,8 +141,8 @@ input UpdateUserInput {
   email: String
   emailVerified: Boolean
   age: String
-  gender: Gender
-  ethnicity: Ethnicity
+  gender: String
+  ethnicity: String
   familyHistory: Boolean
   smoking: Boolean
   drinking: Boolean

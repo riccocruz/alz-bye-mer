@@ -103,6 +103,8 @@ export const listPhysicals = `query ListPhysicals(
         email
         emailVerified
         age
+        gender
+        ethnicity
         familyHistory
         smoking
         drinking

@@ -4,8 +4,8 @@ type User @model {
   email: String
   emailVerified: Boolean
   age: String
-  gender: Gender
-  ethnicity: Ethnicity
+  gender: String
+  ethnicity: String
   familyHistory: Boolean
   smoking: Boolean
   drinking: Boolean
@@ -22,17 +22,4 @@ type Physical @model {
   steps: [Int]
   distance: [Float]
   user: User @connection(name: "UserPhysicals")
-}
-
-enum Gender {
-  MALE
-  FEMALE
-}
-
-enum Ethnicity {
-  ASIAN
-  AFRICAN
-  CAUCASIAN
-  HISPANICS
-  OTHER
 }
