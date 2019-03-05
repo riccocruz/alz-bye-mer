@@ -200,7 +200,7 @@
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "ageRange",
+          "name" : "age",
           "description" : null,
           "args" : [ ],
           "type" : {
@@ -1028,7 +1028,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "ageRange",
+          "name" : "age",
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",
@@ -1548,7 +1548,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "ageRange",
+          "name" : "age",
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
@@ -1696,7 +1696,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "ageRange",
+          "name" : "age",
           "description" : null,
           "type" : {
             "kind" : "SCALAR",

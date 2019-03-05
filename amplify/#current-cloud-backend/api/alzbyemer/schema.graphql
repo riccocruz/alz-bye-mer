@@ -3,7 +3,7 @@ type User @model {
   username: String!
   email: String
   emailVerified: Boolean
-  ageRange: String
+  age: String
   gender: Gender
   ethnicity: Ethnicity
   familyHistory: Boolean
