@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { TextInput, Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { NavigationActions, StackActions } from 'react-navigation'
+import { Auth, API, graphqlOperation } from 'aws-amplify';
 
+import { listUsers } from '../graphql/queries';
+import { updateUser } from '../graphql/mutations';
 import TextField from '../commons/TextField';
 import CustomPicker from '../commons/CustomPicker';
 import RadioButton from '../commons/RadioButton';
@@ -11,6 +14,7 @@ export default class UserProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      profile: null,
       responses: [null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],
       score: 0,
       isSubmitting: false,
@@ -24,20 +28,43 @@ export default class UserProfile extends Component {
 
   componentWillMount() {
     const username = this.props.navigation.getParam('username');
+    this.fetchUserProfile(username)
+    .then(data => {
+      profile = data.data.getUser.items[0];
+      this.setState({ profile: profile });
+    });
   }
 
   componentDidUpdate() {
     console.log(this.state);
   }
 
+  fetchUserProfile(username) {
+    return API.graphql(graphqlOperation(listUsers, {
+      filter: {
+        username: { eq: username }
+      },
+      limit: 1
+    }))
+    .then(data => console.log("Fetch User Profile Successful"))
+    .catch(err => console.log(err));
+  }
+
+  updateUserProfile(profile) {
+    return API.graphql(graphqlOperation(updateUser, {
+      input: profile
+    }))
+    .then(data => console.log("Update User Profile Successful"))
+    .catch(err => console.log(err));
+  }
+
   onPressSubmit = () => {
     // this is where all local states will be posted to the database
-    // for now, hardcoded some timeOut in place of actual request
     this.setState({
       isSubmitting: true,
     });
-    setTimeout(()=>{
-      console.log(this.state);
+    this.updateUserProfile(this.state.profile)
+    .then(data => {
       this.setState({
         isSubmitting: false,
       });
@@ -48,8 +75,8 @@ export default class UserProfile extends Component {
            routeName: 'HomeScreen',
          }),
        ],
-     }))
-   }, 1500);
+      }));
+    });
   }
 
 
@@ -110,10 +137,14 @@ export default class UserProfile extends Component {
         completed++;
       }
     });
-    this.setState({
+    this.setState(previousState => ({
+      profile: {
+        ...previousState.profile,
+        assessmentScore: sum
+      },
       score: sum,
       isComplete: completed==21? true: false,
-    });
+    }));
   }
 
   render() {

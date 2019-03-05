@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { TextInput, Text, View, TouchableOpacity, ScrollView, Platform } from 'react-native';
+import { Auth, API, graphqlOperation } from 'aws-amplify';
 
+import { listUsers } from '../graphql/queries';
+import { updateUser } from '../graphql/mutations';
 import TextField from '../commons/TextField';
 import CustomPicker from '../commons/CustomPicker';
 import IOSPicker from '../commons/IOSPicker';
@@ -10,20 +13,22 @@ import { Button } from 'react-native-elements';
 export default class UserProfile extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-
-      ethnicity: '',   // asian, african, caucasian, hispanics, others
-      age: '',         // <65, 65-69, 70-74, 75-79, 80-84, >=85
-      gender: null,    // 0 for Male, 1 for Female
-      height: '',
-      weight: '',
-      familyHistory: null,  // 1 for Yes, 0 for No
-      smoking: null,        // 1 for Yes, 0 for No
-      highBloodPressure: null,
-      diabetes: null,
-
-      isSubmitting: false,
-    };
+      profile: {
+        id: '',
+        ethnicity: '',   // asian, african, caucasian, hispanics, others
+        age: '',         // <65, 65-69, 70-74, 75-79, 80-84, >=85
+        gender: null,    // 0 for Male, 1 for Female
+        height: '',
+        weight: '',
+        familyHistory: null,  // 1 for Yes, 0 for No
+        smoking: null,        // 1 for Yes, 0 for No
+        highBloodPressure: null,
+        diabetes: null,
+      },
+      isSubmitting: false
+    }
 
     // this.shouldComponentUpdate()
 
@@ -35,23 +40,21 @@ export default class UserProfile extends Component {
 
   componentWillMount() {
     const username = this.props.navigation.getParam('username');
+
     // fetch actual userdata from database
-    // this.setState({
-    //   ethnicity: ,
-    //   age: ,
-    //   gender: ,
-    //   height: ,
-    //   weight: ,
-    //   familyHistory: ,
-    //   smoking: ,
-    //   highBloodPressure: ,
-    //   diabetes: ,
-    // });
+    this.fetchUserProfile(username)
+    .then(data => {
+      const profile = data.data.listUsers.items[0];
+      delete profile.physicals;
+      this.setState({
+        profile: profile
+      });
+    });
   }
 
   componentDidUpdate() {
 
-    console.log(this.state);
+    // console.log(this.state);
   }
 
   onPressNext = () => {
@@ -61,13 +64,31 @@ export default class UserProfile extends Component {
     this.setState({
       isSubmitting: true,
     });
-    setTimeout(()=>{
-      console.log(this.state);
+    this.updateUserProfile(this.state.profile)
+    .then(data => {
       this.setState({
         isSubmitting: false,
       });
       this.props.navigation.navigate('UserAssessment', {username: username});
-    }, 1500);
+    });
+  }
+
+  async fetchUserProfile(username) {
+    return API.graphql(graphqlOperation(listUsers, {
+      filter: {
+        username: { eq: username }
+      },
+      limit: 1
+    }))
+    .catch(err => console.error(err));
+  }
+
+  async updateUserProfile(profile) {
+    profile.ethnicity = profile.ethnicity.toUpperCase();
+    return API.graphql(graphqlOperation(updateUser, {
+      input: profile
+    }))
+    .catch(err => console.error(err));
   }
 
   renderIOSPicker = () => {
@@ -75,14 +96,22 @@ export default class UserProfile extends Component {
         <View>
           <IOSPicker
             label={"Ethnicity"}
-            selectedValue={this.state.ethnicity}
-            onValueChange={ethnicity=>this.setState({ethnicity})}
-            items={['cancel', 'Asian', 'African','Caucasian', 'Hispanics', 'Others']}
+            selectedValue={this.state.profile.ethnicity}
+            onValueChange={ethnicity => {
+              let profile = Object.assign({}, this.state.profile);
+              profile.ethnicity = ethnicity;
+              this.setState({profile: profile});
+            }}
+            items={['cancel', 'Asian', 'African','Caucasian', 'Hispanics', 'Other']}
           />
           <IOSPicker
             label={"Age"}
-            selectedValue={this.state.age}
-            onValueChange={age=>this.setState({age})}
+            selectedValue={this.state.profile.age}
+            onValueChange={ethnicity => {
+              let profile = Object.assign({}, this.state.profile);
+              profile.age = age;
+              this.setState({profile: profile});
+            }}
             items={['cancel', 'Less than 65', '65-69','70-74', '75-79', '80-84', '85 or older']}
           />
         </View>
@@ -94,18 +123,26 @@ export default class UserProfile extends Component {
       <View>
         <CustomPicker
           label={"Ethnicity"}
-          selectedValue={this.state.ethnicity}
-          onValueChange={ethnicity=>this.setState({ethnicity})}
+          selectedValue={this.state.profile.ethnicity}
+          onValueChange={ethnicity => {
+            let profile = Object.assign({}, this.state.profile);
+            profile.ethnicity = ethnicity;
+            this.setState({profile: profile});
+          }}
           items={[{label: 'Asian', value: 'Asian'},
                   {label: 'African', value: 'African'},
                   {label: 'Caucasian', value: 'Caucasian'},
                   {label: 'Hispanics', value: 'Hispanics'},
-                  {label: 'Others', value: 'Others'}]}
+                  {label: 'Other', value: 'Other'}]}
         />
         <CustomPicker
           label={"Age"}
-          selectedValue={this.state.age}
-          onValueChange={age=>this.setState({age})}
+          selectedValue={this.state.profile.age}
+          onValueChange={age => {
+            let profile = Object.assign({}, this.state.profile);
+            profile.age = age;
+            this.setState({profile: profile});
+          }}
           items={[{label: 'Less than 65', value: 'Less than 65'},
                   {label: '65-69', value: '65-69'},
                   {label: '70-74', value: '70-74'},
@@ -118,15 +155,15 @@ export default class UserProfile extends Component {
   }
 
   render() {
-    const { ethnicity, age, gender, height, weight, familyHistory, smoking, highBloodPressure, diabetes } = this.state;
+    const { ethnicity, age, gender, height, weight, familyHistory, smoking, highBloodPressure, diabetes } = this.state.profile;
 
     const gender_options = [
-      {id: 0, label: 'Male'},
-      {id: 1, label: 'Female'},
+      {id: 0, label: 'Male', DBLabel: 'MALE'},
+      {id: 1, label: 'Female', DBLabel: 'FEMALE'},
     ];
     const yes_no = [
-      {id: 1, label: 'Yes'},
-      {id: 0, label: 'No'},
+      {id: 1, label: 'Yes', DBLabel: true},
+      {id: 0, label: 'No', DBLabel: false},
     ];
 
     return (
@@ -135,49 +172,77 @@ export default class UserProfile extends Component {
         <RadioButton
           label="Gender"
           options={gender_options}
-          onChange={option=>this.setState({gender:option.id})}
-          activeButtonId={this.state.gender}
+          onChange={option => {
+            let profile = Object.assign({}, this.state.profile);
+            profile.gender = option.DBLabel;
+            this.setState({profile: profile});
+          }}
+          activeButtonId={this.state.profile.gender}
           horizontal
         />
         <TextField
           label={"Height(in)"}
-          value={this.state.height}
-          onChangeText={height=>this.setState({height})}
+          value={this.state.profile.height}
+          onChangeText={height => {
+            let profile = Object.assign({}, this.state.profile);
+            profile.height = height;
+            this.setState({profile: profile});
+          }}
           keyboardType="numeric"
         />
         <TextField
           label={"Weight(lb)"}
-          value={this.state.weight}
-          onChangeText={weight=>this.setState({weight})}
+          value={this.state.profile.weight}
+          onChangeText={weight => {
+            let profile = Object.assign({}, this.state.profile);
+            profile.weight = weight;
+            this.setState({profile: profile});
+          }}
           keyboardType="numeric"
         />
         <RadioButton
           label="Any family history of Alzheimer's Disease?"
           options={yes_no}
-          onChange={option=>this.setState({familyHistory:option.id})}
-          activeButtonId={this.state.familyHistory}
+          onChange={option => {
+            let profile = Object.assign({}, this.state.profile);
+            profile.familyHistory = option.DBLabel;
+            this.setState({profile: profile});
+          }}
+          activeButtonId={this.state.profile.familyHistory}
           horizontal
         />
         <RadioButton
           label="Do you smoke?"
           options={yes_no}
-          onChange={option=>this.setState({smoking:option.id})}
-          activeButtonId={this.state.smoking}
+          onChange={option => {
+            let profile = Object.assign({}, this.state.profile);
+            profile.smoking = option.DBLabel;
+            this.setState({profile: profile});
+          }}
+          activeButtonId={this.state.profile.smoking}
           horizontal
         />
         <Text style={{fontSize: 18, paddingLeft: 4, paddingRight: 4, fontWeight: 'bold', marginTop: 8}}>Do you have any of the following medical conditions?</Text>
         <RadioButton
           label="High Blood Pressure"
           options={yes_no}
-          onChange={option=>this.setState({highBloodPressure:option.id})}
-          activeButtonId={this.state.highBloodPressure}
+          onChange={option => {
+            let profile = Object.assign({}, this.state.profile);
+            profile.highBloodPressure = option.DBLabel;
+            this.setState({profile: profile});
+          }}
+          activeButtonId={this.state.profile.highBloodPressure}
           horizontal
         />
         <RadioButton
           label="Diabetes"
           options={yes_no}
-          onChange={option=>this.setState({diabetes:option.id})}
-          activeButtonId={this.state.diabetes}
+          onChange={option => {
+            let profile = Object.assign({}, this.state.profile);
+            profile.diabetes = option.DBLabel;
+            this.setState({profile: profile});
+          }}
+          activeButtonId={this.state.profile.diabetes}
           horizontal
         />
         <Button
