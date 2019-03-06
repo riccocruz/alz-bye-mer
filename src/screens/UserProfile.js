@@ -83,7 +83,7 @@ export default class UserProfile extends Component {
             label={"Age"}
             selectedValue={this.state.age}
             onValueChange={age=>this.setState({age})}
-            items={['cancel', 'Less than 65', '65-69','70-74', '75-79', '80-84', '85 or older']}
+            items={['cancel', 'Less than 65', '65-74', '75-84', '85 or older']}
           />
         </View>
       );
@@ -107,10 +107,8 @@ export default class UserProfile extends Component {
           selectedValue={this.state.age}
           onValueChange={age=>this.setState({age})}
           items={[{label: 'Less than 65', value: 'Less than 65'},
-                  {label: '65-69', value: '65-69'},
-                  {label: '70-74', value: '70-74'},
-                  {label: '75-79', value: '75-79'},
-                  {label: '80-84', value: '80-84'},
+                  {label: '65-74', value: '65-74'},
+                  {label: '75-84', value: '75-84'},
                   {label: '85 or older', value: '85 or older'}]}
         />
       </View>
