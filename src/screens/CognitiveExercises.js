@@ -31,7 +31,7 @@ export default class CognitiveExercises extends Component {
         </View>
           {
             difficulty.map((item, index) => (
-              <TouchableOpacity key={index} onPress={()=>navigate('SingleExercise', {type: 'Alphanumeric', difficulty: item.name, 
+              <TouchableOpacity key={index} onPress={()=>navigate('SingleExercise', {type: 'Alphanumeric', difficulty: item.name,
                                                                                     icon: "numeric"})}>
                 <ListItem
                   title={item.name}

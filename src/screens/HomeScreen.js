@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Linking, Button } from 'react-native';
+import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Linking, Button, ActivityIndicator } from 'react-native';
 import { Auth } from 'aws-amplify';
 
 import HomeCard from '../components/HomeCard';
@@ -21,6 +21,7 @@ export default class HomeScreen extends React.Component {
       risk: 'low',
       cognitiveChallengeCompleted: true,
       PhysicalChallengeCompleted: false,
+      isLoading: true,
     }
   }
 
@@ -47,6 +48,10 @@ export default class HomeScreen extends React.Component {
         });
       }
     );
+    this._subscribe();
+    setTimeout(()=>{
+      this.setState({isLoading:false});
+    }, 1500);
   }
 
   componentDidMount() {
@@ -54,7 +59,6 @@ export default class HomeScreen extends React.Component {
     Auth.currentAuthenticatedUser()
         .then(user=>this.setState({username: user.username}))
         .catch(err=>console.log(err));
-        this._subscribe();
   }
 
   componentWillUnmount() {
@@ -66,6 +70,20 @@ export default class HomeScreen extends React.Component {
   }
 
   _subscribe = () => {
+    const end = new Date();
+    const start = new Date();
+    start.setDate(end.getDate() - 1);
+    Pedometer.getStepCountAsync(start, end).then(
+      result => {
+        this.setState({ pastStepCount: result.steps });
+      },
+      error => {
+        this.setState({
+          pastStepCount: "Could not get stepCount: " + error
+        });
+      }
+    );
+
     this._subscription = Pedometer.watchStepCount(result => {
       console.log(result);
       console.log(this.state.pastStepCount);
@@ -87,19 +105,6 @@ export default class HomeScreen extends React.Component {
       }
     );
 
-    const end = new Date();
-    const start = new Date();
-    start.setDate(end.getDate() - 1);
-    Pedometer.getStepCountAsync(start, end).then(
-      result => {
-        this.setState({ pastStepCount: result.steps });
-      },
-      error => {
-        this.setState({
-          pastStepCount: "Could not get stepCount: " + error
-        });
-      }
-    );
   };
 
   _unsubscribe = () => {
@@ -107,60 +112,74 @@ export default class HomeScreen extends React.Component {
     this._subscription = null;
   };
 
-  render() {
+  renderHome = () => {
     const {navigate} = this.props.navigation;
+    return (
+      <View>
+        <HomeCard
+          title={"Cognitive Challenge"}
+          item1={{title: 'View Stat', onPress: 'CognitiveStat', image: require('../../assets/img/bar_graph.png')}}
+          item2={{title: 'Exercises', onPress: 'CognitiveExercises', image: require('../../assets/img/brain_exercise.png')}}
+          item3={{title: 'Daily Challenge', onPress: 'SingleExercise', image: this.state.dailyCompletd? require('../../assets/img/check_mark.png') : require('../../assets/img/exclamation.png')}}
+          backgroundColor={this.state.cognitiveChallengeCompleted? 'rgba(123, 239, 178, 0.75)' : 'rgba(247, 202, 24, 0.5)'}
+          navigate={navigate}
+          username={this.state.username}
+        />
+        <HomeCard
+          title={"Physical Challenge"}
+          item1={{title: 'View Stat', onPress: 'PhysicalStat', image: require('../../assets/img/bar_graph.png')}}
+          item2={{title: `${this.state.currentStepCount}/10000 steps`, onPress: '', image: require('../../assets/img/walking.png')}}
+          item3={{title: `${this.state.distance} Miles`, onPress: 'DistanceTraveled', image: require('../../assets/img/distance.png')}}
+          backgroundColor={this.state.PhysicalChallengeCompleted? 'rgba(123, 239, 178, 0.75)' : 'rgba(247, 202, 24, 0.5)'}
+          navigate={navigate}
+          username={this.state.username}
+        />
+        <HomeCard
+          title={"My Profile"}
+          item1={{title: 'Cognitive', onPress: 'CognitiveTodo', image: require('../../assets/img/check_mark.png')}}
+          item2={{title: 'Physical', onPress: 'PhysicalTodo', image: require('../../assets/img/exclamation.png')}}
+          item3={{title: 'Profile & Risk', onPress: 'UserProfile', image: require('../../assets/img/risk.jpg')}}
+          backgroundColor={this.state.cognitiveTodoCompleted&&this.state.physicalTodoCompleted? 'rgba(123, 239, 178, 0.75)' : 'rgba(247, 202, 24, 0.5)'}
+          navigate={navigate}
+          username={this.state.username}
+        />
 
+        <TouchableOpacity
+          style={styles.button}
+          onPress={this.onPress}
+          onPress={ ()=>{ Linking.openURL('https://www.nia.nih.gov/health/what-alzheimers-disease')}}
+        >
+          <Text style={styles.buttonTextStyle}>
+            About Alzheimer's Disease </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={ ()=> navigate('Settings', {username: this.state.username})}
+        >
+        <Text style = { styles.textStyle }> Settings </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={ ()=> navigate('Recommendation', {username: this.state.username})}
+        >
+        <Text style = { styles.textStyle }> Recommendation </Text>
+        </TouchableOpacity>
+      </View>
+    )
+  }
+
+  renderLoading = () => {
+    return (
+      <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
+        <ActivityIndicator size="large" style={{marginTop: 250}}/>
+      </View>
+    )
+  }
+
+  render() {
     return (
         <ScrollView style={{flex:1}}>
-          <HomeCard
-            title={"Cognitive Challenge"}
-            item1={{title: 'View Stat', onPress: 'CognitiveStat', image: require('../../assets/img/bar_graph.png')}}
-            item2={{title: 'Exercises', onPress: 'CognitiveExercises', image: require('../../assets/img/brain_exercise.png')}}
-            item3={{title: 'Daily Challenge', onPress: 'SingleExercise', image: this.state.dailyCompletd? require('../../assets/img/check_mark.png') : require('../../assets/img/exclamation.png')}}
-            backgroundColor={this.state.cognitiveChallengeCompleted? 'rgba(123, 239, 178, 0.75)' : 'rgba(247, 202, 24, 0.5)'}
-            navigate={navigate}
-            username={this.state.username}
-          />
-          <HomeCard
-            title={"Physical Challenge"}
-            item1={{title: 'View Stat', onPress: 'PhysicalStat', image: require('../../assets/img/bar_graph.png')}}
-            item2={{title: `${this.state.currentStepCount}/10000 steps`, onPress: '', image: require('../../assets/img/walking.png')}}
-            item3={{title: `${this.state.distance} Miles`, onPress: 'DistanceTraveled', image: require('../../assets/img/distance.png')}}
-            backgroundColor={this.state.PhysicalChallengeCompleted? 'rgba(123, 239, 178, 0.75)' : 'rgba(247, 202, 24, 0.5)'}
-            navigate={navigate}
-            username={this.state.username}
-          />
-          <HomeCard
-            title={"My Profile"}
-            item1={{title: 'Cognitive', onPress: 'CognitiveTodo', image: require('../../assets/img/check_mark.png')}}
-            item2={{title: 'Physical', onPress: 'PhysicalTodo', image: require('../../assets/img/exclamation.png')}}
-            item3={{title: 'Profile & Risk', onPress: 'UserProfile', image: require('../../assets/img/risk.jpg')}}
-            backgroundColor={this.state.cognitiveTodoCompleted&&this.state.physicalTodoCompleted? 'rgba(123, 239, 178, 0.75)' : 'rgba(247, 202, 24, 0.5)'}
-            navigate={navigate}
-            username={this.state.username}
-          />
-
-          <TouchableOpacity
-            style={styles.button}
-            onPress={this.onPress}
-            onPress={ ()=>{ Linking.openURL('https://www.nia.nih.gov/health/what-alzheimers-disease')}}
-          >
-            <Text style={styles.buttonTextStyle}>
-              About Alzheimer's Disease </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={ ()=> navigate('Settings', {username: this.state.username})}
-          >
-          <Text style = { styles.textStyle }> Settings </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity 
-            onPress={ ()=> navigate('Recommendation', {username: this.state.username})}
-          >
-          <Text style = { styles.textStyle }> Recommendation </Text>
-          </TouchableOpacity>
-
+          {this.state.isLoading? this.renderLoading() : this.renderHome()}
         </ScrollView>
     )
   }
