@@ -6,6 +6,7 @@ import CustomPicker from '../commons/CustomPicker';
 import IOSPicker from '../commons/IOSPicker';
 import RadioButton from '../commons/RadioButton';
 import { Button } from 'react-native-elements';
+import { profileRiskCalc } from '../helpers/index';
 
 export default class UserProfile extends Component {
   constructor(props) {
@@ -50,8 +51,20 @@ export default class UserProfile extends Component {
   }
 
   componentDidUpdate() {
+    // ****** temporary to see Profile Calculation ********
+    const { ethnicity, age, gender, height, weight, familyHistory, smoking, highBloodPressure, diabetes } = this.state;
+    if(!(ethnicity==''||age==''||gender==null||height==''||weight==''||familyHistory==null||smoking==null||highBloodPressure==null||diabetes==null)) {
+      let profileRiskScore = profileRiskCalc(this.state);
+      console.log(profileRiskScore);
+      if(profileRiskScore >= 20) {
+        console.log("HIGH RISK");
+      } else if(profileRiskScore >= 13) {
+        console.log("MODERATE RISK");
+      } else {
+        console.log("LOW RISK");
+      }
+    }
 
-    console.log(this.state);
   }
 
   onPressNext = () => {
