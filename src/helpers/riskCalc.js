@@ -8,7 +8,10 @@ export function profileRiskCalc(obj) {
     'Hispanics': 2.5,
     'Others': 1
   };
-  const GENDER_SCORE = [3, 4.5];
+  const GENDER_SCORE = {
+    'Male': 3,
+    'Female': 4.5
+  };
   const AGE_SCORE = {
     'Less than 65': 0.5,
     '65-74': 1.5,
@@ -21,14 +24,14 @@ export function profileRiskCalc(obj) {
     'Overweight': 3,
     'Obese': 4.5
   };
-  const FAMHISTORY_SCORE = [0, 1];
-  const SMOKING_SCORE = [0, 1.5];
-  const HBP_SCORE = [0, 3];
-  const DIABETES_SCORE = [0, 3];
+  const FAMHISTORY_SCORE = familyHistory? 1 : 0;
+  const SMOKING_SCORE = smoking? 1.5: 0;
+  const HBP_SCORE = highBloodPressure? 3 : 0;
+  const DIABETES_SCORE = diabetes? 3 : 0;
   // BMI calculation
-  const BMI = BMICalc(obj.height, obj.weight);
+  const BMI = BMICalc(height, weight);
 
-  return ETHNICITY_SCORE[ethnicity] + GENDER_SCORE[gender] + AGE_SCORE[age] + BMI_SCORE[BMI] + FAMHISTORY_SCORE[familyHistory] + SMOKING_SCORE[smoking] + HBP_SCORE[highBloodPressure] + DIABETES_SCORE[diabetes];
+  return ETHNICITY_SCORE[ethnicity] + GENDER_SCORE[gender] + AGE_SCORE[age] + BMI_SCORE[BMI] + FAMHISTORY_SCORE + SMOKING_SCORE + HBP_SCORE + DIABETES_SCORE;
 };
 
 function BMICalc(height, weight) {

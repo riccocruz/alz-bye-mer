@@ -6,7 +6,7 @@ import CustomPicker from '../commons/CustomPicker';
 import IOSPicker from '../commons/IOSPicker';
 import RadioButton from '../commons/RadioButton';
 import { Button } from 'react-native-elements';
-import { profileRiskCalc } from '../helpers/index';
+import { profileRiskCalc } from '../helpers/riskCalc';
 
 export default class UserProfile extends Component {
   constructor(props) {
@@ -64,7 +64,7 @@ export default class UserProfile extends Component {
         console.log("LOW RISK");
       }
     }
-
+    // console.log(this.state);
   }
 
   onPressNext = () => {
@@ -132,12 +132,12 @@ export default class UserProfile extends Component {
     const { ethnicity, age, gender, height, weight, familyHistory, smoking, highBloodPressure, diabetes } = this.state;
 
     const gender_options = [
-      {id: 0, label: 'Male'},
-      {id: 1, label: 'Female'},
+      {label: 'Male', value: 'Male'},
+      {label: 'Female', value: 'Female'},
     ];
     const yes_no = [
-      {id: 1, label: 'Yes'},
-      {id: 0, label: 'No'},
+      {label: 'Yes', value: true},
+      {label: 'No', value: false},
     ];
 
     return (
@@ -146,8 +146,8 @@ export default class UserProfile extends Component {
         <RadioButton
           label="Gender"
           options={gender_options}
-          onChange={option=>this.setState({gender:option.id})}
-          activeButtonId={this.state.gender}
+          onPress={value=>this.setState({gender:value})}
+          initial={this.state.gender}
           horizontal
         />
         <TextField
@@ -165,30 +165,30 @@ export default class UserProfile extends Component {
         <RadioButton
           label="Any family history of Alzheimer's Disease?"
           options={yes_no}
-          onChange={option=>this.setState({familyHistory:option.id})}
-          activeButtonId={this.state.familyHistory}
+          onPress={value=>this.setState({familyHistory:value})}
+          initial={this.state.familyHistory}
           horizontal
         />
         <RadioButton
           label="Do you smoke?"
           options={yes_no}
-          onChange={option=>this.setState({smoking:option.id})}
-          activeButtonId={this.state.smoking}
+          onPress={value=>this.setState({smoking:value})}
+          initial={this.state.smoking}
           horizontal
         />
         <Text style={{fontSize: 18, paddingLeft: 4, paddingRight: 4, fontWeight: 'bold', marginTop: 8}}>Do you have any of the following medical conditions?</Text>
         <RadioButton
           label="High Blood Pressure"
           options={yes_no}
-          onChange={option=>this.setState({highBloodPressure:option.id})}
-          activeButtonId={this.state.highBloodPressure}
+          onPress={value=>this.setState({highBloodPressure:value})}
+          initial={this.state.highBloodPressure}
           horizontal
         />
         <RadioButton
           label="Diabetes"
           options={yes_no}
-          onChange={option=>this.setState({diabetes:option.id})}
-          activeButtonId={this.state.diabetes}
+          onPress={value=>this.setState({diabetes:value})}
+          initial={this.state.diabetes}
           horizontal
         />
         <Button
