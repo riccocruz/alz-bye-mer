@@ -4,6 +4,8 @@ import { TextInput, Text, View, TouchableOpacity, ScrollView, StyleSheet } from 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { ListItem } from 'react-native-elements';
 
+import Alphanumeric from '../components/Alphanumeric';
+
 export default class SingleExercise extends Component {
   static navigationOptions = {
     title: 'Cognitive Challenge',
@@ -38,15 +40,47 @@ export default class SingleExercise extends Component {
     console.log(this.state);
   }
 
+  // Type: dailyChallenge, Alphanumeric, Figure/shape, Words
+  // Difficulty: Easy, Medium, Hard
+  renderGame = (type, difficulty) => {
+    switch(type) {
+      case "Alphanumeric":
+        return (
+          <Alphanumeric difficulty={difficulty}/>
+        );
+        break;
+      case "Figure/shape":
+        return (
+          <View>
+            <Text>Figure/Shape - {difficulty}</Text>
+          </View>
+        );
+        break;
+      case "Words":
+        return (
+          <View>
+            <Text>Words Recall - {difficulty}</Text>
+          </View>
+        );
+        break;
+      case "dailyChallenge":
+        return (
+          <View>
+            <Text>Daily Challenge</Text>
+          </View>
+        );
+        break;
+    }
+  }
+
   render() {
     return (
       <ScrollView style={{flex:1}}>
-      <View style={styles.title_container}>
-        <MaterialCommunityIcons name = {this.state.icon} size={32} />
-        <Text style={styles.title}> {this.state.type}</Text>
+        <View style={styles.title_container}>
+          <MaterialCommunityIcons name = {this.state.icon} size={32} />
+          <Text style={styles.title}> {this.state.type}</Text>
         </View>
-        <Text style={styles.titleText}> {this.state.type} - {this.state.difficulty}</Text>
-        <Text style={styles.titleText}> Insert Exercise Below</Text>
+        {this.renderGame(this.state.type, this.state.difficulty)}
       </ScrollView>
 
     )
