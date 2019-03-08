@@ -27,6 +27,7 @@ export default class UserProfile extends Component {
         smoking: null,        // 1 for Yes, 0 for No
         highBloodPressure: null,
         diabetes: null,
+        profileScore: 0,
       },
       isSubmitting: false
     }
@@ -55,27 +56,30 @@ export default class UserProfile extends Component {
 
   componentDidUpdate() {
     // ****** temporary to see Profile Calculation ********
-    const { ethnicity, age, gender, height, weight, familyHistory, smoking, highBloodPressure, diabetes } = this.state.profile;
-    if(!(ethnicity==''||age==''||gender==null||height==''||weight==''||familyHistory==null||smoking==null||highBloodPressure==null||diabetes==null)) {
-      let profileRiskScore = profileRiskCalc(this.state.profile);
-      console.log(profileRiskScore);
-      if(profileRiskScore >= 20) {
-        console.log("HIGH RISK");
-      } else if(profileRiskScore >= 13) {
-        console.log("MODERATE RISK");
-      } else {
-        console.log("LOW RISK");
-      }
-    }
+    // const { ethnicity, age, gender, height, weight, familyHistory, smoking, highBloodPressure, diabetes } = this.state.profile;
+    // if(!(ethnicity==''||age==''||gender==null||height==''||weight==''||familyHistory==null||smoking==null||highBloodPressure==null||diabetes==null)) {
+    //   let profileRiskScore = profileRiskCalc(this.state.profile);
+    //   console.log(profileRiskScore);
+    //   if(profileRiskScore >= 20) {
+    //     console.log("HIGH RISK");
+    //   } else if(profileRiskScore >= 13) {
+    //     console.log("MODERATE RISK");
+    //   } else {
+    //     console.log("LOW RISK");
+    //   }
+    // }
     console.log(this.state);
   }
 
   onPressNext = () => {
     const username = this.props.navigation.getParam('username');
+    let profile = Object.assign({}, this.state.profile);
+    profile.profileScore = profileRiskCalc(this.state.profile);
     // this is where all local states will be posted to the database
     // for now, hardcoded some timeOut in place of actual request
     this.setState({
       isSubmitting: true,
+      profile: profile
     });
     this.updateUserProfile(this.state.profile)
     .then(data => {

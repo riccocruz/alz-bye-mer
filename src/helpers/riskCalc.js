@@ -47,3 +47,7 @@ function BMICalc(height, weight) {
   else
     return 'Underweight';
 };
+
+export function riskScoreCalc(profileScore, assessScore) {
+  return profileScore * 2 + assessScore * 8;
+}
