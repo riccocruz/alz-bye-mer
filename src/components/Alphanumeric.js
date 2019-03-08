@@ -16,6 +16,8 @@ export default class Alphanumeric extends Component {
       prompt: '',
       showInput: false,
       userInput: '',
+      correct: false,
+      showResult: false,
     };
     let timer;
     let timeout;
@@ -47,7 +49,7 @@ export default class Alphanumeric extends Component {
   }
 
   timerStart = () => {
-    this.setState({time:3});
+    this.setState({time:5});
     timer = setInterval(()=>{
       this.setState(prevState=>({
         time: prevState.time-1
@@ -61,27 +63,48 @@ export default class Alphanumeric extends Component {
         showPrompt:false,
         showInput: true,
       })
-    }, 3500);
+    }, 5500);
   }
 
   gameStart = () => {
-    this.generateString();
-    this.timerStart();
-    this.setState({showPrompt:true});
+    if(this.state.stage < 10) {
+      this.generateString();
+      this.timerStart();
+      this.setState({showPrompt:true});
+    } else {
+      this.setState({
+        time: null,
+        showPrompt: true,
+        prompt: 'Finish',
+        showInput: false,
+        userInput: '',
+        correct: false,
+        showResult: false,
+      });
+    }
   };
 
   checkAnswer = () => {
     if(this.state.userInput == this.state.prompt) {
       this.setState(prevState=>({
         score: prevState.score+1,
-      }))
+        correct: true,
+      }));
     }
     this.setState(prevState=>({
       stage: prevState.stage+1,
       userInput: '',
       showInput: false,
+      showPrompt: false,
+      showResult: true,
     }));
-    this.gameStart();
+    setTimeout(()=>{
+      this.setState({
+        correct: false,
+        showResult: false,
+      });
+      this.gameStart();
+    }, 1200);
   }
 
   onStartPress = () => {
@@ -91,10 +114,16 @@ export default class Alphanumeric extends Component {
 
   onQuitPress = () => {
     this.setState({
-      isRun:false,
+      score: 0,
+      stage: 1,
+      isRun: false,
       time: null,
       showPrompt: false,
       prompt: '',
+      showInput: false,
+      userInput: '',
+      correct: false,
+      showResult: false,
     });
     clearInterval(timer);
     clearTimeout(timeout);
@@ -139,6 +168,25 @@ export default class Alphanumeric extends Component {
     );
   }
 
+  renderResult = () => {
+    if(this.state.showResult) {
+      if(this.state.correct) {
+        return (
+          <View style={{backgroundColor:'#44ee44', flex: 1, width: '100%', justifyContent:'center', alignItems:'center'}}>
+            <Text style={{color:'white', fontSize: 30}}>Correct!</Text>
+          </View>
+        );
+      }
+      return (
+        <View style={{backgroundColor:'#ee4444', flex: 1, width: '100%', justifyContent:'center', alignItems:'center'}}>
+          <Text style={{color:'white', fontSize: 30}}>Incorrect!</Text>
+        </View>
+      );
+    }
+    else
+      return(<View></View>);
+  }
+
   render() {
     return (
       <View style={{alignItems:'center'}}>
@@ -148,6 +196,7 @@ export default class Alphanumeric extends Component {
         </View>
         <View style={styles.gameboard}>
           {this.renderUserInput()}
+          {this.renderResult()}
         </View>
         <ScoreBoard
           difficulty={this.props.difficulty}
@@ -164,9 +213,11 @@ const styles = StyleSheet.create({
   timer: {
     position: 'absolute',
     right: 20,
+    top: 20,
     justifyContent:'center',
     alignItems:'center',
     flexDirection:'row',
+    zIndex: 2,
   },
   timer_time: {
     fontSize: 24,
