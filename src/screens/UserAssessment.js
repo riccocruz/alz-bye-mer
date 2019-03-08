@@ -26,12 +26,15 @@ export default class UserProfile extends Component {
     title: 'My Profile',
   };
 
-  componentWillMount() {
+  componentDidMount() {
     const username = this.props.navigation.getParam('username');
     this.fetchUserProfile(username)
     .then(data => {
-      profile = data.data.getUser.items[0];
-      this.setState({ profile: profile });
+      const profile = data.data.listUsers.items[0];
+      delete profile.physicals;
+      this.setState({
+        profile: profile
+      });
     });
   }
 
@@ -45,17 +48,13 @@ export default class UserProfile extends Component {
         username: { eq: username }
       },
       limit: 1
-    }))
-    .then(data => console.log("Fetch User Profile Successful"))
-    .catch(err => console.log(err));
+    }));
   }
 
   updateUserProfile(profile) {
     return API.graphql(graphqlOperation(updateUser, {
       input: profile
-    }))
-    .then(data => console.log("Update User Profile Successful"))
-    .catch(err => console.log(err));
+    }));
   }
 
   onPressSubmit = () => {

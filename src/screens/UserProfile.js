@@ -38,9 +38,8 @@ export default class UserProfile extends Component {
     title: 'My Profile',
   };
 
-  componentWillMount() {
+  componentDidMount() {
     const username = this.props.navigation.getParam('username');
-
     // fetch actual userdata from database
     this.fetchUserProfile(username)
     .then(data => {
@@ -49,12 +48,13 @@ export default class UserProfile extends Component {
       this.setState({
         profile: profile
       });
+      console.log(profile);
     });
   }
 
   componentDidUpdate() {
 
-    // console.log(this.state);
+    console.log(this.state);
   }
 
   onPressNext = () => {
@@ -73,22 +73,19 @@ export default class UserProfile extends Component {
     });
   }
 
-  async fetchUserProfile(username) {
+  fetchUserProfile(username) {
     return API.graphql(graphqlOperation(listUsers, {
       filter: {
         username: { eq: username }
       },
       limit: 1
-    }))
-    .catch(err => console.error(err));
+    }));
   }
 
-  async updateUserProfile(profile) {
-    profile.ethnicity = profile.ethnicity.toUpperCase();
+  updateUserProfile(profile) {
     return API.graphql(graphqlOperation(updateUser, {
       input: profile
-    }))
-    .catch(err => console.error(err));
+    }));
   }
 
   renderIOSPicker = () => {
@@ -158,12 +155,12 @@ export default class UserProfile extends Component {
     const { ethnicity, age, gender, height, weight, familyHistory, smoking, highBloodPressure, diabetes } = this.state.profile;
 
     const gender_options = [
-      {id: 0, label: 'Male', DBLabel: 'MALE'},
-      {id: 1, label: 'Female', DBLabel: 'FEMALE'},
+      {id: 0, label: 'Male'},
+      {id: 1, label: 'Female'},
     ];
     const yes_no = [
-      {id: 1, label: 'Yes', DBLabel: true},
-      {id: 0, label: 'No', DBLabel: false},
+      {id: 1, label: 'Yes'},
+      {id: 0, label: 'No'},
     ];
 
     return (
@@ -174,15 +171,15 @@ export default class UserProfile extends Component {
           options={gender_options}
           onChange={option => {
             let profile = Object.assign({}, this.state.profile);
-            profile.gender = option.DBLabel;
+            profile.gender = (option.id === 0 ? "Female" : "Male");
             this.setState({profile: profile});
           }}
-          activeButtonId={this.state.profile.gender}
+          activeButtonId={(this.state.profile.gender === "Male" ? 0 : 1)}
           horizontal
         />
         <TextField
           label={"Height(in)"}
-          value={this.state.profile.height}
+          value={this.state.profile.height.toString()}
           onChangeText={height => {
             let profile = Object.assign({}, this.state.profile);
             profile.height = height;
@@ -192,7 +189,7 @@ export default class UserProfile extends Component {
         />
         <TextField
           label={"Weight(lb)"}
-          value={this.state.profile.weight}
+          value={this.state.profile.weight.toString()}
           onChangeText={weight => {
             let profile = Object.assign({}, this.state.profile);
             profile.weight = weight;
@@ -205,10 +202,10 @@ export default class UserProfile extends Component {
           options={yes_no}
           onChange={option => {
             let profile = Object.assign({}, this.state.profile);
-            profile.familyHistory = option.DBLabel;
+            profile.familyHistory = !!option.id;
             this.setState({profile: profile});
           }}
-          activeButtonId={this.state.profile.familyHistory}
+          activeButtonId={(this.state.profile.familyHistory ? 1 : 0)}
           horizontal
         />
         <RadioButton
@@ -216,10 +213,10 @@ export default class UserProfile extends Component {
           options={yes_no}
           onChange={option => {
             let profile = Object.assign({}, this.state.profile);
-            profile.smoking = option.DBLabel;
+            profile.smoking = !!option.id;
             this.setState({profile: profile});
           }}
-          activeButtonId={this.state.profile.smoking}
+          activeButtonId={(this.state.profile.smoking ? 1 : 0)}
           horizontal
         />
         <Text style={{fontSize: 18, paddingLeft: 4, paddingRight: 4, fontWeight: 'bold', marginTop: 8}}>Do you have any of the following medical conditions?</Text>
@@ -228,10 +225,10 @@ export default class UserProfile extends Component {
           options={yes_no}
           onChange={option => {
             let profile = Object.assign({}, this.state.profile);
-            profile.highBloodPressure = option.DBLabel;
+            profile.highBloodPressure = !!option.id;
             this.setState({profile: profile});
           }}
-          activeButtonId={this.state.profile.highBloodPressure}
+          activeButtonId={(this.state.profile.highBloodPressure ? 1 : 0)}
           horizontal
         />
         <RadioButton
@@ -239,10 +236,10 @@ export default class UserProfile extends Component {
           options={yes_no}
           onChange={option => {
             let profile = Object.assign({}, this.state.profile);
-            profile.diabetes = option.DBLabel;
+            profile.diabetes = !!option.id;
             this.setState({profile: profile});
           }}
-          activeButtonId={this.state.profile.diabetes}
+          activeButtonId={(this.state.profile.diabetes ? 1 : 0)}
           horizontal
         />
         <Button
