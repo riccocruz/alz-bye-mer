@@ -50,7 +50,7 @@ export default class PedometerSensor extends React.Component {
 
     const end = new Date();
     const start = new Date();
-    start.setDate(end.getDate() - 1);
+    start.setDate(end.getDate());
     Pedometer.getStepCountAsync(start, end).then(
       result => {
         this.setState({ pastStepCount: result.steps });

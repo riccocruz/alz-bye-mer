@@ -36,7 +36,10 @@ export default class HomeScreen extends React.Component {
   componentWillMount() {
     const end = new Date();
     const start = new Date();
-    start.setDate(end.getDate() - 1);
+    start.setDate(end.getDate() - 3);
+    end.setDate(end.getDate() - 2);
+    start.setHours(0, 0, 0, 0);
+    end.setHours(0, 0, 0, 0);
     Pedometer.getStepCountAsync(start, end).then(
       result => {
         this.setState({ currentStepCount: result.steps });

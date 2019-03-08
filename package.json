@@ -7,6 +7,8 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@JWWon/react-native-universal-pedometer": "JWWon/react-native-universal-pedometer",
+    "@asserdata/react-native-universal-pedometer": "^1.0.3",
     "all": "^0.0.0",
     "aws-amplify": "^1.1.19",
     "aws-amplify-react-native": "^2.1.7",

@@ -2,6 +2,15 @@
 # yarn lockfile v1
 
 
+"@JWWon/react-native-universal-pedometer@JWWon/react-native-universal-pedometer":
+  version "1.0.3"
+  resolved "https://codeload.github.com/JWWon/react-native-universal-pedometer/tar.gz/4d07dec57c37fa3b46a7ea18c2f9cbb74f33daec"
+
+"@asserdata/react-native-universal-pedometer@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@asserdata/react-native-universal-pedometer/-/react-native-universal-pedometer-1.0.3.tgz#96d3c67d3b523fe94ed50ed42f9a85922d65816f"
+  integrity sha512-2+9eQJ4KkMECIKq2j0cN9gWWq61PSUklFGtMVK+ICD73dBugVZyusnhO45gk4HOZcwFVKOKqYs9b7be5nVZMqA==
+
 "@aws-amplify/analytics@^1.2.10":
   version "1.2.10"
   resolved "https://registry.yarnpkg.com/@aws-amplify/analytics/-/analytics-1.2.10.tgz#f499068a31a17788554158228f8fd85346838779"
