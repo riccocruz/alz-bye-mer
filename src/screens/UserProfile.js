@@ -19,8 +19,8 @@ export default class UserProfile extends Component {
       profile: {
         id: '',
         ethnicity: '',   // asian, african, caucasian, hispanics, others
-        age: '',         // <65, 65-69, 70-74, 75-79, 80-84, >=85
-        gender: null,    // 0 for Male, 1 for Female
+        age: '',         // Less than 65, 65-74, 75-79, 80-84, >=85
+        gender: null,    // Male, Female
         height: '',
         weight: '',
         familyHistory: null,  // 1 for Yes, 0 for No
@@ -55,9 +55,9 @@ export default class UserProfile extends Component {
 
   componentDidUpdate() {
     // ****** temporary to see Profile Calculation ********
-    const { ethnicity, age, gender, height, weight, familyHistory, smoking, highBloodPressure, diabetes } = this.state;
+    const { ethnicity, age, gender, height, weight, familyHistory, smoking, highBloodPressure, diabetes } = this.state.profile;
     if(!(ethnicity==''||age==''||gender==null||height==''||weight==''||familyHistory==null||smoking==null||highBloodPressure==null||diabetes==null)) {
-      let profileRiskScore = profileRiskCalc(this.state);
+      let profileRiskScore = profileRiskCalc(this.state.profile);
       console.log(profileRiskScore);
       if(profileRiskScore >= 20) {
         console.log("HIGH RISK");
@@ -67,7 +67,7 @@ export default class UserProfile extends Component {
         console.log("LOW RISK");
       }
     }
-    // console.log(this.state);
+    console.log(this.state);
   }
 
   onPressNext = () => {
@@ -176,8 +176,12 @@ export default class UserProfile extends Component {
         <RadioButton
           label="Gender"
           options={gender_options}
-          onPress={value=>this.setState({gender:value})}
-          initial={this.state.gender}
+          onPress={value => {
+            let profile = Object.assign({}, this.state.profile);
+            profile.gender = value;
+            this.setState({profile});
+          }}
+          initial={gender}
           horizontal
         />
         <TextField
@@ -203,30 +207,46 @@ export default class UserProfile extends Component {
         <RadioButton
           label="Any family history of Alzheimer's Disease?"
           options={yes_no}
-          onPress={value=>this.setState({familyHistory:value})}
-          initial={this.state.familyHistory}
+          onPress={value => {
+            let profile = Object.assign({}, this.state.profile);
+            profile.familyHistory = value;
+            this.setState({profile});
+          }}
+          initial={familyHistory}
           horizontal
         />
         <RadioButton
           label="Do you smoke?"
           options={yes_no}
-          onPress={value=>this.setState({smoking:value})}
-          initial={this.state.smoking}
+          onPress={value => {
+            let profile = Object.assign({}, this.state.profile);
+            profile.smoking = value;
+            this.setState({profile});
+          }}
+          initial={smoking}
           horizontal
         />
         <Text style={{fontSize: 18, paddingLeft: 4, paddingRight: 4, fontWeight: 'bold', marginTop: 8}}>Do you have any of the following medical conditions?</Text>
         <RadioButton
           label="High Blood Pressure"
           options={yes_no}
-          onPress={value=>this.setState({highBloodPressure:value})}
-          initial={this.state.highBloodPressure}
+          onPress={value => {
+            let profile = Object.assign({}, this.state.profile);
+            profile.highBloodPressure = value;
+            this.setState({profile});
+          }}
+          initial={highBloodPressure}
           horizontal
         />
         <RadioButton
           label="Diabetes"
           options={yes_no}
-          onPress={value=>this.setState({diabetes:value})}
-          initial={this.state.diabetes}
+          onPress={value => {
+            let profile = Object.assign({}, this.state.profile);
+            profile.diabetes = value;
+            this.setState({profile});
+          }}
+          initial={diabetes}
           horizontal
         />
         <Button
