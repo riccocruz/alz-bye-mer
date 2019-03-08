@@ -9,6 +9,7 @@ import CustomPicker from '../commons/CustomPicker';
 import IOSPicker from '../commons/IOSPicker';
 import RadioButton from '../commons/RadioButton';
 import { Button } from 'react-native-elements';
+import { profileRiskCalc } from '../helpers/riskCalc';
 
 export default class UserProfile extends Component {
   constructor(props) {
@@ -53,8 +54,20 @@ export default class UserProfile extends Component {
   }
 
   componentDidUpdate() {
-
-    console.log(this.state);
+    // ****** temporary to see Profile Calculation ********
+    const { ethnicity, age, gender, height, weight, familyHistory, smoking, highBloodPressure, diabetes } = this.state;
+    if(!(ethnicity==''||age==''||gender==null||height==''||weight==''||familyHistory==null||smoking==null||highBloodPressure==null||diabetes==null)) {
+      let profileRiskScore = profileRiskCalc(this.state);
+      console.log(profileRiskScore);
+      if(profileRiskScore >= 20) {
+        console.log("HIGH RISK");
+      } else if(profileRiskScore >= 13) {
+        console.log("MODERATE RISK");
+      } else {
+        console.log("LOW RISK");
+      }
+    }
+    // console.log(this.state);
   }
 
   onPressNext = () => {
@@ -141,10 +154,8 @@ export default class UserProfile extends Component {
             this.setState({profile: profile});
           }}
           items={[{label: 'Less than 65', value: 'Less than 65'},
-                  {label: '65-69', value: '65-69'},
-                  {label: '70-74', value: '70-74'},
-                  {label: '75-79', value: '75-79'},
-                  {label: '80-84', value: '80-84'},
+                  {label: '65-74', value: '65-74'},
+                  {label: '75-84', value: '75-84'},
                   {label: '85 or older', value: '85 or older'}]}
         />
       </View>
@@ -155,12 +166,12 @@ export default class UserProfile extends Component {
     const { ethnicity, age, gender, height, weight, familyHistory, smoking, highBloodPressure, diabetes } = this.state.profile;
 
     const gender_options = [
-      {id: 0, label: 'Male'},
-      {id: 1, label: 'Female'},
+      {label: 'Male', value: 'Male'},
+      {label: 'Female', value: 'Female'},
     ];
     const yes_no = [
-      {id: 1, label: 'Yes'},
-      {id: 0, label: 'No'},
+      {label: 'Yes', value: true},
+      {label: 'No', value: false},
     ];
 
     return (
@@ -169,12 +180,12 @@ export default class UserProfile extends Component {
         <RadioButton
           label="Gender"
           options={gender_options}
-          onChange={option => {
+          onPress={option => {
             let profile = Object.assign({}, this.state.profile);
             profile.gender = (option.id === 0 ? "Female" : "Male");
             this.setState({profile: profile});
           }}
-          activeButtonId={(this.state.profile.gender === "Male" ? 0 : 1)}
+          initial={(this.state.profile.gender === "Male" ? 0 : 1)}
           horizontal
         />
         <TextField
@@ -200,46 +211,46 @@ export default class UserProfile extends Component {
         <RadioButton
           label="Any family history of Alzheimer's Disease?"
           options={yes_no}
-          onChange={option => {
+          onPress={option => {
             let profile = Object.assign({}, this.state.profile);
             profile.familyHistory = !!option.id;
             this.setState({profile: profile});
           }}
-          activeButtonId={(this.state.profile.familyHistory ? 1 : 0)}
+          initial={(this.state.profile.familyHistory ? 1 : 0)}
           horizontal
         />
         <RadioButton
           label="Do you smoke?"
           options={yes_no}
-          onChange={option => {
+          onPress={option => {
             let profile = Object.assign({}, this.state.profile);
             profile.smoking = !!option.id;
             this.setState({profile: profile});
           }}
-          activeButtonId={(this.state.profile.smoking ? 1 : 0)}
+          initial={(this.state.profile.smoking ? 1 : 0)}
           horizontal
         />
         <Text style={{fontSize: 18, paddingLeft: 4, paddingRight: 4, fontWeight: 'bold', marginTop: 8}}>Do you have any of the following medical conditions?</Text>
         <RadioButton
           label="High Blood Pressure"
           options={yes_no}
-          onChange={option => {
+          onPress={option => {
             let profile = Object.assign({}, this.state.profile);
             profile.highBloodPressure = !!option.id;
             this.setState({profile: profile});
           }}
-          activeButtonId={(this.state.profile.highBloodPressure ? 1 : 0)}
+          initial={(this.state.profile.highBloodPressure ? 1 : 0)}
           horizontal
         />
         <RadioButton
           label="Diabetes"
           options={yes_no}
-          onChange={option => {
+          onPress={option => {
             let profile = Object.assign({}, this.state.profile);
             profile.diabetes = !!option.id;
             this.setState({profile: profile});
           }}
-          activeButtonId={(this.state.profile.diabetes ? 1 : 0)}
+          initial={(this.state.profile.diabetes ? 1 : 0)}
           horizontal
         />
         <Button

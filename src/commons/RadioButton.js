@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import RadioGroup from 'react-native-radio-button-group';
+// import RadioGroup from 'react-native-radio-button-group';
+import RadioForm from 'react-native-simple-radio-button';
 
 /**
  * label: the label for the radio button group
@@ -9,15 +10,17 @@ import RadioGroup from 'react-native-radio-button-group';
  * horizontal: (optional) layout of radio buttons, default to vertial alignment.
 */
 
-const RadioButton = ({ label, options, onChange, horizontal, activeButtonId }) => {
+const RadioButton = ({ label, options, onPress, horizontal, initial }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
-      <RadioGroup
-        options={options}
-        onChange={onChange}
-        horizontal={horizontal}
-        activeButtonId={activeButtonId}
+      <RadioForm
+        radio_props={options}
+        initial={initial}
+        onPress={onPress}
+        labelHorizontal={horizontal}
+        formHorizontal={horizontal}
+        animation={true}
       />
     </View>
   );
