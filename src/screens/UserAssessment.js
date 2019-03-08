@@ -9,6 +9,7 @@ import TextField from '../commons/TextField';
 import CustomPicker from '../commons/CustomPicker';
 import RadioButton from '../commons/RadioButton';
 import { Button } from 'react-native-elements';
+import { riskScoreCalc } from '../helpers/riskCalc';
 
 export default class UserProfile extends Component {
   constructor(props) {
@@ -16,7 +17,6 @@ export default class UserProfile extends Component {
     this.state = {
       profile: null,
       responses: [null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],
-      score: 0,
       isSubmitting: false,
       isComplete: false,
     };
@@ -58,10 +58,14 @@ export default class UserProfile extends Component {
   }
 
   onPressSubmit = () => {
+    let profile = Object.assign({}, this.state.profile);
+    profile.riskScore = riskCalc(this.state.profile.profileScore, this.state.profile.assessmentScore);
     // this is where all local states will be posted to the database
     this.setState({
       isSubmitting: true,
+      profile: profile
     });
+    console.log(this.state.profile.riskScore);
     this.updateUserProfile(this.state.profile)
     .then(data => {
       this.setState({
@@ -104,8 +108,8 @@ export default class UserProfile extends Component {
       {id: 20, q: "21.Do you have difficulty recognizing people familiar to you?", point: 2},
     ];
     const yes_no = [
-      {id: 1, label: 'Yes'},
-      {id: 0, label: 'No'},
+      {label: 'Yes', value: 1},
+      {label: 'No', value: 0},
     ];
     return questions.map((question) => {
       return(
@@ -113,17 +117,17 @@ export default class UserProfile extends Component {
           key={question.id}
           label={question.q}
           options={yes_no}
-          onChange={option=>this._onChange(option, question)}
+          onPress={value=>this._onPress(value, question)}
           horizontal
         />
       );
     });
   }
 
-  _onChange = (option, question) => {
+  _onPress = (value, question) => {
     let tempArray = this.state.responses;
     const index = question.id;
-    tempArray[index] = question.point*option.id;
+    tempArray[index] = question.point*value;
     this.setState({
       responses: tempArray,
     });
@@ -141,7 +145,6 @@ export default class UserProfile extends Component {
         ...previousState.profile,
         assessmentScore: sum
       },
-      score: sum,
       isComplete: completed==21? true: false,
     }));
   }
