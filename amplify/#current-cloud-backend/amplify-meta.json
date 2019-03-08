@@ -27,7 +27,7 @@
 				"AppClientID": "5b6c7t2mgtir1ds5dit10c9m93",
 				"UserPoolName": "alz_bye_mer62890894_userpool_62890894"
 			},
-			"lastPushTimeStamp": "2019-02-27T01:23:55.596Z",
+			"lastPushTimeStamp": "2019-03-05T23:52:40.416Z",
 			"providerMetadata": {
 				"s3TemplateURL": "https://s3.amazonaws.com/alz-bye-mer-20190225113955-deployment/amplify-cfn-templates/auth/cognito62890894-cloudformation-template.yml",
 				"logicalId": "authcognito62890894"
@@ -48,12 +48,12 @@
 				"AuthCognitoUserPoolNativeClientId": "See UserPool: us-west-2_Bg93Nlrvp",
 				"AuthCognitoUserPoolJSClientId": "See UserPool: us-west-2_Bg93Nlrvp"
 			},
-			"lastPushTimeStamp": "2019-02-27T01:23:55.596Z",
+			"lastPushTimeStamp": "2019-03-05T23:52:41.846Z",
 			"providerMetadata": {
 				"s3TemplateURL": "https://s3.amazonaws.com/alz-bye-mer-20190225113955-deployment/amplify-cfn-templates/api/cloudformation-template.json",
 				"logicalId": "apialzbyemer"
 			},
-			"lastPushDirHash": "NXozLgvP0py4t2cfuBnSaF+oO1U="
+			"lastPushDirHash": "Z3fO8Ey5Yhec6lUUoxibR57NR/I="
 		}
 	}
 }

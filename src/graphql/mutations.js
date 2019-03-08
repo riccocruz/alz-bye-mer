@@ -8,6 +8,7 @@ export const createUser = `mutation CreateUser($input: CreateUserInput!) {
     email
     emailVerified
     age
+    gender
     ethnicity
     familyHistory
     smoking
@@ -35,6 +36,7 @@ export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
     email
     emailVerified
     age
+    gender
     ethnicity
     familyHistory
     smoking
@@ -62,6 +64,7 @@ export const deleteUser = `mutation DeleteUser($input: DeleteUserInput!) {
     email
     emailVerified
     age
+    gender
     ethnicity
     familyHistory
     smoking
@@ -93,6 +96,7 @@ export const createPhysical = `mutation CreatePhysical($input: CreatePhysicalInp
       email
       emailVerified
       age
+      gender
       ethnicity
       familyHistory
       smoking
@@ -120,6 +124,7 @@ export const updatePhysical = `mutation UpdatePhysical($input: UpdatePhysicalInp
       email
       emailVerified
       age
+      gender
       ethnicity
       familyHistory
       smoking
@@ -147,6 +152,7 @@ export const deletePhysical = `mutation DeletePhysical($input: DeletePhysicalInp
       email
       emailVerified
       age
+      gender
       ethnicity
       familyHistory
       smoking

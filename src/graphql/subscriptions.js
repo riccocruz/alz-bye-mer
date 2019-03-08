@@ -8,6 +8,7 @@ export const onCreateUser = `subscription OnCreateUser {
     email
     emailVerified
     age
+    gender
     ethnicity
     familyHistory
     smoking
@@ -35,6 +36,7 @@ export const onUpdateUser = `subscription OnUpdateUser {
     email
     emailVerified
     age
+    gender
     ethnicity
     familyHistory
     smoking
@@ -62,6 +64,7 @@ export const onDeleteUser = `subscription OnDeleteUser {
     email
     emailVerified
     age
+    gender
     ethnicity
     familyHistory
     smoking
@@ -93,6 +96,7 @@ export const onCreatePhysical = `subscription OnCreatePhysical {
       email
       emailVerified
       age
+      gender
       ethnicity
       familyHistory
       smoking
@@ -120,6 +124,7 @@ export const onUpdatePhysical = `subscription OnUpdatePhysical {
       email
       emailVerified
       age
+      gender
       ethnicity
       familyHistory
       smoking
@@ -147,6 +152,7 @@ export const onDeletePhysical = `subscription OnDeletePhysical {
       email
       emailVerified
       age
+      gender
       ethnicity
       familyHistory
       smoking

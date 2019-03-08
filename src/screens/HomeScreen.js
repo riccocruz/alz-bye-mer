@@ -2,6 +2,8 @@ import React from 'react';
 import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Linking, Button, ActivityIndicator } from 'react-native';
 import { Auth } from 'aws-amplify';
 
+import { createUser } from '../graphql/mutations';
+import { listUsers } from '../graphql/queries';
 import HomeCard from '../components/HomeCard';
 
 import { Pedometer } from 'expo';
@@ -57,12 +59,36 @@ export default class HomeScreen extends React.Component {
   componentDidMount() {
     // store username from loggedIn user info to retrieve user-specific data from database
     Auth.currentAuthenticatedUser()
-        .then(user=>this.setState({username: user.username}))
+        .then(user => {
+          this.setState({username: user.username});
+          this.checkNewUser(user);
+        })
         .catch(err=>console.log(err));
   }
 
   componentWillUnmount() {
     this._unsubscribe();
+  }
+
+  // check if current authenticated user is in database
+  // if not, then create new user to database
+  checkNewUser(user) {
+    (async () => {
+      const data = await API.graphql(graphqlOperation(listUsers, {
+        filter: { username: { eq: user.username } }
+      }));
+      console.log(data.data.listUsers);
+      if(data.data.listUsers.items.length == 0) {
+        API.graphql(graphqlOperation(createUser, {
+          input: {
+            username: user.username,
+            email: user.attributes.email,
+            emailVerified: user.attributes.email_verified
+          }
+        }))
+        .then(data => console.log("New User Created: " + data.data.createUser.username));
+      }
+    })();
   }
 
   getPastStepCount() {
