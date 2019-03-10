@@ -11,11 +11,11 @@ export default class HomeScreen extends React.Component {
     super(props);
     this.state = {
       username: "",
-      pastStepCount: null,
+      pastStepCount: 0,
       currentStepCount: 0,
       isPedometerAvailable: "checking",
-      distance: 1.12,
-      dailyCompletd: false,
+      distance: 0,
+      dailyCompleted: false,
       cognitiveTodoCompleted: true,
       physicalTodoCompleted: false,
       risk: 'low',
@@ -34,22 +34,11 @@ export default class HomeScreen extends React.Component {
   };
 
   componentWillMount() {
-    const end = new Date();
-    const start = new Date();
-    start.setDate(end.getDate() - 3);
-    end.setDate(end.getDate() - 2);
-    start.setHours(0, 0, 0, 0);
-    end.setHours(0, 0, 0, 0);
-    Pedometer.getStepCountAsync(start, end).then(
-      result => {
-        this.setState({ currentStepCount: result.steps });
-      },
-      error => {
-        this.setState({
-          currentStepCount: "Could not get stepCount: " + error
-        });
-      }
-    );
+    this._initStepCount();
+
+    setTimeout(()=>{
+      this.setState({isLoading:false});
+    }, 1500);
   }
 
   componentDidMount() {
@@ -57,7 +46,9 @@ export default class HomeScreen extends React.Component {
     Auth.currentAuthenticatedUser()
         .then(user=>this.setState({username: user.username}))
         .catch(err=>console.log(err));
-        this._subscribe();
+    this._subscribe();
+        // this._initStepCount();
+    console.log(this.state);
   }
 
   componentWillUnmount() {
@@ -73,7 +64,9 @@ export default class HomeScreen extends React.Component {
       console.log(result);
       console.log(this.state.pastStepCount);
       this.setState({
-        currentStepCount: this.state.pastStepCount + result.steps
+        currentStepCount: this.state.pastStepCount + result.steps,
+        distance: (this.state.pastStepCount + result.steps) / 2500
+
       });
     });
 
@@ -119,7 +112,7 @@ export default class HomeScreen extends React.Component {
             title={"Cognitive Challenge"}
             item1={{title: 'View Stat', onPress: 'CognitiveStat', image: require('../../assets/img/bar_graph.png')}}
             item2={{title: 'Exercises', onPress: 'CognitiveExercises', image: require('../../assets/img/brain_exercise.png')}}
-            item3={{title: 'Daily Challenge', onPress: 'SingleExercise', image: this.state.dailyCompletd? require('../../assets/img/check_mark.png') : require('../../assets/img/exclamation.png')}}
+            item3={{title: 'Daily Challenge', onPress: 'SingleExercise', image: this.state.dailyCompleted? require('../../assets/img/check_mark.png') : require('../../assets/img/exclamation.png')}}
             backgroundColor={this.state.cognitiveChallengeCompleted? 'rgba(123, 239, 178, 0.75)' : 'rgba(247, 202, 24, 0.5)'}
             navigate={navigate}
             username={this.state.username}
@@ -128,7 +121,7 @@ export default class HomeScreen extends React.Component {
             title={"Physical Challenge"}
             item1={{title: 'View Stat', onPress: 'PhysicalStat', image: require('../../assets/img/bar_graph.png')}}
             item2={{title: `${this.state.currentStepCount}/10000 steps`, onPress: '', image: require('../../assets/img/walking.png')}}
-            item3={{title: `${this.state.distance} Miles`, onPress: 'DistanceTraveled', image: require('../../assets/img/distance.png')}}
+            item3={{title: `${Number(this.state.distance).toFixed(2)} Miles`, onPress: 'DistanceTraveled', image: require('../../assets/img/distance.png')}}
             backgroundColor={this.state.PhysicalChallengeCompleted? 'rgba(123, 239, 178, 0.75)' : 'rgba(247, 202, 24, 0.5)'}
             navigate={navigate}
             username={this.state.username}
@@ -163,6 +156,26 @@ export default class HomeScreen extends React.Component {
           </TouchableOpacity>
         </ScrollView>
     )
+  }
+
+  _initStepCount() {
+    let end = new Date();
+    let start = new Date();
+    start.setDate(end.getDate() - 1);
+
+    Pedometer.getStepCountAsync(start, end).then(
+      result => {
+        this.setState({ 
+          currentStepCount: result.steps,
+          distance: result.steps / 2500
+        });
+      },
+      error => {
+        this.setState({
+          currentStepCount: "Could not get stepCount: " + error
+        });
+      }
+    );
   }
 }
 const styles = StyleSheet.create({

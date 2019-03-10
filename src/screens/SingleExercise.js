@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { TextInput, Text, View, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { ListItem } from 'react-native-elements';
-import Pedometer from '@JWWon/react-native-universal-pedometer';
 
 export default class SingleExercise extends Component {
   static navigationOptions = {
