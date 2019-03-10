@@ -5,6 +5,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { ListItem } from 'react-native-elements';
 
 import Alphanumeric from '../components/Alphanumeric';
+import CardMatch from '../games/cardMatch/CardMatch';
 
 export default class SingleExercise extends Component {
   static navigationOptions = {
@@ -49,11 +50,9 @@ export default class SingleExercise extends Component {
           <Alphanumeric difficulty={difficulty}/>
         );
         break;
-      case "Figure/shape":
+      case "Card Match":
         return (
-          <View>
-            <Text>Figure/Shape - {difficulty}</Text>
-          </View>
+          <CardMatch difficulty={difficulty}/>
         );
         break;
       case "Words":
@@ -75,13 +74,13 @@ export default class SingleExercise extends Component {
 
   render() {
     return (
-      <ScrollView style={{flex:1}}>
+      <View style={{flex:1}}>
         <View style={styles.title_container}>
           <MaterialCommunityIcons name = {this.state.icon} size={32} />
           <Text style={styles.title}> {this.state.type}</Text>
         </View>
         {this.renderGame(this.state.type, this.state.difficulty)}
-      </ScrollView>
+      </View>
 
     )
   }
@@ -92,8 +91,8 @@ const styles = StyleSheet.create({
     alignItems:'center',
     flexDirection:'row',
     justifyContent:'center',
-    paddingTop: 20,
-    marginBottom: 15,
+    paddingTop: 10,
+    marginBottom: 10,
   },
   title: {
     fontSize: 20,
