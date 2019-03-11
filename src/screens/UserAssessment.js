@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
 import { TextInput, Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { NavigationActions, StackActions } from 'react-navigation'
+import { Auth, API, graphqlOperation } from 'aws-amplify';
 
+import { listUsers } from '../graphql/queries';
+import { updateUser } from '../graphql/mutations';
 import TextField from '../commons/TextField';
 import CustomPicker from '../commons/CustomPicker';
 import RadioButton from '../commons/RadioButton';
 import { Button } from 'react-native-elements';
+import { riskScoreCalc } from '../helpers/riskCalc';
 
 export default class UserProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      profile: null,
       responses: [null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],
-      score: 0,
       isSubmitting: false,
       isComplete: false,
     };
@@ -22,22 +26,48 @@ export default class UserProfile extends Component {
     title: 'My Profile',
   };
 
-  componentWillMount() {
+  componentDidMount() {
     const username = this.props.navigation.getParam('username');
+    this.fetchUserProfile(username)
+    .then(data => {
+      const profile = data.data.listUsers.items[0];
+      delete profile.physicals;
+      this.setState({
+        profile: profile
+      });
+    });
   }
 
   componentDidUpdate() {
     console.log(this.state);
   }
 
+  fetchUserProfile(username) {
+    return API.graphql(graphqlOperation(listUsers, {
+      filter: {
+        username: { eq: username }
+      },
+      limit: 1
+    }));
+  }
+
+  updateUserProfile(profile) {
+    return API.graphql(graphqlOperation(updateUser, {
+      input: profile
+    }));
+  }
+
   onPressSubmit = () => {
+    let profile = Object.assign({}, this.state.profile);
+    profile.riskScore = riskCalc(this.state.profile.profileScore, this.state.profile.assessmentScore);
     // this is where all local states will be posted to the database
-    // for now, hardcoded some timeOut in place of actual request
     this.setState({
       isSubmitting: true,
+      profile: profile
     });
-    setTimeout(()=>{
-      console.log(this.state);
+    console.log(this.state.profile.riskScore);
+    this.updateUserProfile(this.state.profile)
+    .then(data => {
       this.setState({
         isSubmitting: false,
       });
@@ -48,8 +78,8 @@ export default class UserProfile extends Component {
            routeName: 'HomeScreen',
          }),
        ],
-     }))
-   }, 1500);
+      }));
+    });
   }
 
 
@@ -78,8 +108,8 @@ export default class UserProfile extends Component {
       {id: 20, q: "21.Do you have difficulty recognizing people familiar to you?", point: 2},
     ];
     const yes_no = [
-      {id: 1, label: 'Yes'},
-      {id: 0, label: 'No'},
+      {label: 'Yes', value: 1},
+      {label: 'No', value: 0},
     ];
     return questions.map((question) => {
       return(
@@ -87,17 +117,17 @@ export default class UserProfile extends Component {
           key={question.id}
           label={question.q}
           options={yes_no}
-          onChange={option=>this._onChange(option, question)}
+          onPress={value=>this._onPress(value, question)}
           horizontal
         />
       );
     });
   }
 
-  _onChange = (option, question) => {
+  _onPress = (value, question) => {
     let tempArray = this.state.responses;
     const index = question.id;
-    tempArray[index] = question.point*option.id;
+    tempArray[index] = question.point*value;
     this.setState({
       responses: tempArray,
     });
@@ -110,10 +140,13 @@ export default class UserProfile extends Component {
         completed++;
       }
     });
-    this.setState({
-      score: sum,
+    this.setState(previousState => ({
+      profile: {
+        ...previousState.profile,
+        assessmentScore: sum
+      },
       isComplete: completed==21? true: false,
-    });
+    }));
   }
 
   render() {

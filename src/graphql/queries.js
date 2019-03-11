@@ -8,6 +8,7 @@ export const getUser = `query GetUser($id: ID!) {
     email
     emailVerified
     age
+    gender
     ethnicity
     familyHistory
     smoking
@@ -40,6 +41,7 @@ export const listUsers = `query ListUsers(
       email
       emailVerified
       age
+      gender
       ethnicity
       familyHistory
       smoking
@@ -68,6 +70,7 @@ export const getPhysical = `query GetPhysical($id: ID!) {
       email
       emailVerified
       age
+      gender
       ethnicity
       familyHistory
       smoking
@@ -100,6 +103,7 @@ export const listPhysicals = `query ListPhysicals(
         email
         emailVerified
         age
+        gender
         ethnicity
         familyHistory
         smoking
