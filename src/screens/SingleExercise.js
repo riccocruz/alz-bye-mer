@@ -5,7 +5,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { ListItem } from 'react-native-elements';
 
 import Alphanumeric from '../components/Alphanumeric';
-import CardMatch from '../games/cardMatch/CardMatch';
+import FigureMemory from '../components/FigureMemory';
 
 export default class SingleExercise extends Component {
   static navigationOptions = {
@@ -50,9 +50,9 @@ export default class SingleExercise extends Component {
           <Alphanumeric difficulty={difficulty}/>
         );
         break;
-      case "Card Match":
+      case "Figure Memory":
         return (
-          <CardMatch difficulty={difficulty}/>
+          <FigureMemory difficulty={difficulty}/>
         );
         break;
       case "Words":
@@ -69,6 +69,7 @@ export default class SingleExercise extends Component {
           </View>
         );
         break;
+      
     }
   }
 
