@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-const ScoreBoard = ({difficulty, score, stage}) => {
+const ScoreBoard = ({difficulty, score, stage, totalStage}) => {
   return (
     <View style={styles.scoreboard}>
       <Text>Difficulty: {difficulty}</Text>
@@ -11,7 +11,7 @@ const ScoreBoard = ({difficulty, score, stage}) => {
       </View>
       <View style={styles.row}>
         <Text>Current Stage: </Text>
-        <Text style={styles.stage_box}>{stage} / 10</Text>
+        <Text style={styles.stage_box}>{stage} / {totalStage}</Text>
       </View>
     </View>
   )
@@ -31,9 +31,9 @@ const styles = StyleSheet.create({
   score_box: {
     borderWidth: 1,
     borderColor: 'black',
-    paddingLeft:5,
+    paddingLeft:3,
     paddingRight:5,
-    width: 25,
+    width: 35,
     textAlign: 'center'
   },
   stage_box: {
