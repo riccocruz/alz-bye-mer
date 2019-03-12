@@ -202,6 +202,7 @@ export default class Alphanumeric extends Component {
           difficulty={this.props.difficulty}
           score={this.state.score}
           stage={this.state.stage}
+          totalStage={10}
         />
         {this.renderButton()}
       </View>

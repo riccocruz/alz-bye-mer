@@ -42,11 +42,11 @@ export default class CognitiveExercises extends Component {
           }
           <View style={styles.title_container}>
             <MaterialCommunityIcons name="shape" size={32} />
-            <Text style={styles.title}> Figure/Shape Memory</Text>
+            <Text style={styles.title}> Figure Memory </Text>
           </View>
             {
               difficulty.map((item, index) => (
-                <TouchableOpacity key={index} onPress={()=>navigate('SingleExercise', {type: 'Figure/shape', difficulty: item.name,
+                <TouchableOpacity key={index} onPress={()=>navigate('SingleExercise', {type: 'Figure Memory', difficulty: item.name,
                                                                                       icon: "shape"})}>
                   <ListItem
                     title={item.name}
@@ -70,6 +70,8 @@ export default class CognitiveExercises extends Component {
                   </TouchableOpacity>
                 ))
               }
+
+            
       </ScrollView>
     );
   }
