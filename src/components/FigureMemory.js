@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
-
-import ScoreBoard from '../commons/ScoreBoard';
 
 export default class FigureMemory extends Component {
   constructor(props) {
     super(props);
     this.state = {
       showImage: false,
+      contains: false,
       randomImage: null,
       score: 0,
       stage: 0,
@@ -17,7 +15,8 @@ export default class FigureMemory extends Component {
       submit: false,
       startGame:false,
       pressed:false,
-      arr:[]
+      arr:[],
+      dupArr: [] // array for the number of times the image was duplicated
     };
     let timer;
     let timeout;
@@ -38,6 +37,21 @@ export default class FigureMemory extends Component {
 
   componentDidUpdate() {
     console.log(this.state);
+  }
+
+  scoreBoard = (difficulty) => {
+    return (
+      <View style={styles.scoreboard}>
+        <View style={styles.row}>
+          <Text style={{fontSize:18}}>Difficulty: {difficulty} </Text>
+        </View>
+        <View style={styles.row}>
+          <Text style={{fontSize:18}}>Stage: </Text>
+          <Text style={styles.stage_box}>{this.state.stage} / 30</Text>
+
+        </View>
+      </View>
+    );
   }
 
   renderButton = () => {
@@ -70,7 +84,9 @@ export default class FigureMemory extends Component {
       showImage: false,
       startGame:false,
       pressed:false,
-      arr:[]
+      arr:[],
+      dupArr: [],
+      contains: false,
     });
     clearTimeout(timeout);
   }
@@ -86,7 +102,7 @@ export default class FigureMemory extends Component {
   checkAnswer = () => {
     // stop the timer
     // and make an interval (for 3s)
-    if(this.state.arr.indexOf(this.state.randomImage)!==-1 )
+    if(this.state.contains)
     {
       this.setState(prevState=>({
         score: prevState.score+5,
@@ -103,6 +119,7 @@ export default class FigureMemory extends Component {
       randomImage: null,
       time: null,
       showResult: true,
+      contains: false,
       pressed:false
     }));
     clearTimeout(timeout);
@@ -120,31 +137,59 @@ export default class FigureMemory extends Component {
     var randomInt = Math.floor(Math.random() * itemArr.length)
     var randomItem = itemArr[randomInt]
 
+    if(randomItem !== null){
+      if(this.state.arr.indexOf(randomItem)===-1)
+      {
+        this.state.dupArr.push(0)
+        this.state.arr.push(randomItem)
+      }
+      else
+      {
+        // get the value in the index which contains the random image
+        // value++;
+        const dupArr = [...this.state.dupArr]
+        let i = this.state.arr.indexOf(randomItem)
+        dupArr[i] = this.state.dupArr[i]+1;
+
+        this.setState({
+          dupArr: dupArr,
+          contains: true,
+        })
+      }
+    }
+
     this.setState({randomImage: randomItem})
   }
 
 
   gameStart = () => {
     if(this.state.stage < 30) {
+      this.generateRandomImage();
       this.setState(prevState=>({
         stage: prevState.stage+1,
         pressed:false
       }))
 
-      this.generateRandomImage();
       this.timerStart();
-      if(this.state.randomImage !== null)
-        if(this.state.arr.indexOf(this.state.randomImage)===-1)
-          this.state.arr.push(this.state.randomImage)
+
     } else {
       this.setState({
+        score: this.getFinalScore(),
         randomImage: null,
-        arr: [],
         time: null,
-        showPrompt: true,
         showImage: false,
       });
-    } 
+    }
+  } 
+
+  getFinalScore = () =>
+  {
+    const reducer = (accumulator, currentValue) => accumulator+currentValue;
+    totalPossibleScore = this.state.dupArr.reduce(reducer)*5;
+
+    return parseInt(this.state.score/totalPossibleScore*100);
+
+    // return this.state.score;
   }
 
 
@@ -160,15 +205,14 @@ export default class FigureMemory extends Component {
     else if(this.state.startGame && !this.state.showImage)
     {
       return(
-        <Text style = {{fontSize: 20}}> Your final score is: {this.state.score} </Text>
+        <Text style = {{fontSize: 20}}> You got {this.state.score}% correct!  </Text>
       )
     }
     else {
         return(
           <View style={styles.alignStyle}>
-            <Text style = {{fontSize: 20}}> You will be shown a series of images.</Text>
-            <Text style = {{fontSize: 20}}> If you see an exact repeat image, click it! </Text>
-            <Text style = {{fontSize: 20}}> If you are ready, PRESS START TO PLAY! </Text>
+            <Text style = {{fontSize: 17}}> You will be shown a series of images.</Text>
+            <Text style = {{fontSize: 17}}> If you see an exact repeat image, press the image! PRESS START TO PLAY! </Text>
             <Text style = {{fontSize: 20}}> Good luck! </Text>
           </View>
         );
@@ -178,16 +222,13 @@ export default class FigureMemory extends Component {
   render() {
     return (
       <View style={{alignItems:'center'}}>
+        <View style={{flexDirection:'row',}}>
+          {this.scoreBoard(this.props.difficulty)}
+          {this.renderButton()}
+        </View>
         <View style={styles.gameboard}>
             {this.renderGame()}
         </View>
-        <ScoreBoard
-          difficulty={this.props.difficulty}
-          score={this.state.score}
-          stage={this.state.stage}
-          totalStage={30}
-        />
-        {this.renderButton()}
       </View>
     );
   }
@@ -204,8 +245,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: 'white',
     backgroundColor: '#33ff33',
-    paddingTop: 8,
-    paddingBottom: 8,
+    paddingTop: 15,
+    paddingBottom: 15,
     paddingLeft: 15,
     paddingRight: 15,
   },
@@ -213,8 +254,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: 'white',
     backgroundColor: '#ff3333',
-    paddingTop: 8,
-    paddingBottom: 8,
+    paddingTop: 15,
+    paddingBottom: 15,
     paddingLeft: 15,
     paddingRight: 15,
   },
@@ -228,5 +269,32 @@ const styles = StyleSheet.create({
   {
     justifyContent: 'center',
     alignItems: 'center'
-  }
+  },
+  scoreboard: {
+    width:'75%',
+    flexDirection:'column',
+    justifyContent:'space-around',
+    paddingBottom: 15,
+
+  },
+  row: {
+    flexDirection:'row',
+    paddingBottom:6,
+    paddingLeft:5,
+    paddingRight:5,
+  },
+  stage_box: {
+    borderWidth: 1,
+    borderColor: 'black',
+    paddingLeft:5,
+    paddingRight:5,
+    textAlign: 'left',
+    fontSize: 18,
+  },
 });
+
+
+// create an array contains how many times each image is duplicated
+// first time ==> push 0 into the array
+// others ==> add 1 to the index which has the image
+// total score ==> user score / (5*(each value in the index))

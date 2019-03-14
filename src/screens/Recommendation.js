@@ -29,6 +29,28 @@ export default class Recommendation extends Component {
         .catch(err=>console.log(err));
     }
 
+renderRecommendationCard = (title1, title2, image1, image2, username) => {
+    return( <RecommendationCard
+        item1={title1}
+        item2={title2}
+        image1={image1}
+        image2={image2}
+        username={username}
+    />);
+}
+
+renderProgressIcon = (item, onPress, image, percentage, navigate) => 
+{
+    return (
+    <ProgressIcon
+        item = {item}
+        onPress = {onPress}
+        image = {image}
+        percentage = {percentage}
+        navigate = {navigate}
+    />);
+}
+
 render() {
 
     const {navigate} = this.props.navigation;
@@ -41,25 +63,11 @@ render() {
             <View style={styles.dividerStyle}/>
 
             <View style = {styles.rowLayout}>
-                <ProgressIcon
-                    item = "Cognitive"
-                    onPress = 'CognitiveTodo'
-                    image = {require('../../assets/img/brain_exercise.png')}
-                    percentage = "25"
-                    navigate = {navigate}
-                />
 
-                <ProgressIcon
-                    item = "Physical"
-                    onPress = 'PhysicalTodo'
-                    image = {require('../../assets/img/walking.png')}
-                    percentage = "100"
-                    navigate = {navigate}
-                />
+                {this.renderProgressIcon("Cognitive", 'CognitiveTodo', require('../../assets/img/brain_exercise.png'), 25, navigate)}
+                {this.renderProgressIcon("Physical", 'PhysicalTodo', require('../../assets/img/walking.png'), 100, navigate)}
 
             </View>
-
-            {/* <View style={{margin: 10}}/> */}
 
             <View style={{backgroundColor: '#d3d3d3'}}>
                 <Text style={styles.titleText}> Our Recommendations for 
@@ -71,29 +79,19 @@ render() {
             
             <Text style={styles.subTitleText}> Cognitive Exercises </Text>
 
-            <RecommendationCard
-                item1={{title: 'Recommendation 1', image: require('../../assets/img/brain_exercise.png')}}
-                item2={{title: 'Recommendation 2', image: require('../../assets/img/brain_exercise.png')}}
-                username={this.state.username}
-            />
-            <RecommendationCard
-                item1={{title: 'Recommendation 3', image: require('../../assets/img/brain_exercise.png')}}
-                item2={{title: 'Recommendation 4', image: require('../../assets/img/brain_exercise.png')}}
-                username={this.state.username}
-            />
+            {this.renderRecommendationCard("Recommendation 1", "Recommentation 2", 
+                require('../../assets/img/brain_exercise.png'), require('../../assets/img/brain_exercise.png'), this.state.username)}
+            
+            {this.renderRecommendationCard("Recommendation 3", "Recommentation 4", 
+                require('../../assets/img/brain_exercise.png'), require('../../assets/img/brain_exercise.png'))}
             
             <Text style={styles.subTitleText}> Physical Exercises </Text>
 
-            <RecommendationCard
-                item1={{title: 'Recommendation 1', image: require('../../assets/img/walking.png')}}
-                item2={{title: 'Recommendation 2', image: require('../../assets/img/walking.png')}}
-                username={this.state.username}
-            />
-            <RecommendationCard
-                item1={{title: 'Recommendation 3', image: require('../../assets/img/walking.png')}}
-                item2={{title: 'Recommendation 4', image: require('../../assets/img/walking.png')}}
-                username={this.state.username}
-            />
+            {this.renderRecommendationCard("Recommendation 1", "Recommentation 2", 
+                require('../../assets/img/walking.png'), require('../../assets/img/walking.png'))}
+            
+            {this.renderRecommendationCard("Recommendation 3", "Recommentation 4", 
+                require('../../assets/img/walking.png'), require('../../assets/img/walking.png'))}
             
             
         </ScrollView>
