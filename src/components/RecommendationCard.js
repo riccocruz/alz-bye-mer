@@ -3,18 +3,18 @@ import { View, Text, StyleSheet } from 'react-native';
 
 import RecommendationItem from '../components/RecommendationItem';
 
-const RecommendationCard = ({ title, item1, item2, item3, backgroundColor, navigate, username }) => {
+const RecommendationCard = ({ item1, item2, image1, image2, backgroundColor, navigate, username }) => {
   return (
     <View style={styles.container}>
       <View style={styles.cardItemContainer}>
         <RecommendationItem
-          title={item1.title}
-          image={item1.image}
+          title={item1}
+          image={image1}
           username={username}
         />
         <RecommendationItem
-          title={item2.title}
-          image={item2.image}
+          title={item2}
+          image={image2}
           username={username}
         />
       </View>

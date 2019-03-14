@@ -8,7 +8,8 @@ export default class CognitiveTodo extends Component {
     super(props);
     
     this.state = {
-        
+        completed: 1,
+        numRecommendation: 4
     }
     
   }
@@ -22,13 +23,22 @@ export default class CognitiveTodo extends Component {
     
   };
 
+renderPercentageList = (item, percentage) => {
+    return (
+        <PercentageList
+            item = {item}
+            percentage = {percentage}
+        />
+    );
+}
+
 render() {
     return (
         <ScrollView>
             <View style={styles.rowLayout}>
                 <Text style={styles.titleText}> TO DO </Text>
-                <Text style={styles.redBaseText}> 1
-                <Text style={styles.titleText}> /4 completed </Text> </Text>
+                <Text style={styles.redBaseText}> {this.state.completed}
+                <Text style={styles.titleText}> / {this.state.numRecommendation} completed </Text> </Text>
             </View>
 
             <View style={{
@@ -37,22 +47,11 @@ render() {
                 borderRadius:0.5,
             }}/>
 
-            <PercentageList
-                item = "Recommendation 1"
-                percentage = "100"
-            />
-            <PercentageList
-                item = "Recommendation 2"
-                percentage = "50"
-            />
-            <PercentageList
-                item = "Recommendation 3"
-                percentage = "30"
-            />
-            <PercentageList
-                item = "Recommendation 4"
-                percentage = "0"
-            />
+            {this.renderPercentageList("Recommendation 1", 100)}
+            {this.renderPercentageList("Recommendation 2", 50)}
+            {this.renderPercentageList("Recommendation 3", 30)}
+            {this.renderPercentageList("Recommendation 4", 0)}
+
         </ScrollView>
     );
   }
