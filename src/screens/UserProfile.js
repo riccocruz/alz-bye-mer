@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TextInput, Text, View, TouchableOpacity, ScrollView, Platform } from 'react-native';
+import { TextInput, Text, View, TouchableOpacity, ScrollView, Platform, ActivityIndicator } from 'react-native';
 import { Auth, API, graphqlOperation } from 'aws-amplify';
 
 import { listUsers } from '../graphql/queries';
@@ -101,20 +101,21 @@ export default class UserProfile extends Component {
 
   onPressNext = () => {
     const username = this.props.navigation.getParam('username');
-    let profile = Object.assign({}, this.state.profile);
+    profile = Object.assign({}, this.state.profile);
     profile.profileScore = profileRiskCalc(this.state.profile);
     // this is where all local states will be posted to the database
     // for now, hardcoded some timeOut in place of actual request
     this.setState({
       isSubmitting: true,
-      profile: profile
-    });
-    this.updateUserProfile(this.state.profile)
-    .then(data => {
-      this.setState({
-        isSubmitting: false,
-      });
-      this.props.navigation.navigate('UserAssessment', {username: username});
+      profile
+    }, () => {
+        this.updateUserProfile(this.state.profile)
+        .then(data => {
+          this.setState({
+            isSubmitting: false,
+          });
+          this.props.navigation.navigate('UserAssessment', {username: username});
+        });
     });
   }
 
@@ -230,12 +231,12 @@ export default class UserProfile extends Component {
             profile.gender = value;
             this.setState({profile});
           }}
-          initial={gender}
+          initial={'Male'}
           horizontal
         />
         <TextField
           label={"Height(in)"}
-          value={this.state.profile.height.toString()}
+          value={(height ? height.toString() : null)}
           onChangeText={height => {
             let profile = Object.assign({}, this.state.profile);
             profile.height = height;
@@ -245,7 +246,7 @@ export default class UserProfile extends Component {
         />
         <TextField
           label={"Weight(lb)"}
-          value={this.state.profile.weight.toString()}
+          value={(weight ? weight.toString() : null)}
           onChangeText={weight => {
             let profile = Object.assign({}, this.state.profile);
             profile.weight = weight;

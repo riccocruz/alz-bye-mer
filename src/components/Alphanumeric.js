@@ -72,6 +72,9 @@ export default class Alphanumeric extends Component {
       this.timerStart();
       this.setState({showPrompt:true});
     } else {
+      //Game complete logic here
+
+
       this.setState({
         time: null,
         showPrompt: true,
@@ -83,6 +86,35 @@ export default class Alphanumeric extends Component {
       });
     }
   };
+
+  // Get current user then push the completed game result to db
+  pushGameResultToDB(type, difficulty, score) {
+    (async () => {
+      Auth.currentAuthenticatedUser()
+      .then(user => {
+        const username = user.username;
+        API.graphql(graphqlOperation(getUser, {
+          input: {
+            username: user.username
+          }
+        }))
+        .then(data => {
+          const userId = data.data.getUser.id;
+          API.graphql(graphqlOperation(createCognitive, {
+            input: {
+              type: type,
+              difficulty: difficulty,
+              score: score,
+              total: 10,
+              cognitiveUserId: userId
+            }
+          }));
+        })
+        .catch(err => console.warn(err));
+      })
+      .catch(err => console.warn(err));
+    })();
+  }
 
   checkAnswer = () => {
     if(this.state.userInput == this.state.prompt) {
