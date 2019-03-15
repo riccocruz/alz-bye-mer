@@ -8,20 +8,51 @@ type User {
   ethnicity: String
   familyHistory: Boolean
   smoking: Boolean
-  drinking: Boolean
   highBloodPressure: Boolean
   diabetes: Boolean
   height: Int
   weight: Int
+  profileScore: Int
+  riskScore: Int
   assessmentScore: Int
+  todos: [Todo]
   physicals(filter: ModelPhysicalFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelPhysicalConnection
+  cognitives(filter: ModelCognitiveFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelCognitiveConnection
 }
 
 type Physical {
   id: ID!
-  steps: [Int]
-  distance: [Float]
+  createAt: String
+  date: String
+  score: Int
   user: User
+}
+
+type Cognitive {
+  id: ID!
+  createdAt: String
+  type: String
+  difficulty: String
+  solved: Int
+  total: Int
+  user: User
+}
+
+enum TodoType {
+  PHYSICAL
+  COGNITIVE
+}
+
+type Todo {
+  type: TodoType
+  createdAt: String
+  isCompleted: Boolean
+}
+
+input TodoInput {
+  type: TodoType
+  createdAt: String
+  isCompleted: Boolean
 }
 
 enum ModelSortDirection {
@@ -99,11 +130,12 @@ input ModelUserFilterInput {
   ethnicity: ModelStringFilterInput
   familyHistory: ModelBooleanFilterInput
   smoking: ModelBooleanFilterInput
-  drinking: ModelBooleanFilterInput
   highBloodPressure: ModelBooleanFilterInput
   diabetes: ModelBooleanFilterInput
   height: ModelIntFilterInput
   weight: ModelIntFilterInput
+  profileScore: ModelIntFilterInput
+  riskScore: ModelIntFilterInput
   assessmentScore: ModelIntFilterInput
   and: [ModelUserFilterInput]
   or: [ModelUserFilterInput]
@@ -115,6 +147,8 @@ type Query {
   listUsers(filter: ModelUserFilterInput, limit: Int, nextToken: String): ModelUserConnection
   getPhysical(id: ID!): Physical
   listPhysicals(filter: ModelPhysicalFilterInput, limit: Int, nextToken: String): ModelPhysicalConnection
+  getCognitive(id: ID!): Cognitive
+  listCognitives(filter: ModelCognitiveFilterInput, limit: Int, nextToken: String): ModelCognitiveConnection
 }
 
 input CreateUserInput {
@@ -127,12 +161,14 @@ input CreateUserInput {
   ethnicity: String
   familyHistory: Boolean
   smoking: Boolean
-  drinking: Boolean
   highBloodPressure: Boolean
   diabetes: Boolean
   height: Int
   weight: Int
+  profileScore: Int
+  riskScore: Int
   assessmentScore: Int
+  todos: [TodoInput]
 }
 
 input UpdateUserInput {
@@ -145,12 +181,14 @@ input UpdateUserInput {
   ethnicity: String
   familyHistory: Boolean
   smoking: Boolean
-  drinking: Boolean
   highBloodPressure: Boolean
   diabetes: Boolean
   height: Int
   weight: Int
+  profileScore: Int
+  riskScore: Int
   assessmentScore: Int
+  todos: [TodoInput]
 }
 
 input DeleteUserInput {
@@ -164,6 +202,9 @@ type Mutation {
   createPhysical(input: CreatePhysicalInput!): Physical
   updatePhysical(input: UpdatePhysicalInput!): Physical
   deletePhysical(input: DeletePhysicalInput!): Physical
+  createCognitive(input: CreateCognitiveInput!): Cognitive
+  updateCognitive(input: UpdateCognitiveInput!): Cognitive
+  deleteCognitive(input: DeleteCognitiveInput!): Cognitive
 }
 
 type Subscription {
@@ -173,6 +214,9 @@ type Subscription {
   onCreatePhysical: Physical @aws_subscribe(mutations: ["createPhysical"])
   onUpdatePhysical: Physical @aws_subscribe(mutations: ["updatePhysical"])
   onDeletePhysical: Physical @aws_subscribe(mutations: ["deletePhysical"])
+  onCreateCognitive: Cognitive @aws_subscribe(mutations: ["createCognitive"])
+  onUpdateCognitive: Cognitive @aws_subscribe(mutations: ["updateCognitive"])
+  onDeleteCognitive: Cognitive @aws_subscribe(mutations: ["deleteCognitive"])
 }
 
 type ModelPhysicalConnection {
@@ -182,8 +226,9 @@ type ModelPhysicalConnection {
 
 input ModelPhysicalFilterInput {
   id: ModelIDFilterInput
-  steps: ModelIntFilterInput
-  distance: ModelFloatFilterInput
+  createAt: ModelStringFilterInput
+  date: ModelStringFilterInput
+  score: ModelIntFilterInput
   and: [ModelPhysicalFilterInput]
   or: [ModelPhysicalFilterInput]
   not: ModelPhysicalFilterInput
@@ -191,18 +236,61 @@ input ModelPhysicalFilterInput {
 
 input CreatePhysicalInput {
   id: ID
-  steps: [Int]
-  distance: [Float]
+  createAt: String
+  date: String
+  score: Int
   physicalUserId: ID
 }
 
 input UpdatePhysicalInput {
   id: ID!
-  steps: [Int]
-  distance: [Float]
+  createAt: String
+  date: String
+  score: Int
   physicalUserId: ID
 }
 
 input DeletePhysicalInput {
+  id: ID
+}
+
+type ModelCognitiveConnection {
+  items: [Cognitive]
+  nextToken: String
+}
+
+input ModelCognitiveFilterInput {
+  id: ModelIDFilterInput
+  createdAt: ModelStringFilterInput
+  type: ModelStringFilterInput
+  difficulty: ModelStringFilterInput
+  solved: ModelIntFilterInput
+  total: ModelIntFilterInput
+  and: [ModelCognitiveFilterInput]
+  or: [ModelCognitiveFilterInput]
+  not: ModelCognitiveFilterInput
+}
+
+input CreateCognitiveInput {
+  id: ID
+  createdAt: String
+  type: String
+  difficulty: String
+  solved: Int
+  total: Int
+  cognitiveUserId: ID
+}
+
+input UpdateCognitiveInput {
+  id: ID!
+  createdAt: String
+  type: String
+  difficulty: String
+  solved: Int
+  total: Int
+  cognitiveUserId: ID
+}
+
+input DeleteCognitiveInput {
   id: ID
 }

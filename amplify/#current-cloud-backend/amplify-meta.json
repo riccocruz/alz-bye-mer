@@ -1,38 +1,35 @@
 {
 	"providers": {
 		"awscloudformation": {
-			"AuthRoleName": "alz-bye-mer-20190225113955-authRole",
-			"UnauthRoleArn": "arn:aws:iam::763327914732:role/alz-bye-mer-20190225113955-unauthRole",
-			"AuthRoleArn": "arn:aws:iam::763327914732:role/alz-bye-mer-20190225113955-authRole",
+			"AuthRoleName": "alz-bye-mer-20190315110649-authRole",
+			"UnauthRoleArn": "arn:aws:iam::763327914732:role/alz-bye-mer-20190315110649-unauthRole",
+			"AuthRoleArn": "arn:aws:iam::763327914732:role/alz-bye-mer-20190315110649-authRole",
 			"Region": "us-west-2",
-			"DeploymentBucketName": "alz-bye-mer-20190225113955-deployment",
-			"UnauthRoleName": "alz-bye-mer-20190225113955-unauthRole",
-			"StackName": "alz-bye-mer-20190225113955",
-			"StackId": "arn:aws:cloudformation:us-west-2:763327914732:stack/alz-bye-mer-20190225113955/21c3f0d0-3935-11e9-b38f-0adcdede1372"
-		},
-		"categories": {
-			"auth": {
-				"cognito62890894": {}
-			}
+			"DeploymentBucketName": "alz-bye-mer-20190315110649-deployment",
+			"UnauthRoleName": "alz-bye-mer-20190315110649-unauthRole",
+			"StackName": "alz-bye-mer-20190315110649",
+			"StackId": "arn:aws:cloudformation:us-west-2:763327914732:stack/alz-bye-mer-20190315110649/20823990-474d-11e9-a474-06bc2c4a7b48"
 		}
 	},
 	"auth": {
-		"cognito62890894": {
+		"cognito95a33120": {
 			"service": "Cognito",
 			"providerPlugin": "awscloudformation",
-			"output": {
-				"AppClientSecret": "p9an85bt39cp90mqc52b0fjr9cgooceof4dj7jqqi99e9me6bvb",
-				"UserPoolId": "us-west-2_Bg93Nlrvp",
-				"AppClientIDWeb": "17jl2k3bqp7qdlnksfslaafr73",
-				"AppClientID": "5b6c7t2mgtir1ds5dit10c9m93",
-				"UserPoolName": "alz_bye_mer62890894_userpool_62890894"
-			},
-			"lastPushTimeStamp": "2019-03-05T23:52:40.416Z",
 			"providerMetadata": {
-				"s3TemplateURL": "https://s3.amazonaws.com/alz-bye-mer-20190225113955-deployment/amplify-cfn-templates/auth/cognito62890894-cloudformation-template.yml",
-				"logicalId": "authcognito62890894"
+				"s3TemplateURL": "https://s3.amazonaws.com/alz-bye-mer-20190315110649-deployment/amplify-cfn-templates/auth/cognito95a33120-cloudformation-template.yml",
+				"logicalId": "authcognito95a33120"
 			},
-			"lastPushDirHash": "MJ751D5BhCoNUIq+YOgL6lCdOMs="
+			"lastPushTimeStamp": "2019-03-15T20:20:12.214Z",
+			"output": {
+				"AppClientSecret": "10uqvccqavvohlksr4et2qcs3j3hv8i44dbqqcrea8gpo8erv8ec",
+				"UserPoolId": "us-west-2_IAXxjYOx1",
+				"AppClientIDWeb": "2h3e06qelbb87dc2lnpkd0fht5",
+				"AppClientID": "otesjh20jbo13180p2ai1b2a6",
+				"IdentityPoolId": "us-west-2:460796c9-762d-4d6e-8b40-378837d50beb",
+				"IdentityPoolName": "alz_bye_mer95a33120_identitypool_95a33120__alzbyemer",
+				"UserPoolName": "alz_bye_mer95a33120_userpool_95a33120"
+			},
+			"lastPushDirHash": "uBTRq9PABmgp/hL+WOZdA5nVRKw="
 		}
 	},
 	"api": {
@@ -41,19 +38,19 @@
 			"providerPlugin": "awscloudformation",
 			"output": {
 				"securityType": "AMAZON_COGNITO_USER_POOLS",
-				"GraphQLAPIIdOutput": "fhd66uu6njao5ewhmc4camtlwu",
-				"GraphQLAPIEndpointOutput": "https://k6m7q6p75nfwllm36a3i54elqq.appsync-api.us-west-2.amazonaws.com/graphql",
-				"GraphQLAPIKeyOutput": "da2-syhm5ku325bedcg55lavb3cawq",
-				"AuthCognitoUserPoolIdOutput": "us-west-2_Bg93Nlrvp",
-				"AuthCognitoUserPoolNativeClientId": "See UserPool: us-west-2_Bg93Nlrvp",
-				"AuthCognitoUserPoolJSClientId": "See UserPool: us-west-2_Bg93Nlrvp"
+				"GraphQLAPIIdOutput": "5dklejwcljdnxcete7e2wfrqyi",
+				"GraphQLAPIEndpointOutput": "https://sbgs4gbqdzbzreu7jv3ouvcnme.appsync-api.us-west-2.amazonaws.com/graphql",
+				"GraphQLAPIKeyOutput": "da2-t3uxo4ruubgetdziyrurocyn6e",
+				"AuthCognitoUserPoolIdOutput": "us-west-2_IAXxjYOx1",
+				"AuthCognitoUserPoolNativeClientId": "See UserPool: us-west-2_IAXxjYOx1",
+				"AuthCognitoUserPoolJSClientId": "See UserPool: us-west-2_IAXxjYOx1"
 			},
-			"lastPushTimeStamp": "2019-03-05T23:52:41.846Z",
 			"providerMetadata": {
-				"s3TemplateURL": "https://s3.amazonaws.com/alz-bye-mer-20190225113955-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+				"s3TemplateURL": "https://s3.amazonaws.com/alz-bye-mer-20190315110649-deployment/amplify-cfn-templates/api/cloudformation-template.json",
 				"logicalId": "apialzbyemer"
 			},
-			"lastPushDirHash": "Z3fO8Ey5Yhec6lUUoxibR57NR/I="
+			"lastPushTimeStamp": "2019-03-15T20:20:15.417Z",
+			"lastPushDirHash": "u9J/aCmKLxYr4CnaV+EtQIgH+tY="
 		}
 	}
 }

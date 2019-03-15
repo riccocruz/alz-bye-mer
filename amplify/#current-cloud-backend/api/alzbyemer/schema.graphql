@@ -8,18 +8,43 @@ type User @model {
   ethnicity: String
   familyHistory: Boolean
   smoking: Boolean
-  drinking: Boolean
   highBloodPressure: Boolean
   diabetes: Boolean
   height: Int
   weight: Int
+  profileScore: Int
+  riskScore: Int
   assessmentScore: Int
+  todos: [Todo]
   physicals: [Physical] @connection(name: "UserPhysicals")
+  cognitives: [Cognitive] @connection(name: "UserCognitives")
 }
 
 type Physical @model {
   id: ID!
-  steps: [Int]
-  distance: [Float]
+  createAt: String
+  date: String
+  score: Int
   user: User @connection(name: "UserPhysicals")
+}
+
+type Cognitive @model {
+  id: ID!
+  createdAt: String
+  type: String
+  difficulty: String
+  solved: Int
+  total: Int
+  user: User @connection(name: "UserCognitives")
+}
+
+enum TodoType {
+  PHYSICAL
+  COGNITIVE
+}
+
+type Todo {
+  type: TodoType
+  createdAt: String
+  isCompleted: Boolean
 }
