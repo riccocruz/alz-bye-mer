@@ -5,8 +5,8 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { ListItem } from 'react-native-elements';
 
 import Alphanumeric from '../components/Alphanumeric';
-import FigureMemory from '../components/FigureMemory';
 import ColorMatch from '../components/ColorMatch';
+import ImageMemory from '../components/ImageMemory';
 
 export default class SingleExercise extends Component {
   static navigationOptions = {
@@ -42,7 +42,7 @@ export default class SingleExercise extends Component {
     console.log(this.state);
   }
 
-  // Type: dailyChallenge, Alphanumeric, Figure/shape, Words
+  // Type: dailyChallenge, Alphanumeric, Image, Words
   // Difficulty: Easy, Medium, Hard
   renderGame = (type, difficulty) => {
     switch(type) {
@@ -51,9 +51,9 @@ export default class SingleExercise extends Component {
           <Alphanumeric difficulty={difficulty}/>
         );
         break;
-      case "Figure Memory":
+      case "Image Memory":
         return (
-          <FigureMemory difficulty={difficulty}/>
+          <ImageMemory difficulty={difficulty}/>
         );
         break;
       case "ColorMatch":
@@ -70,7 +70,7 @@ export default class SingleExercise extends Component {
           </View>
         );
         break;
-      
+
     }
   }
 

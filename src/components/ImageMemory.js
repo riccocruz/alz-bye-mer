@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
-export default class FigureMemory extends Component {
+export default class ImageMemory extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,9 +29,9 @@ export default class FigureMemory extends Component {
         require('../../assets/game_img/medium9.jpg'), require('../../assets/game_img/medium10.jpg'), require('../../assets/game_img/medium11.jpg'), require('../../assets/game_img/medium13.jpg')]
     this.hardItems = [require('../../assets/game_img/hard1.jpg'), require('../../assets/game_img/hard2.jpg'), require('../../assets/game_img/hard12.jpg'),
         require('../../assets/game_img/hard3.jpg'), require('../../assets/game_img/hard4.jpg'), require('../../assets/game_img/hard5.jpg'), require('../../assets/game_img/hard19.jpg'),
-        require('../../assets/game_img/hard6.jpg'), require('../../assets/game_img/hard7.jpg'), require('../../assets/game_img/hard8.jpg'),require('../../assets/game_img/hard18.jpg'), 
+        require('../../assets/game_img/hard6.jpg'), require('../../assets/game_img/hard7.jpg'), require('../../assets/game_img/hard8.jpg'),require('../../assets/game_img/hard18.jpg'),
         require('../../assets/game_img/hard9.jpg'), require('../../assets/game_img/hard10.jpg'), require('../../assets/game_img/hard11.jpg'),require('../../assets/game_img/hard17.jpg'),
-        require('../../assets/game_img/hard13.jpg'), require('../../assets/game_img/hard14.jpg'), require('../../assets/game_img/hard15.jpg'), require('../../assets/game_img/hard16.jpg'), require('../../assets/game_img/hard20.jpg')]        
+        require('../../assets/game_img/hard13.jpg'), require('../../assets/game_img/hard14.jpg'), require('../../assets/game_img/hard15.jpg'), require('../../assets/game_img/hard16.jpg'), require('../../assets/game_img/hard20.jpg')]
   };
 
   componentDidUpdate() {
@@ -172,7 +172,7 @@ export default class FigureMemory extends Component {
         showImage: false,
       });
     }
-  } 
+  }
 
   getFinalScore = () =>
   {
@@ -189,7 +189,7 @@ export default class FigureMemory extends Component {
     if(this.state.showImage && this.state.startGame) {
       return (
         // ** disable it when it's pressed
-        <TouchableOpacity  onPress={()=>{this.checkAnswer(); this.setState({pressed: true})}}> 
+        <TouchableOpacity  onPress={()=>{this.checkAnswer(); this.setState({pressed: true})}}>
           <Image style={styles.imageContainer} source={this.state.randomImage} resizeMode={'contain'} />
         </TouchableOpacity>
       );
