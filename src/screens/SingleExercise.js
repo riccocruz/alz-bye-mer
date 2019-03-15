@@ -6,6 +6,7 @@ import { ListItem } from 'react-native-elements';
 
 import Alphanumeric from '../components/Alphanumeric';
 import FigureMemory from '../components/FigureMemory';
+import ColorMatch from '../components/ColorMatch';
 
 export default class SingleExercise extends Component {
   static navigationOptions = {
@@ -55,10 +56,10 @@ export default class SingleExercise extends Component {
           <FigureMemory difficulty={difficulty}/>
         );
         break;
-      case "Words":
+      case "ColorMatch":
         return (
           <View>
-            <Text>Words Recall - {difficulty}</Text>
+            <ColorMatch difficulty={difficulty}/>
           </View>
         );
         break;

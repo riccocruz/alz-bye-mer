@@ -11,7 +11,6 @@ export default class FigureMemory extends Component {
       score: 0,
       stage: 0,
       isRun: false,
-      showPrompt: false,
       submit: false,
       startGame:false,
       pressed:false,
@@ -108,14 +107,7 @@ export default class FigureMemory extends Component {
         score: prevState.score+5,
       }));
     }
-    else
-    {
-      this.setState(prevState=>({
-        score: prevState.score-5,
-      }));
-    }
     this.setState(prevState=>({
-      showPrompt: false,
       randomImage: null,
       time: null,
       showResult: true,
