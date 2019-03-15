@@ -5,6 +5,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { ListItem } from 'react-native-elements';
 
 import Alphanumeric from '../components/Alphanumeric';
+import ColorMatch from '../components/ColorMatch';
 import ImageMemory from '../components/ImageMemory';
 
 export default class SingleExercise extends Component {
@@ -55,10 +56,10 @@ export default class SingleExercise extends Component {
           <ImageMemory difficulty={difficulty}/>
         );
         break;
-      case "Words":
+      case "ColorMatch":
         return (
           <View>
-            <Text>Words Recall - {difficulty}</Text>
+            <ColorMatch difficulty={difficulty}/>
           </View>
         );
         break;

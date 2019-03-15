@@ -56,13 +56,13 @@ export default class CognitiveExercises extends Component {
               ))
             }
             <View style={styles.title_container}>
-              <MaterialCommunityIcons name="file-word-box" size={32} />
-              <Text style={styles.title}> Words Recall</Text>
+              <MaterialCommunityIcons name="eyedropper-variant" size={32} />
+              <Text style={styles.title}> Color Match</Text>
             </View>
               {
                 difficulty.map((item, index) => (
-                  <TouchableOpacity key={index} onPress={()=>navigate('SingleExercise', {type: 'Words', difficulty: item.name,
-                                                                                        icon: "file-word-box"})}>
+                  <TouchableOpacity key={index} onPress={()=>navigate('SingleExercise', {type: 'ColorMatch', difficulty: item.name,
+                                                                                        icon: "eyedropper-variant"})}>
                     <ListItem
                       title={item.name}
                       style={index==0? styles.list_item1 : styles.list_item}
