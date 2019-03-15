@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-const RecommendationItem = ({ title, image, navigate, username }) => {
+const RecommendationItem = ({ title, image, navigate, }) => {
   return (
     <View style={styles.container}>
         <Image
@@ -10,7 +10,7 @@ const RecommendationItem = ({ title, image, navigate, username }) => {
           resizeMode={'contain'}
         />
         <Text style={styles.title}>{title}</Text>
-      </View>
+    </View>
   );
 };
 

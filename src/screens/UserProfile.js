@@ -11,6 +11,7 @@ import RadioButton from '../commons/RadioButton';
 import { Button } from 'react-native-elements';
 import { profileRiskCalc } from '../helpers/riskCalc';
 
+
 export default class UserProfile extends Component {
   constructor(props) {
     super(props);
@@ -120,8 +121,12 @@ export default class UserProfile extends Component {
           />
           <IOSPicker
             label={"Age"}
-            selectedValue={this.state.age}
-            onValueChange={age=>this.setState({age})}
+            selectedValue={this.state.profile.age}
+            onValueChange={age => {
+              let profile = Object.assign({}, this.state.profile);
+              profile.age = age;
+              this.setState({profile: profile});
+            }}
             items={['cancel', 'Less than 65', '65-74', '75-84', '85 or older']}
           />
         </View>

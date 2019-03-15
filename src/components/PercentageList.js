@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-const PercentageList = ({ item, percentage, color }) => {
-    if(percentage=="100")
+const PercentageList = ({ item, percentage, num}) => {
+    if(percentage==100)
     return (
         <View style={styles.container}>
-        <Text style={styles.completedText}>{item}</Text>
+        <Text style={styles.completedText}>{item} {num}</Text>
         <Text style={styles.completedText}> {percentage} % </Text>
         </View>
     )
