@@ -13,11 +13,11 @@ export default class HomeScreen extends React.Component {
     super(props);
     this.state = {
       username: "",
-      pastStepCount: null,
+      pastStepCount: 0,
       currentStepCount: 0,
       isPedometerAvailable: "checking",
       distance: 1.12,
-      dailyCompletd: false,
+      dailyCompleted: false,
       cognitiveTodoCompleted: true,
       physicalTodoCompleted: false,
       risk: 'low',
@@ -37,20 +37,7 @@ export default class HomeScreen extends React.Component {
   };
 
   componentWillMount() {
-    const end = new Date();
-    const start = new Date();
-    start.setDate(end.getDate() - 1);
-    Pedometer.getStepCountAsync(start, end).then(
-      result => {
-        this.setState({ currentStepCount: result.steps });
-      },
-      error => {
-        this.setState({
-          currentStepCount: "Could not get stepCount: " + error
-        });
-      }
-    );
-    this._subscribe();
+    this._initStepCount();
     setTimeout(()=>{
       this.setState({isLoading:false});
     }, 1500);
@@ -64,6 +51,8 @@ export default class HomeScreen extends React.Component {
           this.checkNewUser(user);
         })
         .catch(err=>console.log(err));
+        this._subscribe();
+
   }
 
   componentWillUnmount() {
@@ -89,10 +78,6 @@ export default class HomeScreen extends React.Component {
         .then(data => console.log("New User Created: " + data.data.createUser.username));
       }
     })();
-  }
-
-  getPastStepCount() {
-    return this.pastStepCount;
   }
 
   _subscribe = () => {
@@ -146,7 +131,7 @@ export default class HomeScreen extends React.Component {
           title={"Cognitive Challenge"}
           item1={{title: 'View Stat', onPress: 'CognitiveStat', image: require('../../assets/img/bar_graph.png')}}
           item2={{title: 'Exercises', onPress: 'CognitiveExercises', image: require('../../assets/img/brain_exercise.png')}}
-          item3={{title: 'Daily Challenge', onPress: 'SingleExercise', image: this.state.dailyCompletd? require('../../assets/img/check_mark.png') : require('../../assets/img/exclamation.png')}}
+          item3={{title: 'Daily Challenge', onPress: 'SingleExercise', image: this.state.dailyCompleted? require('../../assets/img/check_mark.png') : require('../../assets/img/exclamation.png')}}
           backgroundColor={this.state.cognitiveChallengeCompleted? 'rgba(123, 239, 178, 0.75)' : 'rgba(247, 202, 24, 0.5)'}
           navigate={navigate}
           username={this.state.username}
@@ -209,6 +194,26 @@ export default class HomeScreen extends React.Component {
         </ScrollView>
     )
   }
+
+  _initStepCount() {
+    let end = new Date();
+    let start = new Date();
+    start.setDate(end.getDate() - 1);
+    Pedometer.getStepCountAsync(start, end).then(
+      result => {
+        this.setState({
+          currentStepCount: result.steps,
+          distance: result.steps / 2500
+        });
+      },
+      error => {
+        this.setState({
+          currentStepCount: "Could not get stepCount: " + error
+        });
+      }
+    );
+  }
+
 }
 
 const styles = StyleSheet.create({

@@ -1,12 +1,13 @@
 import React from 'react';
 import { Picker, View, Text, StyleSheet, TouchableOpacity, ActionSheetIOS } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
 
 const IOSPicker = ({ label, items, selectedValue, onValueChange }) => {
 
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
-      <TouchableOpacity onPress={()=>renderActionSheet(items, onValueChange)}><Text style={{textTransform:'capitalize'}}>{selectedValue} arrow</Text></TouchableOpacity>
+      <TouchableOpacity onPress={()=>renderActionSheet(items, onValueChange)}><Text style={{textTransform:'capitalize'}}>{selectedValue} <FontAwesome name = "caret-down"/> </Text></TouchableOpacity>
     </View>
   );
 };

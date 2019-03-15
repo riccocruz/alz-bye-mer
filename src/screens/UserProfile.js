@@ -11,6 +11,7 @@ import RadioButton from '../commons/RadioButton';
 import { Button } from 'react-native-elements';
 import { profileRiskCalc } from '../helpers/riskCalc';
 
+
 export default class UserProfile extends Component {
   constructor(props) {
     super(props);
@@ -19,14 +20,23 @@ export default class UserProfile extends Component {
       profile: {
         id: '',
         ethnicity: '',   // asian, african, caucasian, hispanics, others
+<<<<<<< HEAD
         age: '',         // <65, 65-69, 70-74, 75-79, 80-84, >=85
         gender: null,    // 0 for Male, 1 for Female
+=======
+        age: '',         // Less than 65, 65-74, 75-79, 80-84, >=85
+        gender: null,    // Male, Female
+>>>>>>> 68e1737b0a8a8ffab02d07eb17071fbeeef882ba
         height: '',
         weight: '',
         familyHistory: null,  // 1 for Yes, 0 for No
         smoking: null,        // 1 for Yes, 0 for No
         highBloodPressure: null,
         diabetes: null,
+<<<<<<< HEAD
+=======
+        profileScore: 0,
+>>>>>>> 68e1737b0a8a8ffab02d07eb17071fbeeef882ba
       },
       isSubmitting: false
     }
@@ -55,27 +65,30 @@ export default class UserProfile extends Component {
 
   componentDidUpdate() {
     // ****** temporary to see Profile Calculation ********
-    const { ethnicity, age, gender, height, weight, familyHistory, smoking, highBloodPressure, diabetes } = this.state;
-    if(!(ethnicity==''||age==''||gender==null||height==''||weight==''||familyHistory==null||smoking==null||highBloodPressure==null||diabetes==null)) {
-      let profileRiskScore = profileRiskCalc(this.state);
-      console.log(profileRiskScore);
-      if(profileRiskScore >= 20) {
-        console.log("HIGH RISK");
-      } else if(profileRiskScore >= 13) {
-        console.log("MODERATE RISK");
-      } else {
-        console.log("LOW RISK");
-      }
-    }
-    // console.log(this.state);
+    // const { ethnicity, age, gender, height, weight, familyHistory, smoking, highBloodPressure, diabetes } = this.state.profile;
+    // if(!(ethnicity==''||age==''||gender==null||height==''||weight==''||familyHistory==null||smoking==null||highBloodPressure==null||diabetes==null)) {
+    //   let profileRiskScore = profileRiskCalc(this.state.profile);
+    //   console.log(profileRiskScore);
+    //   if(profileRiskScore >= 20) {
+    //     console.log("HIGH RISK");
+    //   } else if(profileRiskScore >= 13) {
+    //     console.log("MODERATE RISK");
+    //   } else {
+    //     console.log("LOW RISK");
+    //   }
+    // }
+    console.log(this.state);
   }
 
   onPressNext = () => {
     const username = this.props.navigation.getParam('username');
+    let profile = Object.assign({}, this.state.profile);
+    profile.profileScore = profileRiskCalc(this.state.profile);
     // this is where all local states will be posted to the database
     // for now, hardcoded some timeOut in place of actual request
     this.setState({
       isSubmitting: true,
+      profile: profile
     });
     this.updateUserProfile(this.state.profile)
     .then(data => {
@@ -117,12 +130,12 @@ export default class UserProfile extends Component {
           <IOSPicker
             label={"Age"}
             selectedValue={this.state.profile.age}
-            onValueChange={ethnicity => {
+            onValueChange={age => {
               let profile = Object.assign({}, this.state.profile);
               profile.age = age;
               this.setState({profile: profile});
             }}
-            items={['cancel', 'Less than 65', '65-69','70-74', '75-79', '80-84', '85 or older']}
+            items={['cancel', 'Less than 65', '65-74', '75-84', '85 or older']}
           />
         </View>
       );
@@ -180,12 +193,12 @@ export default class UserProfile extends Component {
         <RadioButton
           label="Gender"
           options={gender_options}
-          onPress={option => {
+          onPress={value => {
             let profile = Object.assign({}, this.state.profile);
-            profile.gender = (option.id === 0 ? "Female" : "Male");
-            this.setState({profile: profile});
+            profile.gender = value;
+            this.setState({profile});
           }}
-          initial={(this.state.profile.gender === "Male" ? 0 : 1)}
+          initial={gender}
           horizontal
         />
         <TextField
@@ -211,46 +224,82 @@ export default class UserProfile extends Component {
         <RadioButton
           label="Any family history of Alzheimer's Disease?"
           options={yes_no}
+<<<<<<< HEAD
           onPress={option => {
             let profile = Object.assign({}, this.state.profile);
             profile.familyHistory = !!option.id;
             this.setState({profile: profile});
           }}
           initial={(this.state.profile.familyHistory ? 1 : 0)}
+=======
+          onPress={value => {
+            let profile = Object.assign({}, this.state.profile);
+            profile.familyHistory = value;
+            this.setState({profile});
+          }}
+          initial={familyHistory}
+>>>>>>> 68e1737b0a8a8ffab02d07eb17071fbeeef882ba
           horizontal
         />
         <RadioButton
           label="Do you smoke?"
           options={yes_no}
+<<<<<<< HEAD
           onPress={option => {
             let profile = Object.assign({}, this.state.profile);
             profile.smoking = !!option.id;
             this.setState({profile: profile});
           }}
           initial={(this.state.profile.smoking ? 1 : 0)}
+=======
+          onPress={value => {
+            let profile = Object.assign({}, this.state.profile);
+            profile.smoking = value;
+            this.setState({profile});
+          }}
+          initial={smoking}
+>>>>>>> 68e1737b0a8a8ffab02d07eb17071fbeeef882ba
           horizontal
         />
         <Text style={{fontSize: 18, paddingLeft: 4, paddingRight: 4, fontWeight: 'bold', marginTop: 8}}>Do you have any of the following medical conditions?</Text>
         <RadioButton
           label="High Blood Pressure"
           options={yes_no}
+<<<<<<< HEAD
           onPress={option => {
             let profile = Object.assign({}, this.state.profile);
             profile.highBloodPressure = !!option.id;
             this.setState({profile: profile});
           }}
           initial={(this.state.profile.highBloodPressure ? 1 : 0)}
+=======
+          onPress={value => {
+            let profile = Object.assign({}, this.state.profile);
+            profile.highBloodPressure = value;
+            this.setState({profile});
+          }}
+          initial={highBloodPressure}
+>>>>>>> 68e1737b0a8a8ffab02d07eb17071fbeeef882ba
           horizontal
         />
         <RadioButton
           label="Diabetes"
           options={yes_no}
+<<<<<<< HEAD
           onPress={option => {
             let profile = Object.assign({}, this.state.profile);
             profile.diabetes = !!option.id;
             this.setState({profile: profile});
           }}
           initial={(this.state.profile.diabetes ? 1 : 0)}
+=======
+          onPress={value => {
+            let profile = Object.assign({}, this.state.profile);
+            profile.diabetes = value;
+            this.setState({profile});
+          }}
+          initial={diabetes}
+>>>>>>> 68e1737b0a8a8ffab02d07eb17071fbeeef882ba
           horizontal
         />
         <Button

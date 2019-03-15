@@ -7,6 +7,8 @@ export default class PhysicalTodo extends Component {
   constructor(props) {
     super(props);
     this.state = {
+        completed: 1,
+        numRecommendation: 3
     }
     
   }
@@ -20,13 +22,23 @@ export default class PhysicalTodo extends Component {
     
   };
 
-render() {
+  renderPercentageList = (item, percentage) => {
+      return (
+        <PercentageList
+            item = {item}
+            percentage = {percentage}
+        />
+      );
+  }
+
+
+    render() {
     return (
         <ScrollView>
             <View style={styles.rowLayout}>
                 <Text style={styles.titleText}> TO DO </Text>
-                <Text style={styles.redBaseText}> 3
-                <Text style={styles.titleText}> /3 completed </Text> </Text>
+                <Text style={styles.redBaseText}> {this.state.completed}
+                <Text style={styles.titleText}> / {this.state.numRecommendation} completed </Text> </Text>
             </View>
             <View style={{
                 borderBottomColor: '#000080',
@@ -34,18 +46,10 @@ render() {
                 borderRadius:0.5,
             }}/>
 
-            <PercentageList
-                item = "Recommendation 1"
-                percentage = "100"
-            />
-            <PercentageList
-                item = "Recommendation 2"
-                percentage = "100"
-            />
-            <PercentageList
-                item = "Recommendation 3"
-                percentage = "100"
-            />
+            {this.renderPercentageList("Recommendation 1", 100)}
+            {this.renderPercentageList("Recommendation 2", 100)}
+            {this.renderPercentageList("Recommendation 3", 100)}
+
         </ScrollView>
     );
   }
