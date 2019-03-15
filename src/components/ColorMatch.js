@@ -14,11 +14,10 @@ export default class ColorMatch extends Component {
       isRun: false,
       startGame:false,
       answerColor: null, // the color that the first word says
-      randomText: null,
-      answerText: null, // the color that the second word has
+      randomText: "",
+      answerText: "", // the color that the second word has
       randomColor: null,
       showScore: false,
-        
     };
     let timer;
     let timeout;
@@ -49,18 +48,19 @@ export default class ColorMatch extends Component {
   }
 
   timerStart = () => {
-    if(this.props.difficulty === 'Easy')
+      if(this.props.difficulty === 'Easy')
       this.setState({time: 5});
-    else if(this.props.difficulty === 'Medium')
-      this.setState({time: 4});
-    else
-      this.setState({time: 3});
+      else if(this.props.difficulty === 'Medium')
+        this.setState({time: 3});
+      else
+        this.setState({time: 2});
 
-    timer = setInterval(()=>{
-      this.setState(prevState=>({
-        time: prevState.time-1
-      }))
-    }, 1000);
+      timer = setInterval(()=>{
+        this.setState(prevState=>({
+          time: prevState.time-1
+        }))
+      }, 1000);
+    
 
     if(this.props.difficulty === 'Easy')
     {
@@ -69,8 +69,8 @@ export default class ColorMatch extends Component {
         this.setState({
           time: null,
           answerColor: null,
-          randomText: null,
-          answerText: null,
+          randomText: "",
+          answerText: "",
           randomColor: null,
         })
         this.gameStart()
@@ -82,12 +82,12 @@ export default class ColorMatch extends Component {
         this.setState({
           time: null,
           answerColor: null,
-          randomText: null,
-          answerText: null,
+          randomText: "",
+          answerText: "",
           randomColor: null,
         })
         this.gameStart()
-      },4000);
+      },3000);
     }
     else{
       timeout = setTimeout(()=>{
@@ -95,22 +95,21 @@ export default class ColorMatch extends Component {
         this.setState({
           time: null,
           answerColor: null,
-          randomText: null,
-          answerText: null,
+          randomText: "",
+          answerText: "",
           randomColor: null,
         })
         this.gameStart()
-      },3000);
+      },2000);
     }
-    
   }
 
   onQuitPress = () => {
     this.setState({
       time: null,
       answerColor: null,
-      randomText: null,
-      answerText: null,
+      randomText: "",
+      answerText: "",
       randomColor: null,
       score: 0,
       stage: 0,
@@ -155,15 +154,14 @@ export default class ColorMatch extends Component {
     this.gameStart();
   }
 
-  // Yes or No
   buttons = () => {
     return (<View style = {{flexDirection: 'row'}}>
       <TouchableOpacity onPress={()=>this.checkAnswer("yes")}>
-        <Text style={styles.yes_btn}>Yes</Text>
+        <Text style={styles.yes_btn}>YES</Text>
       </TouchableOpacity>
 
       <TouchableOpacity onPress={()=>this.checkAnswer("no")}>
-        <Text style={styles.no_btn}>No</Text>
+        <Text style={styles.no_btn}>NO</Text>
       </TouchableOpacity>
     </View>);
   }
@@ -183,8 +181,6 @@ export default class ColorMatch extends Component {
     return randomColor;
   }
 
-  // first word (says the color)
-  // second word (has the color)
   gameStart = () => {
     if(this.state.stage < 25) {
       this.setState(prevState=>({
@@ -201,8 +197,8 @@ export default class ColorMatch extends Component {
       this.setState({
         time: null,
         answerColor: null,
-        randomText: null,
-        answerText: null,
+        randomText: "",
+        answerText: "",
         randomColor: null,
         showScore:true
       });
@@ -214,8 +210,10 @@ export default class ColorMatch extends Component {
     if(this.state.startGame && !this.state.showScore) {
       return (
         <View>
+          <Text style = {{fontSize:15, textAlign: 'center', paddingBottom: 15,}}> Meaning </Text>
           <Text style={[styles.textStyle, {color: this.state.randomColor}]}> {this.state.answerText.toUpperCase()} </Text>
           <Text style={[styles.textStyle, {color: this.state.answerColor}]}> {this.state.randomText.toUpperCase()} </Text>
+          <Text style = {{fontSize:15, textAlign: 'center', paddingTop: 15}}> Text Color </Text>
           {this.buttons()}
         </View>
       );
@@ -231,8 +229,8 @@ export default class ColorMatch extends Component {
           <View>
             <Text style = {{fontSize: 17, textAlign: 'center'}}> In this game, your task is to identify the color of a written word. 
             You must suppress the impulse to respond to the word's meaning, and focus only on the ink color. </Text>
-            <Text style = {{fontSize: 17, textAlign: 'center'}}> You need to press "YES" if the color that the first word is saying is equal to the color of the second word.
-            Press "NO" if it's the other case.</Text>
+            <Text style = {{fontSize: 17, textAlign: 'center'}}> You need to press "YES" if the meaning of the first text matchs to the color of the second text.
+            Press "NO" fo any other cases.</Text>
             <Text style = {{fontSize: 20, textAlign: 'center'}}> PRESS START TO PLAY! Good luck! </Text>
           </View>
         );
@@ -306,7 +304,7 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     paddingBottom: 15,
     width: 100,
-    marginTop: 10,
+    marginTop: 20,
     marginRight: 30,
     textAlign:'center',
   },
@@ -317,22 +315,16 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     paddingBottom: 15,
     width: 100,
-    marginTop: 10,
+    marginTop: 20,
     marginLeft: 30,
     textAlign:'center',
   },
   textStyle:
   {
-    fontSize: 45,
+    fontSize: 50,
     fontWeight: 'bold',
     textAlign:'center',
     paddingTop: 15,
     paddingBottom: 15,
   },
 });
-
-
-// create an array contains how many times each image is duplicated
-// first time ==> push 0 into the array
-// others ==> add 1 to the index which has the image
-// total score ==> user score / (5*(each value in the index))
