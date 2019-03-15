@@ -16,6 +16,8 @@ export const onCreateUser = `subscription OnCreateUser {
     diabetes
     height
     weight
+    profileScore
+    riskScore
     assessmentScore
     todos {
       type
@@ -25,6 +27,7 @@ export const onCreateUser = `subscription OnCreateUser {
     physicals {
       items {
         id
+        createAt
         date
         score
       }
@@ -33,6 +36,11 @@ export const onCreateUser = `subscription OnCreateUser {
     cognitives {
       items {
         id
+        createdAt
+        type
+        difficulty
+        solved
+        total
       }
       nextToken
     }
@@ -54,6 +62,8 @@ export const onUpdateUser = `subscription OnUpdateUser {
     diabetes
     height
     weight
+    profileScore
+    riskScore
     assessmentScore
     todos {
       type
@@ -63,6 +73,7 @@ export const onUpdateUser = `subscription OnUpdateUser {
     physicals {
       items {
         id
+        createAt
         date
         score
       }
@@ -71,6 +82,11 @@ export const onUpdateUser = `subscription OnUpdateUser {
     cognitives {
       items {
         id
+        createdAt
+        type
+        difficulty
+        solved
+        total
       }
       nextToken
     }
@@ -92,6 +108,8 @@ export const onDeleteUser = `subscription OnDeleteUser {
     diabetes
     height
     weight
+    profileScore
+    riskScore
     assessmentScore
     todos {
       type
@@ -101,6 +119,7 @@ export const onDeleteUser = `subscription OnDeleteUser {
     physicals {
       items {
         id
+        createAt
         date
         score
       }
@@ -109,6 +128,11 @@ export const onDeleteUser = `subscription OnDeleteUser {
     cognitives {
       items {
         id
+        createdAt
+        type
+        difficulty
+        solved
+        total
       }
       nextToken
     }
@@ -118,6 +142,7 @@ export const onDeleteUser = `subscription OnDeleteUser {
 export const onCreatePhysical = `subscription OnCreatePhysical {
   onCreatePhysical {
     id
+    createAt
     date
     score
     user {
@@ -134,6 +159,8 @@ export const onCreatePhysical = `subscription OnCreatePhysical {
       diabetes
       height
       weight
+      profileScore
+      riskScore
       assessmentScore
       todos {
         createdAt
@@ -152,6 +179,7 @@ export const onCreatePhysical = `subscription OnCreatePhysical {
 export const onUpdatePhysical = `subscription OnUpdatePhysical {
   onUpdatePhysical {
     id
+    createAt
     date
     score
     user {
@@ -168,6 +196,8 @@ export const onUpdatePhysical = `subscription OnUpdatePhysical {
       diabetes
       height
       weight
+      profileScore
+      riskScore
       assessmentScore
       todos {
         createdAt
@@ -186,6 +216,7 @@ export const onUpdatePhysical = `subscription OnUpdatePhysical {
 export const onDeletePhysical = `subscription OnDeletePhysical {
   onDeletePhysical {
     id
+    createAt
     date
     score
     user {
@@ -202,6 +233,8 @@ export const onDeletePhysical = `subscription OnDeletePhysical {
       diabetes
       height
       weight
+      profileScore
+      riskScore
       assessmentScore
       todos {
         createdAt
@@ -220,48 +253,11 @@ export const onDeletePhysical = `subscription OnDeletePhysical {
 export const onCreateCognitive = `subscription OnCreateCognitive {
   onCreateCognitive {
     id
-    alphanumericMemory {
-      easy {
-        solved
-        total
-      }
-      medium {
-        solved
-        total
-      }
-      hard {
-        solved
-        total
-      }
-    }
-    wordRecall {
-      easy {
-        solved
-        total
-      }
-      medium {
-        solved
-        total
-      }
-      hard {
-        solved
-        total
-      }
-    }
-    figureShape {
-      easy {
-        solved
-        total
-      }
-      medium {
-        solved
-        total
-      }
-      hard {
-        solved
-        total
-      }
-    }
+    createdAt
+    type
+    difficulty
+    solved
+    total
     user {
       id
       username
@@ -276,6 +272,8 @@ export const onCreateCognitive = `subscription OnCreateCognitive {
       diabetes
       height
       weight
+      profileScore
+      riskScore
       assessmentScore
       todos {
         createdAt
@@ -294,48 +292,11 @@ export const onCreateCognitive = `subscription OnCreateCognitive {
 export const onUpdateCognitive = `subscription OnUpdateCognitive {
   onUpdateCognitive {
     id
-    alphanumericMemory {
-      easy {
-        solved
-        total
-      }
-      medium {
-        solved
-        total
-      }
-      hard {
-        solved
-        total
-      }
-    }
-    wordRecall {
-      easy {
-        solved
-        total
-      }
-      medium {
-        solved
-        total
-      }
-      hard {
-        solved
-        total
-      }
-    }
-    figureShape {
-      easy {
-        solved
-        total
-      }
-      medium {
-        solved
-        total
-      }
-      hard {
-        solved
-        total
-      }
-    }
+    createdAt
+    type
+    difficulty
+    solved
+    total
     user {
       id
       username
@@ -350,6 +311,8 @@ export const onUpdateCognitive = `subscription OnUpdateCognitive {
       diabetes
       height
       weight
+      profileScore
+      riskScore
       assessmentScore
       todos {
         createdAt
@@ -368,48 +331,11 @@ export const onUpdateCognitive = `subscription OnUpdateCognitive {
 export const onDeleteCognitive = `subscription OnDeleteCognitive {
   onDeleteCognitive {
     id
-    alphanumericMemory {
-      easy {
-        solved
-        total
-      }
-      medium {
-        solved
-        total
-      }
-      hard {
-        solved
-        total
-      }
-    }
-    wordRecall {
-      easy {
-        solved
-        total
-      }
-      medium {
-        solved
-        total
-      }
-      hard {
-        solved
-        total
-      }
-    }
-    figureShape {
-      easy {
-        solved
-        total
-      }
-      medium {
-        solved
-        total
-      }
-      hard {
-        solved
-        total
-      }
-    }
+    createdAt
+    type
+    difficulty
+    solved
+    total
     user {
       id
       username
@@ -424,6 +350,8 @@ export const onDeleteCognitive = `subscription OnDeleteCognitive {
       diabetes
       height
       weight
+      profileScore
+      riskScore
       assessmentScore
       todos {
         createdAt

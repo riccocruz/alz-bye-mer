@@ -12,6 +12,8 @@ type User {
   diabetes: Boolean
   height: Int
   weight: Int
+  profileScore: Int
+  riskScore: Int
   assessmentScore: Int
   todos: [Todo]
   physicals(filter: ModelPhysicalFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelPhysicalConnection
@@ -20,6 +22,7 @@ type User {
 
 type Physical {
   id: ID!
+  createAt: String
   date: String
   score: Int
   user: User
@@ -27,9 +30,11 @@ type Physical {
 
 type Cognitive {
   id: ID!
-  alphanumericMemory: Game
-  wordRecall: Game
-  figureShape: Game
+  createdAt: String
+  type: String
+  difficulty: String
+  solved: Int
+  total: Int
   user: User
 }
 
@@ -39,24 +44,13 @@ enum TodoType {
 }
 
 type Todo {
-  type: [TodoType]
+  type: TodoType
   createdAt: String
   isCompleted: Boolean
 }
 
-type Game {
-  easy: GameScore
-  medium: GameScore
-  hard: GameScore
-}
-
-type GameScore {
-  solved: Int
-  total: Int
-}
-
 input TodoInput {
-  type: [TodoType]
+  type: TodoType
   createdAt: String
   isCompleted: Boolean
 }
@@ -140,6 +134,8 @@ input ModelUserFilterInput {
   diabetes: ModelBooleanFilterInput
   height: ModelIntFilterInput
   weight: ModelIntFilterInput
+  profileScore: ModelIntFilterInput
+  riskScore: ModelIntFilterInput
   assessmentScore: ModelIntFilterInput
   and: [ModelUserFilterInput]
   or: [ModelUserFilterInput]
@@ -169,6 +165,8 @@ input CreateUserInput {
   diabetes: Boolean
   height: Int
   weight: Int
+  profileScore: Int
+  riskScore: Int
   assessmentScore: Int
   todos: [TodoInput]
 }
@@ -187,6 +185,8 @@ input UpdateUserInput {
   diabetes: Boolean
   height: Int
   weight: Int
+  profileScore: Int
+  riskScore: Int
   assessmentScore: Int
   todos: [TodoInput]
 }
@@ -226,6 +226,7 @@ type ModelPhysicalConnection {
 
 input ModelPhysicalFilterInput {
   id: ModelIDFilterInput
+  createAt: ModelStringFilterInput
   date: ModelStringFilterInput
   score: ModelIntFilterInput
   and: [ModelPhysicalFilterInput]
@@ -235,6 +236,7 @@ input ModelPhysicalFilterInput {
 
 input CreatePhysicalInput {
   id: ID
+  createAt: String
   date: String
   score: Int
   physicalUserId: ID
@@ -242,6 +244,7 @@ input CreatePhysicalInput {
 
 input UpdatePhysicalInput {
   id: ID!
+  createAt: String
   date: String
   score: Int
   physicalUserId: ID
@@ -251,17 +254,6 @@ input DeletePhysicalInput {
   id: ID
 }
 
-input GameInput {
-  easy: GameScoreInput
-  medium: GameScoreInput
-  hard: GameScoreInput
-}
-
-input GameScoreInput {
-  solved: Int
-  total: Int
-}
-
 type ModelCognitiveConnection {
   items: [Cognitive]
   nextToken: String
@@ -269,6 +261,11 @@ type ModelCognitiveConnection {
 
 input ModelCognitiveFilterInput {
   id: ModelIDFilterInput
+  createdAt: ModelStringFilterInput
+  type: ModelStringFilterInput
+  difficulty: ModelStringFilterInput
+  solved: ModelIntFilterInput
+  total: ModelIntFilterInput
   and: [ModelCognitiveFilterInput]
   or: [ModelCognitiveFilterInput]
   not: ModelCognitiveFilterInput
@@ -276,17 +273,21 @@ input ModelCognitiveFilterInput {
 
 input CreateCognitiveInput {
   id: ID
-  alphanumericMemory: GameInput
-  wordRecall: GameInput
-  figureShape: GameInput
+  createdAt: String
+  type: String
+  difficulty: String
+  solved: Int
+  total: Int
   cognitiveUserId: ID
 }
 
 input UpdateCognitiveInput {
   id: ID!
-  alphanumericMemory: GameInput
-  wordRecall: GameInput
-  figureShape: GameInput
+  createdAt: String
+  type: String
+  difficulty: String
+  solved: Int
+  total: Int
   cognitiveUserId: ID
 }
 

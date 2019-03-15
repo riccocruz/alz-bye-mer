@@ -16,6 +16,8 @@ export const createUser = `mutation CreateUser($input: CreateUserInput!) {
     diabetes
     height
     weight
+    profileScore
+    riskScore
     assessmentScore
     todos {
       type
@@ -25,6 +27,7 @@ export const createUser = `mutation CreateUser($input: CreateUserInput!) {
     physicals {
       items {
         id
+        createAt
         date
         score
       }
@@ -33,6 +36,11 @@ export const createUser = `mutation CreateUser($input: CreateUserInput!) {
     cognitives {
       items {
         id
+        createdAt
+        type
+        difficulty
+        solved
+        total
       }
       nextToken
     }
@@ -54,6 +62,8 @@ export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
     diabetes
     height
     weight
+    profileScore
+    riskScore
     assessmentScore
     todos {
       type
@@ -63,6 +73,7 @@ export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
     physicals {
       items {
         id
+        createAt
         date
         score
       }
@@ -71,6 +82,11 @@ export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
     cognitives {
       items {
         id
+        createdAt
+        type
+        difficulty
+        solved
+        total
       }
       nextToken
     }
@@ -92,6 +108,8 @@ export const deleteUser = `mutation DeleteUser($input: DeleteUserInput!) {
     diabetes
     height
     weight
+    profileScore
+    riskScore
     assessmentScore
     todos {
       type
@@ -101,6 +119,7 @@ export const deleteUser = `mutation DeleteUser($input: DeleteUserInput!) {
     physicals {
       items {
         id
+        createAt
         date
         score
       }
@@ -109,6 +128,11 @@ export const deleteUser = `mutation DeleteUser($input: DeleteUserInput!) {
     cognitives {
       items {
         id
+        createdAt
+        type
+        difficulty
+        solved
+        total
       }
       nextToken
     }
@@ -118,6 +142,7 @@ export const deleteUser = `mutation DeleteUser($input: DeleteUserInput!) {
 export const createPhysical = `mutation CreatePhysical($input: CreatePhysicalInput!) {
   createPhysical(input: $input) {
     id
+    createAt
     date
     score
     user {
@@ -134,6 +159,8 @@ export const createPhysical = `mutation CreatePhysical($input: CreatePhysicalInp
       diabetes
       height
       weight
+      profileScore
+      riskScore
       assessmentScore
       todos {
         createdAt
@@ -152,6 +179,7 @@ export const createPhysical = `mutation CreatePhysical($input: CreatePhysicalInp
 export const updatePhysical = `mutation UpdatePhysical($input: UpdatePhysicalInput!) {
   updatePhysical(input: $input) {
     id
+    createAt
     date
     score
     user {
@@ -168,6 +196,8 @@ export const updatePhysical = `mutation UpdatePhysical($input: UpdatePhysicalInp
       diabetes
       height
       weight
+      profileScore
+      riskScore
       assessmentScore
       todos {
         createdAt
@@ -186,6 +216,7 @@ export const updatePhysical = `mutation UpdatePhysical($input: UpdatePhysicalInp
 export const deletePhysical = `mutation DeletePhysical($input: DeletePhysicalInput!) {
   deletePhysical(input: $input) {
     id
+    createAt
     date
     score
     user {
@@ -202,6 +233,8 @@ export const deletePhysical = `mutation DeletePhysical($input: DeletePhysicalInp
       diabetes
       height
       weight
+      profileScore
+      riskScore
       assessmentScore
       todos {
         createdAt
@@ -220,48 +253,11 @@ export const deletePhysical = `mutation DeletePhysical($input: DeletePhysicalInp
 export const createCognitive = `mutation CreateCognitive($input: CreateCognitiveInput!) {
   createCognitive(input: $input) {
     id
-    alphanumericMemory {
-      easy {
-        solved
-        total
-      }
-      medium {
-        solved
-        total
-      }
-      hard {
-        solved
-        total
-      }
-    }
-    wordRecall {
-      easy {
-        solved
-        total
-      }
-      medium {
-        solved
-        total
-      }
-      hard {
-        solved
-        total
-      }
-    }
-    figureShape {
-      easy {
-        solved
-        total
-      }
-      medium {
-        solved
-        total
-      }
-      hard {
-        solved
-        total
-      }
-    }
+    createdAt
+    type
+    difficulty
+    solved
+    total
     user {
       id
       username
@@ -276,6 +272,8 @@ export const createCognitive = `mutation CreateCognitive($input: CreateCognitive
       diabetes
       height
       weight
+      profileScore
+      riskScore
       assessmentScore
       todos {
         createdAt
@@ -294,48 +292,11 @@ export const createCognitive = `mutation CreateCognitive($input: CreateCognitive
 export const updateCognitive = `mutation UpdateCognitive($input: UpdateCognitiveInput!) {
   updateCognitive(input: $input) {
     id
-    alphanumericMemory {
-      easy {
-        solved
-        total
-      }
-      medium {
-        solved
-        total
-      }
-      hard {
-        solved
-        total
-      }
-    }
-    wordRecall {
-      easy {
-        solved
-        total
-      }
-      medium {
-        solved
-        total
-      }
-      hard {
-        solved
-        total
-      }
-    }
-    figureShape {
-      easy {
-        solved
-        total
-      }
-      medium {
-        solved
-        total
-      }
-      hard {
-        solved
-        total
-      }
-    }
+    createdAt
+    type
+    difficulty
+    solved
+    total
     user {
       id
       username
@@ -350,6 +311,8 @@ export const updateCognitive = `mutation UpdateCognitive($input: UpdateCognitive
       diabetes
       height
       weight
+      profileScore
+      riskScore
       assessmentScore
       todos {
         createdAt
@@ -368,48 +331,11 @@ export const updateCognitive = `mutation UpdateCognitive($input: UpdateCognitive
 export const deleteCognitive = `mutation DeleteCognitive($input: DeleteCognitiveInput!) {
   deleteCognitive(input: $input) {
     id
-    alphanumericMemory {
-      easy {
-        solved
-        total
-      }
-      medium {
-        solved
-        total
-      }
-      hard {
-        solved
-        total
-      }
-    }
-    wordRecall {
-      easy {
-        solved
-        total
-      }
-      medium {
-        solved
-        total
-      }
-      hard {
-        solved
-        total
-      }
-    }
-    figureShape {
-      easy {
-        solved
-        total
-      }
-      medium {
-        solved
-        total
-      }
-      hard {
-        solved
-        total
-      }
-    }
+    createdAt
+    type
+    difficulty
+    solved
+    total
     user {
       id
       username
@@ -424,6 +350,8 @@ export const deleteCognitive = `mutation DeleteCognitive($input: DeleteCognitive
       diabetes
       height
       weight
+      profileScore
+      riskScore
       assessmentScore
       todos {
         createdAt

@@ -12,6 +12,8 @@ type User @model {
   diabetes: Boolean
   height: Int
   weight: Int
+  profileScore: Int
+  riskScore: Int
   assessmentScore: Int
   todos: [Todo]
   physicals: [Physical] @connection(name: "UserPhysicals")
@@ -20,6 +22,7 @@ type User @model {
 
 type Physical @model {
   id: ID!
+  createAt: String
   date: String
   score: Int
   user: User @connection(name: "UserPhysicals")
@@ -27,9 +30,11 @@ type Physical @model {
 
 type Cognitive @model {
   id: ID!
-  alphanumericMemory: Game
-  wordRecall: Game
-  figureShape: Game
+  createdAt: String
+  type: String
+  difficulty: String
+  solved: Int
+  total: Int
   user: User @connection(name: "UserCognitives")
 }
 
@@ -39,18 +44,7 @@ enum TodoType {
 }
 
 type Todo {
-  type: [TodoType]
+  type: TodoType
   createdAt: String
   isCompleted: Boolean
-}
-
-type Game {
-  easy: GameScore
-  medium: GameScore
-  hard: GameScore
-}
-
-type GameScore {
-  solved: Int
-  total: Int
 }

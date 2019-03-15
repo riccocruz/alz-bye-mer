@@ -16,6 +16,8 @@ export const getUser = `query GetUser($id: ID!) {
     diabetes
     height
     weight
+    profileScore
+    riskScore
     assessmentScore
     todos {
       type
@@ -25,6 +27,7 @@ export const getUser = `query GetUser($id: ID!) {
     physicals {
       items {
         id
+        createAt
         date
         score
       }
@@ -33,6 +36,11 @@ export const getUser = `query GetUser($id: ID!) {
     cognitives {
       items {
         id
+        createdAt
+        type
+        difficulty
+        solved
+        total
       }
       nextToken
     }
@@ -59,6 +67,8 @@ export const listUsers = `query ListUsers(
       diabetes
       height
       weight
+      profileScore
+      riskScore
       assessmentScore
       todos {
         createdAt
@@ -78,6 +88,7 @@ export const listUsers = `query ListUsers(
 export const getPhysical = `query GetPhysical($id: ID!) {
   getPhysical(id: $id) {
     id
+    createAt
     date
     score
     user {
@@ -94,6 +105,8 @@ export const getPhysical = `query GetPhysical($id: ID!) {
       diabetes
       height
       weight
+      profileScore
+      riskScore
       assessmentScore
       todos {
         createdAt
@@ -117,6 +130,7 @@ export const listPhysicals = `query ListPhysicals(
   listPhysicals(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
+      createAt
       date
       score
       user {
@@ -133,6 +147,8 @@ export const listPhysicals = `query ListPhysicals(
         diabetes
         height
         weight
+        profileScore
+        riskScore
         assessmentScore
       }
     }
@@ -143,48 +159,11 @@ export const listPhysicals = `query ListPhysicals(
 export const getCognitive = `query GetCognitive($id: ID!) {
   getCognitive(id: $id) {
     id
-    alphanumericMemory {
-      easy {
-        solved
-        total
-      }
-      medium {
-        solved
-        total
-      }
-      hard {
-        solved
-        total
-      }
-    }
-    wordRecall {
-      easy {
-        solved
-        total
-      }
-      medium {
-        solved
-        total
-      }
-      hard {
-        solved
-        total
-      }
-    }
-    figureShape {
-      easy {
-        solved
-        total
-      }
-      medium {
-        solved
-        total
-      }
-      hard {
-        solved
-        total
-      }
-    }
+    createdAt
+    type
+    difficulty
+    solved
+    total
     user {
       id
       username
@@ -199,6 +178,8 @@ export const getCognitive = `query GetCognitive($id: ID!) {
       diabetes
       height
       weight
+      profileScore
+      riskScore
       assessmentScore
       todos {
         createdAt
@@ -222,9 +203,11 @@ export const listCognitives = `query ListCognitives(
   listCognitives(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      alphanumericMemory
-      wordRecall
-      figureShape
+      createdAt
+      type
+      difficulty
+      solved
+      total
       user {
         id
         username
@@ -239,6 +222,8 @@ export const listCognitives = `query ListCognitives(
         diabetes
         height
         weight
+        profileScore
+        riskScore
         assessmentScore
       }
     }

@@ -361,6 +361,28 @@
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
+          "name" : "profileScore",
+          "description" : null,
+          "args" : [ ],
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "Int",
+            "ofType" : null
+          },
+          "isDeprecated" : false,
+          "deprecationReason" : null
+        }, {
+          "name" : "riskScore",
+          "description" : null,
+          "args" : [ ],
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "Int",
+            "ofType" : null
+          },
+          "isDeprecated" : false,
+          "deprecationReason" : null
+        }, {
           "name" : "assessmentScore",
           "description" : null,
           "args" : [ ],
@@ -530,13 +552,9 @@
           "description" : null,
           "args" : [ ],
           "type" : {
-            "kind" : "LIST",
-            "name" : null,
-            "ofType" : {
-              "kind" : "ENUM",
-              "name" : "TodoType",
-              "ofType" : null
-            }
+            "kind" : "ENUM",
+            "name" : "TodoType",
+            "ofType" : null
           },
           "isDeprecated" : false,
           "deprecationReason" : null
@@ -641,6 +659,17 @@
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
+          "name" : "createAt",
+          "description" : null,
+          "args" : [ ],
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "String",
+            "ofType" : null
+          },
+          "isDeprecated" : false,
+          "deprecationReason" : null
+        }, {
           "name" : "date",
           "description" : null,
           "args" : [ ],
@@ -689,6 +718,15 @@
           "type" : {
             "kind" : "INPUT_OBJECT",
             "name" : "ModelIDFilterInput",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "createAt",
+          "description" : null,
+          "type" : {
+            "kind" : "INPUT_OBJECT",
+            "name" : "ModelStringFilterInput",
             "ofType" : null
           },
           "defaultValue" : null
@@ -1123,101 +1161,39 @@
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "alphanumericMemory",
+          "name" : "createdAt",
           "description" : null,
           "args" : [ ],
           "type" : {
-            "kind" : "OBJECT",
-            "name" : "Game",
+            "kind" : "SCALAR",
+            "name" : "String",
             "ofType" : null
           },
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "wordRecall",
+          "name" : "type",
           "description" : null,
           "args" : [ ],
           "type" : {
-            "kind" : "OBJECT",
-            "name" : "Game",
+            "kind" : "SCALAR",
+            "name" : "String",
             "ofType" : null
           },
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "figureShape",
+          "name" : "difficulty",
           "description" : null,
           "args" : [ ],
           "type" : {
-            "kind" : "OBJECT",
-            "name" : "Game",
+            "kind" : "SCALAR",
+            "name" : "String",
             "ofType" : null
           },
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "user",
-          "description" : null,
-          "args" : [ ],
-          "type" : {
-            "kind" : "OBJECT",
-            "name" : "User",
-            "ofType" : null
-          },
-          "isDeprecated" : false,
-          "deprecationReason" : null
-        } ],
-        "inputFields" : null,
-        "interfaces" : [ ],
-        "enumValues" : null,
-        "possibleTypes" : null
-      }, {
-        "kind" : "OBJECT",
-        "name" : "Game",
-        "description" : null,
-        "fields" : [ {
-          "name" : "easy",
-          "description" : null,
-          "args" : [ ],
-          "type" : {
-            "kind" : "OBJECT",
-            "name" : "GameScore",
-            "ofType" : null
-          },
-          "isDeprecated" : false,
-          "deprecationReason" : null
-        }, {
-          "name" : "medium",
-          "description" : null,
-          "args" : [ ],
-          "type" : {
-            "kind" : "OBJECT",
-            "name" : "GameScore",
-            "ofType" : null
-          },
-          "isDeprecated" : false,
-          "deprecationReason" : null
-        }, {
-          "name" : "hard",
-          "description" : null,
-          "args" : [ ],
-          "type" : {
-            "kind" : "OBJECT",
-            "name" : "GameScore",
-            "ofType" : null
-          },
-          "isDeprecated" : false,
-          "deprecationReason" : null
-        } ],
-        "inputFields" : null,
-        "interfaces" : [ ],
-        "enumValues" : null,
-        "possibleTypes" : null
-      }, {
-        "kind" : "OBJECT",
-        "name" : "GameScore",
-        "description" : null,
-        "fields" : [ {
           "name" : "solved",
           "description" : null,
           "args" : [ ],
@@ -1239,6 +1215,17 @@
           },
           "isDeprecated" : false,
           "deprecationReason" : null
+        }, {
+          "name" : "user",
+          "description" : null,
+          "args" : [ ],
+          "type" : {
+            "kind" : "OBJECT",
+            "name" : "User",
+            "ofType" : null
+          },
+          "isDeprecated" : false,
+          "deprecationReason" : null
         } ],
         "inputFields" : null,
         "interfaces" : [ ],
@@ -1255,6 +1242,51 @@
           "type" : {
             "kind" : "INPUT_OBJECT",
             "name" : "ModelIDFilterInput",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "createdAt",
+          "description" : null,
+          "type" : {
+            "kind" : "INPUT_OBJECT",
+            "name" : "ModelStringFilterInput",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "type",
+          "description" : null,
+          "type" : {
+            "kind" : "INPUT_OBJECT",
+            "name" : "ModelStringFilterInput",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "difficulty",
+          "description" : null,
+          "type" : {
+            "kind" : "INPUT_OBJECT",
+            "name" : "ModelStringFilterInput",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "solved",
+          "description" : null,
+          "type" : {
+            "kind" : "INPUT_OBJECT",
+            "name" : "ModelIntFilterInput",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "total",
+          "description" : null,
+          "type" : {
+            "kind" : "INPUT_OBJECT",
+            "name" : "ModelIntFilterInput",
             "ofType" : null
           },
           "defaultValue" : null
@@ -1447,6 +1479,24 @@
           "defaultValue" : null
         }, {
           "name" : "weight",
+          "description" : null,
+          "type" : {
+            "kind" : "INPUT_OBJECT",
+            "name" : "ModelIntFilterInput",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "profileScore",
+          "description" : null,
+          "type" : {
+            "kind" : "INPUT_OBJECT",
+            "name" : "ModelIntFilterInput",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "riskScore",
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",
@@ -1881,6 +1931,24 @@
           },
           "defaultValue" : null
         }, {
+          "name" : "profileScore",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "Int",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "riskScore",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "Int",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
           "name" : "assessmentScore",
           "description" : null,
           "type" : {
@@ -1915,13 +1983,9 @@
           "name" : "type",
           "description" : null,
           "type" : {
-            "kind" : "LIST",
-            "name" : null,
-            "ofType" : {
-              "kind" : "ENUM",
-              "name" : "TodoType",
-              "ofType" : null
-            }
+            "kind" : "ENUM",
+            "name" : "TodoType",
+            "ofType" : null
           },
           "defaultValue" : null
         }, {
@@ -2073,6 +2137,24 @@
           },
           "defaultValue" : null
         }, {
+          "name" : "profileScore",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "Int",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "riskScore",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "Int",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
           "name" : "assessmentScore",
           "description" : null,
           "type" : {
@@ -2131,6 +2213,15 @@
           },
           "defaultValue" : null
         }, {
+          "name" : "createAt",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "String",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
           "name" : "date",
           "description" : null,
           "type" : {
@@ -2177,6 +2268,15 @@
               "name" : "ID",
               "ofType" : null
             }
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "createAt",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "String",
+            "ofType" : null
           },
           "defaultValue" : null
         }, {
@@ -2243,87 +2343,33 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "alphanumericMemory",
-          "description" : null,
-          "type" : {
-            "kind" : "INPUT_OBJECT",
-            "name" : "GameInput",
-            "ofType" : null
-          },
-          "defaultValue" : null
-        }, {
-          "name" : "wordRecall",
-          "description" : null,
-          "type" : {
-            "kind" : "INPUT_OBJECT",
-            "name" : "GameInput",
-            "ofType" : null
-          },
-          "defaultValue" : null
-        }, {
-          "name" : "figureShape",
-          "description" : null,
-          "type" : {
-            "kind" : "INPUT_OBJECT",
-            "name" : "GameInput",
-            "ofType" : null
-          },
-          "defaultValue" : null
-        }, {
-          "name" : "cognitiveUserId",
+          "name" : "createdAt",
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
-            "name" : "ID",
-            "ofType" : null
-          },
-          "defaultValue" : null
-        } ],
-        "interfaces" : null,
-        "enumValues" : null,
-        "possibleTypes" : null
-      }, {
-        "kind" : "INPUT_OBJECT",
-        "name" : "GameInput",
-        "description" : null,
-        "fields" : null,
-        "inputFields" : [ {
-          "name" : "easy",
-          "description" : null,
-          "type" : {
-            "kind" : "INPUT_OBJECT",
-            "name" : "GameScoreInput",
+            "name" : "String",
             "ofType" : null
           },
           "defaultValue" : null
         }, {
-          "name" : "medium",
+          "name" : "type",
           "description" : null,
           "type" : {
-            "kind" : "INPUT_OBJECT",
-            "name" : "GameScoreInput",
+            "kind" : "SCALAR",
+            "name" : "String",
             "ofType" : null
           },
           "defaultValue" : null
         }, {
-          "name" : "hard",
+          "name" : "difficulty",
           "description" : null,
           "type" : {
-            "kind" : "INPUT_OBJECT",
-            "name" : "GameScoreInput",
+            "kind" : "SCALAR",
+            "name" : "String",
             "ofType" : null
           },
           "defaultValue" : null
-        } ],
-        "interfaces" : null,
-        "enumValues" : null,
-        "possibleTypes" : null
-      }, {
-        "kind" : "INPUT_OBJECT",
-        "name" : "GameScoreInput",
-        "description" : null,
-        "fields" : null,
-        "inputFields" : [ {
+        }, {
           "name" : "solved",
           "description" : null,
           "type" : {
@@ -2338,6 +2384,15 @@
           "type" : {
             "kind" : "SCALAR",
             "name" : "Int",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "cognitiveUserId",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "ID",
             "ofType" : null
           },
           "defaultValue" : null
@@ -2364,29 +2419,47 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "alphanumericMemory",
+          "name" : "createdAt",
           "description" : null,
           "type" : {
-            "kind" : "INPUT_OBJECT",
-            "name" : "GameInput",
+            "kind" : "SCALAR",
+            "name" : "String",
             "ofType" : null
           },
           "defaultValue" : null
         }, {
-          "name" : "wordRecall",
+          "name" : "type",
           "description" : null,
           "type" : {
-            "kind" : "INPUT_OBJECT",
-            "name" : "GameInput",
+            "kind" : "SCALAR",
+            "name" : "String",
             "ofType" : null
           },
           "defaultValue" : null
         }, {
-          "name" : "figureShape",
+          "name" : "difficulty",
           "description" : null,
           "type" : {
-            "kind" : "INPUT_OBJECT",
-            "name" : "GameInput",
+            "kind" : "SCALAR",
+            "name" : "String",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "solved",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "Int",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "total",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "Int",
             "ofType" : null
           },
           "defaultValue" : null

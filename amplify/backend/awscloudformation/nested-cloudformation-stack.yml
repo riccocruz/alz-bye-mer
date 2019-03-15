@@ -157,7 +157,7 @@
 						]
 					},
 					"S3DeploymentBucket": "alz-bye-mer-20190315110649-deployment",
-					"S3DeploymentRootKey": "amplify-appsync-files/1e55a2544b63709a27d92c8df5f9fa9458492857",
+					"S3DeploymentRootKey": "amplify-appsync-files/c80f757bfc147277f4d69c76400cbc46857530e1",
 					"env": "alzbyemer"
 				}
 			}
