@@ -12,17 +12,27 @@ export const onCreateUser = `subscription OnCreateUser {
     ethnicity
     familyHistory
     smoking
-    drinking
     highBloodPressure
     diabetes
     height
     weight
     assessmentScore
+    todos {
+      type
+      createdAt
+      isCompleted
+    }
     physicals {
       items {
         id
-        steps
-        distance
+        date
+        score
+      }
+      nextToken
+    }
+    cognitives {
+      items {
+        id
       }
       nextToken
     }
@@ -40,17 +50,27 @@ export const onUpdateUser = `subscription OnUpdateUser {
     ethnicity
     familyHistory
     smoking
-    drinking
     highBloodPressure
     diabetes
     height
     weight
     assessmentScore
+    todos {
+      type
+      createdAt
+      isCompleted
+    }
     physicals {
       items {
         id
-        steps
-        distance
+        date
+        score
+      }
+      nextToken
+    }
+    cognitives {
+      items {
+        id
       }
       nextToken
     }
@@ -68,17 +88,27 @@ export const onDeleteUser = `subscription OnDeleteUser {
     ethnicity
     familyHistory
     smoking
-    drinking
     highBloodPressure
     diabetes
     height
     weight
     assessmentScore
+    todos {
+      type
+      createdAt
+      isCompleted
+    }
     physicals {
       items {
         id
-        steps
-        distance
+        date
+        score
+      }
+      nextToken
+    }
+    cognitives {
+      items {
+        id
       }
       nextToken
     }
@@ -88,8 +118,8 @@ export const onDeleteUser = `subscription OnDeleteUser {
 export const onCreatePhysical = `subscription OnCreatePhysical {
   onCreatePhysical {
     id
-    steps
-    distance
+    date
+    score
     user {
       id
       username
@@ -100,13 +130,19 @@ export const onCreatePhysical = `subscription OnCreatePhysical {
       ethnicity
       familyHistory
       smoking
-      drinking
       highBloodPressure
       diabetes
       height
       weight
       assessmentScore
+      todos {
+        createdAt
+        isCompleted
+      }
       physicals {
+        nextToken
+      }
+      cognitives {
         nextToken
       }
     }
@@ -116,8 +152,8 @@ export const onCreatePhysical = `subscription OnCreatePhysical {
 export const onUpdatePhysical = `subscription OnUpdatePhysical {
   onUpdatePhysical {
     id
-    steps
-    distance
+    date
+    score
     user {
       id
       username
@@ -128,13 +164,19 @@ export const onUpdatePhysical = `subscription OnUpdatePhysical {
       ethnicity
       familyHistory
       smoking
-      drinking
       highBloodPressure
       diabetes
       height
       weight
       assessmentScore
+      todos {
+        createdAt
+        isCompleted
+      }
       physicals {
+        nextToken
+      }
+      cognitives {
         nextToken
       }
     }
@@ -144,8 +186,8 @@ export const onUpdatePhysical = `subscription OnUpdatePhysical {
 export const onDeletePhysical = `subscription OnDeletePhysical {
   onDeletePhysical {
     id
-    steps
-    distance
+    date
+    score
     user {
       id
       username
@@ -156,13 +198,241 @@ export const onDeletePhysical = `subscription OnDeletePhysical {
       ethnicity
       familyHistory
       smoking
-      drinking
       highBloodPressure
       diabetes
       height
       weight
       assessmentScore
+      todos {
+        createdAt
+        isCompleted
+      }
       physicals {
+        nextToken
+      }
+      cognitives {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const onCreateCognitive = `subscription OnCreateCognitive {
+  onCreateCognitive {
+    id
+    alphanumericMemory {
+      easy {
+        solved
+        total
+      }
+      medium {
+        solved
+        total
+      }
+      hard {
+        solved
+        total
+      }
+    }
+    wordRecall {
+      easy {
+        solved
+        total
+      }
+      medium {
+        solved
+        total
+      }
+      hard {
+        solved
+        total
+      }
+    }
+    figureShape {
+      easy {
+        solved
+        total
+      }
+      medium {
+        solved
+        total
+      }
+      hard {
+        solved
+        total
+      }
+    }
+    user {
+      id
+      username
+      email
+      emailVerified
+      age
+      gender
+      ethnicity
+      familyHistory
+      smoking
+      highBloodPressure
+      diabetes
+      height
+      weight
+      assessmentScore
+      todos {
+        createdAt
+        isCompleted
+      }
+      physicals {
+        nextToken
+      }
+      cognitives {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const onUpdateCognitive = `subscription OnUpdateCognitive {
+  onUpdateCognitive {
+    id
+    alphanumericMemory {
+      easy {
+        solved
+        total
+      }
+      medium {
+        solved
+        total
+      }
+      hard {
+        solved
+        total
+      }
+    }
+    wordRecall {
+      easy {
+        solved
+        total
+      }
+      medium {
+        solved
+        total
+      }
+      hard {
+        solved
+        total
+      }
+    }
+    figureShape {
+      easy {
+        solved
+        total
+      }
+      medium {
+        solved
+        total
+      }
+      hard {
+        solved
+        total
+      }
+    }
+    user {
+      id
+      username
+      email
+      emailVerified
+      age
+      gender
+      ethnicity
+      familyHistory
+      smoking
+      highBloodPressure
+      diabetes
+      height
+      weight
+      assessmentScore
+      todos {
+        createdAt
+        isCompleted
+      }
+      physicals {
+        nextToken
+      }
+      cognitives {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const onDeleteCognitive = `subscription OnDeleteCognitive {
+  onDeleteCognitive {
+    id
+    alphanumericMemory {
+      easy {
+        solved
+        total
+      }
+      medium {
+        solved
+        total
+      }
+      hard {
+        solved
+        total
+      }
+    }
+    wordRecall {
+      easy {
+        solved
+        total
+      }
+      medium {
+        solved
+        total
+      }
+      hard {
+        solved
+        total
+      }
+    }
+    figureShape {
+      easy {
+        solved
+        total
+      }
+      medium {
+        solved
+        total
+      }
+      hard {
+        solved
+        total
+      }
+    }
+    user {
+      id
+      username
+      email
+      emailVerified
+      age
+      gender
+      ethnicity
+      familyHistory
+      smoking
+      highBloodPressure
+      diabetes
+      height
+      weight
+      assessmentScore
+      todos {
+        createdAt
+        isCompleted
+      }
+      physicals {
+        nextToken
+      }
+      cognitives {
         nextToken
       }
     }

@@ -20,12 +20,13 @@ type User @model {
 
 type Physical @model {
   id: ID!
-  date: Date
-  score: Number (max: 100)
+  date: String
+  score: Int
   user: User @connection(name: "UserPhysicals")
 }
 
 type Cognitive @model {
+  id: ID!
   alphanumericMemory: Game
   wordRecall: Game
   figureShape: Game
