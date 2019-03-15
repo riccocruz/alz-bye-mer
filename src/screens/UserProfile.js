@@ -20,23 +20,15 @@ export default class UserProfile extends Component {
       profile: {
         id: '',
         ethnicity: '',   // asian, african, caucasian, hispanics, others
-<<<<<<< HEAD
-        age: '',         // <65, 65-69, 70-74, 75-79, 80-84, >=85
-        gender: null,    // 0 for Male, 1 for Female
-=======
         age: '',         // Less than 65, 65-74, 75-79, 80-84, >=85
         gender: null,    // Male, Female
->>>>>>> 68e1737b0a8a8ffab02d07eb17071fbeeef882ba
         height: '',
         weight: '',
         familyHistory: null,  // 1 for Yes, 0 for No
         smoking: null,        // 1 for Yes, 0 for No
         highBloodPressure: null,
         diabetes: null,
-<<<<<<< HEAD
-=======
         profileScore: 0,
->>>>>>> 68e1737b0a8a8ffab02d07eb17071fbeeef882ba
       },
       isSubmitting: false
     }
@@ -224,82 +216,46 @@ export default class UserProfile extends Component {
         <RadioButton
           label="Any family history of Alzheimer's Disease?"
           options={yes_no}
-<<<<<<< HEAD
-          onPress={option => {
-            let profile = Object.assign({}, this.state.profile);
-            profile.familyHistory = !!option.id;
-            this.setState({profile: profile});
-          }}
-          initial={(this.state.profile.familyHistory ? 1 : 0)}
-=======
           onPress={value => {
             let profile = Object.assign({}, this.state.profile);
             profile.familyHistory = value;
             this.setState({profile});
           }}
           initial={familyHistory}
->>>>>>> 68e1737b0a8a8ffab02d07eb17071fbeeef882ba
           horizontal
         />
         <RadioButton
           label="Do you smoke?"
           options={yes_no}
-<<<<<<< HEAD
-          onPress={option => {
-            let profile = Object.assign({}, this.state.profile);
-            profile.smoking = !!option.id;
-            this.setState({profile: profile});
-          }}
-          initial={(this.state.profile.smoking ? 1 : 0)}
-=======
           onPress={value => {
             let profile = Object.assign({}, this.state.profile);
             profile.smoking = value;
             this.setState({profile});
           }}
           initial={smoking}
->>>>>>> 68e1737b0a8a8ffab02d07eb17071fbeeef882ba
           horizontal
         />
         <Text style={{fontSize: 18, paddingLeft: 4, paddingRight: 4, fontWeight: 'bold', marginTop: 8}}>Do you have any of the following medical conditions?</Text>
         <RadioButton
           label="High Blood Pressure"
           options={yes_no}
-<<<<<<< HEAD
-          onPress={option => {
-            let profile = Object.assign({}, this.state.profile);
-            profile.highBloodPressure = !!option.id;
-            this.setState({profile: profile});
-          }}
-          initial={(this.state.profile.highBloodPressure ? 1 : 0)}
-=======
           onPress={value => {
             let profile = Object.assign({}, this.state.profile);
             profile.highBloodPressure = value;
             this.setState({profile});
           }}
           initial={highBloodPressure}
->>>>>>> 68e1737b0a8a8ffab02d07eb17071fbeeef882ba
           horizontal
         />
         <RadioButton
           label="Diabetes"
           options={yes_no}
-<<<<<<< HEAD
-          onPress={option => {
-            let profile = Object.assign({}, this.state.profile);
-            profile.diabetes = !!option.id;
-            this.setState({profile: profile});
-          }}
-          initial={(this.state.profile.diabetes ? 1 : 0)}
-=======
           onPress={value => {
             let profile = Object.assign({}, this.state.profile);
             profile.diabetes = value;
             this.setState({profile});
           }}
           initial={diabetes}
->>>>>>> 68e1737b0a8a8ffab02d07eb17071fbeeef882ba
           horizontal
         />
         <Button

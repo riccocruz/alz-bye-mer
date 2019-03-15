@@ -60,7 +60,7 @@ export default class PhysicalStat extends React.Component {
             <Grid/>
           </BarChart>
         </View>
-        <View style={{ flexDirection:'row', marginLeft: 55}}>
+        <View style={{ flexDirection:'row', marginLeft: 70}}>
           {this._renderDates()}
         </View>
 
@@ -107,7 +107,7 @@ _renderDates = () => {
 _obtainDates(startDate, stopDate) {
   var dateArray = new Array();
   var currentDate = startDate;
-  while (currentDate <= stopDate) {
+  while (currentDate < stopDate) {
     var month = String(currentDate.getMonth() + 1);
     var day = String(currentDate.getDate());
     var slash = "/";
@@ -123,7 +123,7 @@ _obtainDates(startDate, stopDate) {
     start.setDate(end.getDate() - 7);
     this.setState( {dates: this._obtainDates(start, end)} );
   }
-  
+
   _setSteps() {
     var stepArray = new Array();
     var x = 7;
@@ -159,7 +159,7 @@ _obtainDates(startDate, stopDate) {
     end.setHours(0, 0, 0, 0);
     Pedometer.getStepCountAsync(start, end).then(
       result => {
-        this.setState({ 
+        this.setState({
           dayStepCount: result.steps,
           dayDistance: result.steps / 2500,
         });
@@ -180,10 +180,10 @@ _obtainDates(startDate, stopDate) {
     end.setHours(0, 0, 0, 0);
 
     start.setDate(end.getDate() - 7);
-    
+
     Pedometer.getStepCountAsync(start, end).then(
       result => {
-        this.setState({ 
+        this.setState({
           weekStepcount: result.steps,
           weekDistance: result.steps / 2500,
         });
