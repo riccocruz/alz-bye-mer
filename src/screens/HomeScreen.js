@@ -79,7 +79,7 @@ export default class HomeScreen extends React.Component {
       }
     })();
   }
-  
+
   _subscribe = () => {
     const end = new Date();
     const start = new Date();
@@ -201,7 +201,7 @@ export default class HomeScreen extends React.Component {
     start.setDate(end.getDate() - 1);
     Pedometer.getStepCountAsync(start, end).then(
       result => {
-        this.setState({ 
+        this.setState({
           currentStepCount: result.steps,
           distance: result.steps / 2500
         });

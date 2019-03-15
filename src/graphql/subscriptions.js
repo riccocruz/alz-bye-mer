@@ -12,17 +12,35 @@ export const onCreateUser = `subscription OnCreateUser {
     ethnicity
     familyHistory
     smoking
-    drinking
     highBloodPressure
     diabetes
     height
     weight
+    profileScore
+    riskScore
     assessmentScore
+    todos {
+      type
+      createdAt
+      isCompleted
+    }
     physicals {
       items {
         id
-        steps
-        distance
+        createAt
+        date
+        score
+      }
+      nextToken
+    }
+    cognitives {
+      items {
+        id
+        createdAt
+        type
+        difficulty
+        solved
+        total
       }
       nextToken
     }
@@ -40,17 +58,35 @@ export const onUpdateUser = `subscription OnUpdateUser {
     ethnicity
     familyHistory
     smoking
-    drinking
     highBloodPressure
     diabetes
     height
     weight
+    profileScore
+    riskScore
     assessmentScore
+    todos {
+      type
+      createdAt
+      isCompleted
+    }
     physicals {
       items {
         id
-        steps
-        distance
+        createAt
+        date
+        score
+      }
+      nextToken
+    }
+    cognitives {
+      items {
+        id
+        createdAt
+        type
+        difficulty
+        solved
+        total
       }
       nextToken
     }
@@ -68,17 +104,35 @@ export const onDeleteUser = `subscription OnDeleteUser {
     ethnicity
     familyHistory
     smoking
-    drinking
     highBloodPressure
     diabetes
     height
     weight
+    profileScore
+    riskScore
     assessmentScore
+    todos {
+      type
+      createdAt
+      isCompleted
+    }
     physicals {
       items {
         id
-        steps
-        distance
+        createAt
+        date
+        score
+      }
+      nextToken
+    }
+    cognitives {
+      items {
+        id
+        createdAt
+        type
+        difficulty
+        solved
+        total
       }
       nextToken
     }
@@ -88,8 +142,9 @@ export const onDeleteUser = `subscription OnDeleteUser {
 export const onCreatePhysical = `subscription OnCreatePhysical {
   onCreatePhysical {
     id
-    steps
-    distance
+    createAt
+    date
+    score
     user {
       id
       username
@@ -100,13 +155,21 @@ export const onCreatePhysical = `subscription OnCreatePhysical {
       ethnicity
       familyHistory
       smoking
-      drinking
       highBloodPressure
       diabetes
       height
       weight
+      profileScore
+      riskScore
       assessmentScore
+      todos {
+        createdAt
+        isCompleted
+      }
       physicals {
+        nextToken
+      }
+      cognitives {
         nextToken
       }
     }
@@ -116,8 +179,9 @@ export const onCreatePhysical = `subscription OnCreatePhysical {
 export const onUpdatePhysical = `subscription OnUpdatePhysical {
   onUpdatePhysical {
     id
-    steps
-    distance
+    createAt
+    date
+    score
     user {
       id
       username
@@ -128,13 +192,21 @@ export const onUpdatePhysical = `subscription OnUpdatePhysical {
       ethnicity
       familyHistory
       smoking
-      drinking
       highBloodPressure
       diabetes
       height
       weight
+      profileScore
+      riskScore
       assessmentScore
+      todos {
+        createdAt
+        isCompleted
+      }
       physicals {
+        nextToken
+      }
+      cognitives {
         nextToken
       }
     }
@@ -144,8 +216,9 @@ export const onUpdatePhysical = `subscription OnUpdatePhysical {
 export const onDeletePhysical = `subscription OnDeletePhysical {
   onDeletePhysical {
     id
-    steps
-    distance
+    createAt
+    date
+    score
     user {
       id
       username
@@ -156,13 +229,138 @@ export const onDeletePhysical = `subscription OnDeletePhysical {
       ethnicity
       familyHistory
       smoking
-      drinking
       highBloodPressure
       diabetes
       height
       weight
+      profileScore
+      riskScore
       assessmentScore
+      todos {
+        createdAt
+        isCompleted
+      }
       physicals {
+        nextToken
+      }
+      cognitives {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const onCreateCognitive = `subscription OnCreateCognitive {
+  onCreateCognitive {
+    id
+    createdAt
+    type
+    difficulty
+    solved
+    total
+    user {
+      id
+      username
+      email
+      emailVerified
+      age
+      gender
+      ethnicity
+      familyHistory
+      smoking
+      highBloodPressure
+      diabetes
+      height
+      weight
+      profileScore
+      riskScore
+      assessmentScore
+      todos {
+        createdAt
+        isCompleted
+      }
+      physicals {
+        nextToken
+      }
+      cognitives {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const onUpdateCognitive = `subscription OnUpdateCognitive {
+  onUpdateCognitive {
+    id
+    createdAt
+    type
+    difficulty
+    solved
+    total
+    user {
+      id
+      username
+      email
+      emailVerified
+      age
+      gender
+      ethnicity
+      familyHistory
+      smoking
+      highBloodPressure
+      diabetes
+      height
+      weight
+      profileScore
+      riskScore
+      assessmentScore
+      todos {
+        createdAt
+        isCompleted
+      }
+      physicals {
+        nextToken
+      }
+      cognitives {
+        nextToken
+      }
+    }
+  }
+}
+`;
+export const onDeleteCognitive = `subscription OnDeleteCognitive {
+  onDeleteCognitive {
+    id
+    createdAt
+    type
+    difficulty
+    solved
+    total
+    user {
+      id
+      username
+      email
+      emailVerified
+      age
+      gender
+      ethnicity
+      familyHistory
+      smoking
+      highBloodPressure
+      diabetes
+      height
+      weight
+      profileScore
+      riskScore
+      assessmentScore
+      todos {
+        createdAt
+        isCompleted
+      }
+      physicals {
+        nextToken
+      }
+      cognitives {
         nextToken
       }
     }

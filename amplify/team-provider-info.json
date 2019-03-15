@@ -1,18 +1,18 @@
 {
     "alzbyemer": {
         "awscloudformation": {
-            "AuthRoleName": "alz-bye-mer-20190225113955-authRole",
-            "UnauthRoleArn": "arn:aws:iam::763327914732:role/alz-bye-mer-20190225113955-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::763327914732:role/alz-bye-mer-20190225113955-authRole",
+            "AuthRoleName": "alz-bye-mer-20190315110649-authRole",
+            "UnauthRoleArn": "arn:aws:iam::763327914732:role/alz-bye-mer-20190315110649-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::763327914732:role/alz-bye-mer-20190315110649-authRole",
             "Region": "us-west-2",
-            "DeploymentBucketName": "alz-bye-mer-20190225113955-deployment",
-            "UnauthRoleName": "alz-bye-mer-20190225113955-unauthRole",
-            "StackName": "alz-bye-mer-20190225113955",
-            "StackId": "arn:aws:cloudformation:us-west-2:763327914732:stack/alz-bye-mer-20190225113955/21c3f0d0-3935-11e9-b38f-0adcdede1372"
+            "DeploymentBucketName": "alz-bye-mer-20190315110649-deployment",
+            "UnauthRoleName": "alz-bye-mer-20190315110649-unauthRole",
+            "StackName": "alz-bye-mer-20190315110649",
+            "StackId": "arn:aws:cloudformation:us-west-2:763327914732:stack/alz-bye-mer-20190315110649/20823990-474d-11e9-a474-06bc2c4a7b48"
         },
         "categories": {
             "auth": {
-                "cognito62890894": {}
+                "cognito95a33120": {}
             }
         }
     }
