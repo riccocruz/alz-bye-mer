@@ -95,8 +95,7 @@ export default class Alphanumeric extends Component {
       .then(user => {
         const username = user.username;
         API.graphql(graphqlOperation(listUsers, {
-			filter: { username: { eq: user.username } },
-			limit: 1
+			filter: { username: { eq: user.username } }
 		}))
         .then(data => {
           const userId = data.data.listUsers.items[0].id;
