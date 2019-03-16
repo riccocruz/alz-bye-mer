@@ -12,8 +12,8 @@ type User {
   diabetes: Boolean
   height: Int
   weight: Int
-  profileScore: Int
-  riskScore: Int
+  profileScore: Float
+  riskScore: Float
   assessmentScore: Int
   todos: [Todo]
   physicals(filter: ModelPhysicalFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelPhysicalConnection
@@ -134,8 +134,8 @@ input ModelUserFilterInput {
   diabetes: ModelBooleanFilterInput
   height: ModelIntFilterInput
   weight: ModelIntFilterInput
-  profileScore: ModelIntFilterInput
-  riskScore: ModelIntFilterInput
+  profileScore: ModelFloatFilterInput
+  riskScore: ModelFloatFilterInput
   assessmentScore: ModelIntFilterInput
   and: [ModelUserFilterInput]
   or: [ModelUserFilterInput]
@@ -165,8 +165,8 @@ input CreateUserInput {
   diabetes: Boolean
   height: Int
   weight: Int
-  profileScore: Int
-  riskScore: Int
+  profileScore: Float
+  riskScore: Float
   assessmentScore: Int
   todos: [TodoInput]
 }
@@ -185,8 +185,8 @@ input UpdateUserInput {
   diabetes: Boolean
   height: Int
   weight: Int
-  profileScore: Int
-  riskScore: Int
+  profileScore: Float
+  riskScore: Float
   assessmentScore: Int
   todos: [TodoInput]
 }

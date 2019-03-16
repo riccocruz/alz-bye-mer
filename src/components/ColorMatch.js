@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import { Auth, API, graphqlOperation } from 'aws-amplify';
 
 import ScoreBoard from '../commons/ScoreBoard';
+import { listUsers } from '../graphql/queries';
+import { createCognitive } from '../graphql/mutations';
 
 export default class ColorMatch extends Component {
   constructor(props) {
@@ -194,6 +197,7 @@ export default class ColorMatch extends Component {
       this.timerStart();
 
     } else {
+		this.pushGameResultToDB('ColorMatch', this.props.difficulty, this.state.score);
       this.setState({
         time: null,
         answerColor: null,
@@ -203,6 +207,34 @@ export default class ColorMatch extends Component {
         showScore:true
       });
     }
+  }
+  
+  // Get current user then push the completed game result to db
+  pushGameResultToDB(type, difficulty, solved) {
+    (async () => {
+      Auth.currentAuthenticatedUser()
+      .then(user => {
+        const username = user.username;
+        API.graphql(graphqlOperation(listUsers, {
+			filter: { username: { eq: user.username } },
+			limit: 1
+		}))
+        .then(data => {
+          const userId = data.data.listUsers.items[0].id;
+          API.graphql(graphqlOperation(createCognitive, {
+            input: {
+              type,
+              difficulty,
+              solved,
+              total: 100,
+              cognitiveUserId: userId
+            }
+          }));
+        })
+        .catch(err => console.warn(err));
+      })
+      .catch(err => console.warn(err));
+    })();
   }
   
 

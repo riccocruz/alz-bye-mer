@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TextInput, Text, View, TouchableOpacity, ScrollView, Platform } from 'react-native';
+import { TextInput, Text, View, TouchableOpacity, ScrollView, Platform, ActivityIndicator } from 'react-native';
 import { Auth, API, graphqlOperation } from 'aws-amplify';
 
 import { listUsers } from '../graphql/queries';
@@ -11,6 +11,7 @@ import RadioButton from '../commons/RadioButton';
 import { Button } from 'react-native-elements';
 import { profileRiskCalc } from '../helpers/riskCalc';
 
+import { Pedometer } from 'expo';
 
 export default class UserProfile extends Component {
   constructor(props) {
@@ -30,7 +31,8 @@ export default class UserProfile extends Component {
         diabetes: null,
         profileScore: 0,
       },
-      isSubmitting: false
+      isSubmitting: false,
+      isLoading: true
     }
 
     // this.shouldComponentUpdate()
@@ -41,6 +43,10 @@ export default class UserProfile extends Component {
     title: 'My Profile',
   };
 
+  componentWillMount() {
+    this._initStepCount();
+  }
+
   componentDidMount() {
     const username = this.props.navigation.getParam('username');
     // fetch actual userdata from database
@@ -48,8 +54,10 @@ export default class UserProfile extends Component {
     .then(data => {
       const profile = data.data.listUsers.items[0];
       delete profile.physicals;
+      delete profile.cognitives;
       this.setState({
-        profile: profile
+        profile: profile,
+        isLoading: false
       });
       console.log(profile);
     });
@@ -72,22 +80,42 @@ export default class UserProfile extends Component {
     console.log(this.state);
   }
 
+  _initStepCount() {
+    let end = new Date();
+    let start = new Date();
+    start.setDate(end.getDate() - 1);
+    Pedometer.getStepCountAsync(start, end).then(
+      result => {
+        this.setState({
+          currentStepCount: result.steps,
+          distance: result.steps / 2500
+        });
+      },
+      error => {
+        this.setState({
+          currentStepCount: "Could not get stepCount: " + error
+        });
+      }
+    );
+  }
+
   onPressNext = () => {
     const username = this.props.navigation.getParam('username');
-    let profile = Object.assign({}, this.state.profile);
+    profile = Object.assign({}, this.state.profile);
     profile.profileScore = profileRiskCalc(this.state.profile);
     // this is where all local states will be posted to the database
     // for now, hardcoded some timeOut in place of actual request
     this.setState({
       isSubmitting: true,
-      profile: profile
-    });
-    this.updateUserProfile(this.state.profile)
-    .then(data => {
-      this.setState({
-        isSubmitting: false,
-      });
-      this.props.navigation.navigate('UserAssessment', {username: username});
+      profile
+    }, () => {
+        this.updateUserProfile(this.state.profile)
+        .then(data => {
+          this.setState({
+            isSubmitting: false,
+          });
+          this.props.navigation.navigate('UserAssessment', {username: username});
+        });
     });
   }
 
@@ -167,7 +195,20 @@ export default class UserProfile extends Component {
     );
   }
 
+  renderLoading = () => {
+    return (
+      <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
+        <ActivityIndicator size="large" style={{marginTop: 250}}/>
+      </View>
+    )
+  }
+
   render() {
+
+    if(this.state.isLoading) {
+      return (this.renderLoading());
+    }
+
     const { ethnicity, age, gender, height, weight, familyHistory, smoking, highBloodPressure, diabetes } = this.state.profile;
 
     const gender_options = [
@@ -190,12 +231,12 @@ export default class UserProfile extends Component {
             profile.gender = value;
             this.setState({profile});
           }}
-          initial={gender}
+          initial={'Male'}
           horizontal
         />
         <TextField
           label={"Height(in)"}
-          value={this.state.profile.height.toString()}
+          value={(height ? height.toString() : null)}
           onChangeText={height => {
             let profile = Object.assign({}, this.state.profile);
             profile.height = height;
@@ -205,7 +246,7 @@ export default class UserProfile extends Component {
         />
         <TextField
           label={"Weight(lb)"}
-          value={this.state.profile.weight.toString()}
+          value={(weight ? weight.toString() : null)}
           onChangeText={weight => {
             let profile = Object.assign({}, this.state.profile);
             profile.weight = weight;

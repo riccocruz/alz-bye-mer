@@ -32,6 +32,7 @@ export default class UserProfile extends Component {
     .then(data => {
       const profile = data.data.listUsers.items[0];
       delete profile.physicals;
+      delete profile.cognitives;
       this.setState({
         profile: profile
       });
@@ -39,7 +40,7 @@ export default class UserProfile extends Component {
   }
 
   componentDidUpdate() {
-    console.log(this.state);
+
   }
 
   fetchUserProfile(username) {
@@ -58,27 +59,27 @@ export default class UserProfile extends Component {
   }
 
   onPressSubmit = () => {
-    let profile = Object.assign({}, this.state.profile);
-    profile.riskScore = riskCalc(this.state.profile.profileScore, this.state.profile.assessmentScore);
+    profile = Object.assign({}, this.state.profile);
+    profile.riskScore = riskScoreCalc(profile.profileScore, profile.assessmentScore);
     // this is where all local states will be posted to the database
     this.setState({
       isSubmitting: true,
-      profile: profile
-    });
-    console.log(this.state.profile.riskScore);
-    this.updateUserProfile(this.state.profile)
-    .then(data => {
-      this.setState({
-        isSubmitting: false,
-      });
-      this.props.navigation.dispatch(StackActions.reset({
-       index: 0,
-       actions: [
-         NavigationActions.navigate({
-           routeName: 'HomeScreen',
-         }),
-       ],
-      }));
+      profile
+    }, () => {
+        this.updateUserProfile(this.state.profile)
+        .then(data => {
+          this.setState({
+            isSubmitting: false,
+          });
+          this.props.navigation.dispatch(StackActions.reset({
+           index: 0,
+           actions: [
+             NavigationActions.navigate({
+               routeName: 'HomeScreen',
+             }),
+           ],
+          }));
+        });
     });
   }
 
@@ -117,6 +118,7 @@ export default class UserProfile extends Component {
           key={question.id}
           label={question.q}
           options={yes_no}
+          initial={-1}
           onPress={value=>this._onPress(value, question)}
           horizontal
         />
