@@ -73,11 +73,11 @@ export default class CognitiveStat extends React.Component {
     });
   }
 
-  
+
 _obtainDates(startDate, stopDate) {
   var dateArray = new Array();
   var currentDate = startDate;
-  while (currentDate <= stopDate) {
+  while (currentDate < stopDate) {
     var month = String(currentDate.getMonth() + 1);
     var day = String(currentDate.getDate());
     var slash = "/";
