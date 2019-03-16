@@ -70,7 +70,7 @@ export default class Alphanumeric extends Component {
   }
 
   gameStart = () => {
-    if(this.state.stage < 10) {
+    if(this.state.stage <= 10) {
       this.generateString();
       this.timerStart();
       this.setState({showPrompt:true});

@@ -41,13 +41,13 @@ export default class PhysicalStat extends React.Component {
         <Text style={{textAlign:'center', padding: 10, fontWeight: 'bold', fontSize: 20}}>Weekly Performance</Text>
         <View style={{height:400, paddingLeft: 20, paddingRight: 20, paddingTop: 20, flexDirection:'row'}}>
           <YAxis
-            data={ this.state.weekly_data }
+            data={ [0,100] }
             contentInset={ contentInset }
             svg={{
                 fill: 'grey',
                 fontSize: 10,
                 }}
-            numberOfTicks={ 10 }
+            numberOfTicks={ 50 }
             formatLabel={ value => `${value} %` }
           />
           <BarChart
@@ -56,6 +56,8 @@ export default class PhysicalStat extends React.Component {
             contentInset={ contentInset }
             curve={ shape.curveNatural }
             svg={{ fill: 'rgba(134, 65, 244, 0.8)' }}
+            yMin={0}
+            yMax={100}
           >
             <Grid/>
           </BarChart>
