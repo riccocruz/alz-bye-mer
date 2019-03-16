@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import { Auth, API, graphqlOperation } from 'aws-amplify';
 
 import ScoreBoard from '../commons/ScoreBoard';
+import { listUsers } from '../graphql/queries';
+import { createCognitive } from '../graphql/mutations';
 
 export default class Alphanumeric extends Component {
   constructor(props) {
@@ -72,9 +75,7 @@ export default class Alphanumeric extends Component {
       this.timerStart();
       this.setState({showPrompt:true});
     } else {
-      //Game complete logic here
-
-
+      this.pushGameResultToDB('Alphanumeric', this.props.difficulty, this.state.score);
       this.setState({
         time: null,
         showPrompt: true,
@@ -88,23 +89,22 @@ export default class Alphanumeric extends Component {
   };
 
   // Get current user then push the completed game result to db
-  pushGameResultToDB(type, difficulty, score) {
+  pushGameResultToDB(type, difficulty, solved) {
     (async () => {
       Auth.currentAuthenticatedUser()
       .then(user => {
         const username = user.username;
-        API.graphql(graphqlOperation(getUser, {
-          input: {
-            username: user.username
-          }
-        }))
+        API.graphql(graphqlOperation(listUsers, {
+			filter: { username: { eq: user.username } },
+			limit: 1
+		}))
         .then(data => {
-          const userId = data.data.getUser.id;
+          const userId = data.data.listUsers.items[0].id;
           API.graphql(graphqlOperation(createCognitive, {
             input: {
-              type: type,
-              difficulty: difficulty,
-              score: score,
+              type,
+              difficulty,
+              solved,
               total: 10,
               cognitiveUserId: userId
             }
