@@ -63,7 +63,7 @@ export default class ColorMatch extends Component {
           time: prevState.time-1
         }))
       }, 1000);
-    
+
 
     if(this.props.difficulty === 'Easy')
     {
@@ -208,7 +208,7 @@ export default class ColorMatch extends Component {
       });
     }
   }
-  
+
   // Get current user then push the completed game result to db
   pushGameResultToDB(type, difficulty, solved) {
     (async () => {
@@ -236,7 +236,7 @@ export default class ColorMatch extends Component {
       .catch(err => console.warn(err));
     })();
   }
-  
+
 
   renderGame = () => {
     if(this.state.startGame && !this.state.showScore) {
@@ -259,7 +259,7 @@ export default class ColorMatch extends Component {
     else {
         return(
           <View>
-            <Text style = {{fontSize: 17, textAlign: 'center'}}> In this game, your task is to identify the color of a written word. 
+            <Text style = {{fontSize: 17, textAlign: 'center'}}> In this game, your task is to identify the color of a written word.
             You must suppress the impulse to respond to the word's meaning, and focus only on the ink color. </Text>
             <Text style = {{fontSize: 17, textAlign: 'center'}}> You need to press "YES" if the meaning of the first text matchs to the color of the second text.
             Press "NO" fo any other cases.</Text>

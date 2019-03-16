@@ -69,7 +69,7 @@ export default class CognitiveStat extends React.Component {
                 fill: 'grey',
                 fontSize: 10,
                 }}
-            numberOfTicks={ 50 }
+            numberOfTicks={ 10 }
             formatLabel={ value => `${value} %` }
           />
           <BarChart
