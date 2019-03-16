@@ -212,12 +212,12 @@ export default class UserProfile extends Component {
     const { ethnicity, age, gender, height, weight, familyHistory, smoking, highBloodPressure, diabetes } = this.state.profile;
 
     const gender_options = [
-      {label: 'Male', value: 'Male'},
-      {label: 'Female', value: 'Female'},
+      {label: 'Male', value: 0},
+      {label: 'Female', value: 1},
     ];
     const yes_no = [
-      {label: 'Yes', value: true},
-      {label: 'No', value: false},
+      {label: 'Yes', value: 0},
+      {label: 'No', value: 1},
     ];
 
     return (
@@ -228,10 +228,10 @@ export default class UserProfile extends Component {
           options={gender_options}
           onPress={value => {
             let profile = Object.assign({}, this.state.profile);
-            profile.gender = value;
+            profile.gender = value==0? 'Male' : 'Female';
             this.setState({profile});
           }}
-          initial={'Male'}
+          initial={gender==null? -1: (gender=='Male'? 0: 1)}
           horizontal
         />
         <TextField
@@ -259,10 +259,10 @@ export default class UserProfile extends Component {
           options={yes_no}
           onPress={value => {
             let profile = Object.assign({}, this.state.profile);
-            profile.familyHistory = value;
+            profile.familyHistory = value==0? true: false;
             this.setState({profile});
           }}
-          initial={familyHistory}
+          initial={familyHistory==null? -1: (familyHistory==true? 0: 1)}
           horizontal
         />
         <RadioButton
@@ -273,7 +273,7 @@ export default class UserProfile extends Component {
             profile.smoking = value;
             this.setState({profile});
           }}
-          initial={smoking}
+          initial={smoking==null? -1: (smoking==true? 0: 1)}
           horizontal
         />
         <Text style={{fontSize: 18, paddingLeft: 4, paddingRight: 4, fontWeight: 'bold', marginTop: 8}}>Do you have any of the following medical conditions?</Text>
@@ -282,10 +282,10 @@ export default class UserProfile extends Component {
           options={yes_no}
           onPress={value => {
             let profile = Object.assign({}, this.state.profile);
-            profile.highBloodPressure = value;
+            profile.highBloodPressure = value==0? true: false;
             this.setState({profile});
           }}
-          initial={highBloodPressure}
+          initial={highBloodPressure==null? -1: (highBloodPressure==true? 0: 1)}
           horizontal
         />
         <RadioButton
@@ -293,10 +293,10 @@ export default class UserProfile extends Component {
           options={yes_no}
           onPress={value => {
             let profile = Object.assign({}, this.state.profile);
-            profile.diabetes = value;
+            profile.diabetes = value==0? true: false;
             this.setState({profile});
           }}
-          initial={diabetes}
+          initial={diabetes==null? -1: (diabetes==true? 0: 1)}
           horizontal
         />
         <Button

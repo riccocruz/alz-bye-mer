@@ -2,6 +2,8 @@ import React from 'react';
 import { ScrollView, View, Text, StyleSheet } from 'react-native';
 import { BarChart, YAxis, XAxis, Grid } from 'react-native-svg-charts';
 import * as shape from 'd3-shape';
+import { Auth, API, graphqlOperation } from 'aws-amplify';
+import { listUsers, listCognitives } from '../graphql/queries';
 
 export default class CognitiveStat extends React.Component {
   static navigationOptions = {
@@ -11,35 +13,64 @@ export default class CognitiveStat extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      weekly_data: [15, 12, 8, 11, 20, 15, 13],
+      weekly_data: [77, 81, 72, 80, 82, 85, 80],
       dates: [],
       scores: [
-        {type: 'Alphanumeric Memory', easy_correct: 14, easy_total: 20, medium_correct: 4, medium_total: 10, hard_correct: 1, hard_total:4},
-        {type: 'Word Recall', easy_correct: 28, easy_total: 32, medium_correct: 20, medium_total: 25, hard_correct: 10, hard_total:18},
+        {type: 'Alphanumeric Memory', easy_correct: 29, easy_total: 37, medium_correct: 25, medium_total: 39, hard_correct: 11, hard_total:23},
+        {type: 'Image Memory', easy_correct: 37, easy_total: 48, medium_correct: 30, medium_total: 38, hard_correct: 15, hard_total:21},
+        {type: 'Color Match', easy_correct: 31, easy_total: 35, medium_correct: 25, medium_total: 28, hard_correct: 16, hard_total:20},
       ],
     }
   }
 
   componentDidMount() {
     this._setDates();
+    this.fetchGameResultFromDB();
+  }
+
+  fetchGameResultFromDB() {
+    (async () => {
+      Auth.currentAuthenticatedUser()
+      .then(user => {
+        const username = user.username;
+        API.graphql(graphqlOperation(listUsers, {
+          filter: {username: { eq: username}},
+          limit: 1
+		}))
+        .then(userData => {
+          const profile = userData.data.listUsers.items[0];
+          delete profile.cognitives;
+          delete profile.physicals;
+          delete profile.todos;
+          // API.graphql(graphqlOperation(listCognitives, {
+          //   filter: { user: { eq: profile }}
+          // }))
+          // .then(data => {
+          //   console.log(data);
+          // })
+          // .catch(err => console.warn(err));
+        })
+        .catch(err => console.warn(err));
+      })
+      .catch(err => console.warn(err));
+    })();
   }
 
   render() {
-    console.log(this.state.dates);
     const contentInset = { top: 20, bottom: 20 }
     return (
       <ScrollView>
         <Text style={{textAlign:'center', padding: 10, fontWeight: 'bold', fontSize: 20}}>Weekly Performance</Text>
         <View style={{height:400, paddingLeft: 20, paddingRight: 20, paddingTop: 20, flexDirection:'row'}}>
           <YAxis
-            data={ this.state.weekly_data }
+            data={ [0,100] }
             contentInset={ contentInset }
             svg={{
                 fill: 'grey',
                 fontSize: 10,
                 }}
             numberOfTicks={ 10 }
-            formatLabel={ value => `${value}` }
+            formatLabel={ value => `${value} %` }
           />
           <BarChart
             style={{ flex:1, marginLeft: 16 }}
@@ -47,6 +78,8 @@ export default class CognitiveStat extends React.Component {
             contentInset={ contentInset }
             curve={ shape.curveNatural }
             svg={{ fill: 'rgba(134, 65, 244, 0.8)' }}
+            yMin={0}
+            yMax={100}
           >
             <Grid/>
           </BarChart>
@@ -73,11 +106,11 @@ export default class CognitiveStat extends React.Component {
     });
   }
 
-  
+
 _obtainDates(startDate, stopDate) {
   var dateArray = new Array();
   var currentDate = startDate;
-  while (currentDate <= stopDate) {
+  while (currentDate < stopDate) {
     var month = String(currentDate.getMonth() + 1);
     var day = String(currentDate.getDate());
     var slash = "/";
@@ -92,7 +125,6 @@ _obtainDates(startDate, stopDate) {
     let start = new Date();
     start.setDate(end.getDate() - 7);
     this.setState( {dates: this._obtainDates(start, end)} );
-    console.log(this.state.dates);
   }
 
   _renderAreaScores = () => {
