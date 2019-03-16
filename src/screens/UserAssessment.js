@@ -47,8 +47,7 @@ export default class UserProfile extends Component {
     return API.graphql(graphqlOperation(listUsers, {
       filter: {
         username: { eq: username }
-      },
-      limit: 1
+      }
     }));
   }
 

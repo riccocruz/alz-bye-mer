@@ -58,9 +58,11 @@ export default class UserProfile extends Component {
       this.setState({
         profile: profile,
         isLoading: false
+      }, () => {
+        console.log(profile);
       });
-      console.log(profile);
-    });
+    })
+    .catch(err => console.log(err));
   }
 
   componentDidUpdate() {
@@ -123,8 +125,7 @@ export default class UserProfile extends Component {
     return API.graphql(graphqlOperation(listUsers, {
       filter: {
         username: { eq: username }
-      },
-      limit: 1
+      }
     }));
   }
 

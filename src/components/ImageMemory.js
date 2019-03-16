@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { Auth, API, graphqlOperation } from 'aws-amplify';
+
+import { listUsers } from '../graphql/queries';
+import { createCognitive } from '../graphql/mutations';
 
 export default class ImageMemory extends Component {
   constructor(props) {
@@ -33,6 +37,10 @@ export default class ImageMemory extends Component {
         require('../../assets/game_img/hard9.jpg'), require('../../assets/game_img/hard10.jpg'), require('../../assets/game_img/hard11.jpg'),require('../../assets/game_img/hard17.jpg'),
         require('../../assets/game_img/hard13.jpg'), require('../../assets/game_img/hard14.jpg'), require('../../assets/game_img/hard15.jpg'), require('../../assets/game_img/hard16.jpg'), require('../../assets/game_img/hard20.jpg')]
   };
+
+  componentDidMount() {
+    this.pushGameResultToDB('ImageMemory', this.props.difficulty, 16);
+  }
 
   componentDidUpdate() {
     console.log(this.state);
@@ -165,6 +173,7 @@ export default class ImageMemory extends Component {
       this.timerStart();
 
     } else {
+      this.pushGameResultToDB('ImageMemory', this.props.difficulty, this.state.score/5);
       this.setState({
         score: this.getFinalScore(),
         randomImage: null,
@@ -184,6 +193,33 @@ export default class ImageMemory extends Component {
     // return this.state.score;
   }
 
+  // Get current user then push the completed game result to db
+  pushGameResultToDB(type, difficulty, solved) {
+    (async () => {
+      Auth.currentAuthenticatedUser()
+      .then(user => {
+        const username = user.username;
+        API.graphql(graphqlOperation(listUsers, {
+          filter: { username: { eq: user.username } }
+        }))
+        .then(data => {
+          console.log(data);
+          const userId = data.data.listUsers.items[0].id;
+          API.graphql(graphqlOperation(createCognitive, {
+            input: {
+              type,
+              difficulty,
+              solved,
+              total: 30,
+              cognitiveUserId: userId
+            }
+          }));
+        })
+        .catch(err => console.warn(err));
+      })
+      .catch(err => console.warn(err));
+    })();
+  }
 
   renderGame = () => {
     if(this.state.showImage && this.state.startGame) {
