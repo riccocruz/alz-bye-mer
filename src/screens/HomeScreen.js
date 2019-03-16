@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Linking, Button, ActivityIndicator } from 'react-native';
-import { Auth } from 'aws-amplify';
+import { Auth, API, graphqlOperation } from 'aws-amplify';
 
 import { createUser } from '../graphql/mutations';
 import { listUsers } from '../graphql/queries';

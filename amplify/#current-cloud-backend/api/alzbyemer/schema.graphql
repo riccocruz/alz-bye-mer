@@ -12,8 +12,8 @@ type User @model {
   diabetes: Boolean
   height: Int
   weight: Int
-  profileScore: Int
-  riskScore: Int
+  profileScore: Float
+  riskScore: Float
   assessmentScore: Int
   todos: [Todo]
   physicals: [Physical] @connection(name: "UserPhysicals")
