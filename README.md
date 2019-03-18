@@ -8,7 +8,7 @@ In the past, those diagnosed with Alzheimer's Disease have been told that all th
 
 ### Application Objectives
 
-Our target users are those who have been diagnosed with Alzheimer's Disease, and those who are candidates with pre-Alzheimer's symptoms.  People who wish to improve their memory would also want to use this app.
+Our target users are those who are candidates with pre-Alzheimer's symptoms or those who are worried about Alzheimer's Disease due to age.  People who wish to improve their memory would also want to use this app.
 
 Our system provides our target audience with mental challenges, making them recall past events.  We will keep track of the results of these memory challenges and display detailed statistics to monitor the degree of their Alzheimer's symptoms.  We can send users notifications for taking medications at a specified time, and track their location if needed.
 
