@@ -8,7 +8,7 @@ export default class PhysicalTodo extends Component {
     super(props);
     this.state = {
         completed: 1,
-        numRecommendation: 3
+        numRecommendation: 2
     }
     
   }
@@ -46,9 +46,8 @@ export default class PhysicalTodo extends Component {
                 borderRadius:0.5,
             }}/>
 
-            {this.renderPercentageList("Recommendation 1", 100)}
-            {this.renderPercentageList("Recommendation 2", 100)}
-            {this.renderPercentageList("Recommendation 3", 100)}
+            {this.renderPercentageList("Walk (10,000 steps) ", 100)}
+            {this.renderPercentageList("Yoga", 100)}
 
         </ScrollView>
     );

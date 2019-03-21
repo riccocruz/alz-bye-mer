@@ -3,7 +3,8 @@ import { Image, Text, StyleSheet, ScrollView, View, TouchableOpacity } from 'rea
 import { Auth } from 'aws-amplify';
 
 import ProgressIcon from '../components/ProgressIcon';
-import RecommendationCard from '../components/RecommendationCard';
+import RecommendationImageCard from '../components/RecommendationImageCard';
+import RecommendationIconCard from '../components/RecommendationIconCard';
 
 export default class Recommendation extends Component {
   constructor(props) {
@@ -29,12 +30,22 @@ export default class Recommendation extends Component {
         .catch(err=>console.log(err));
     }
 
-renderRecommendationCard = (title1, title2, image1, image2, username) => {
-    return( <RecommendationCard
+renderRecommendationImageCard = (title1, title2, image1, image2, username) => {
+    return( <RecommendationImageCard
         item1={title1}
         item2={title2}
         image1={image1}
         image2={image2}
+        username={username}
+    />);
+}
+
+renderRecommendationIconCard = (title1, title2, icon1, icon2, username) => {
+    return( <RecommendationIconCard
+        item1={title1}
+        item2={title2}
+        icon1={icon1}
+        icon2={icon2}
         username={username}
     />);
 }
@@ -79,19 +90,16 @@ render() {
             
             <Text style={styles.subTitleText}> Cognitive Exercises </Text>
 
-            {this.renderRecommendationCard("Recommendation 1", "Recommentation 2", 
-                require('../../assets/img/brain_exercise.png'), require('../../assets/img/brain_exercise.png'), this.state.username)}
+            {this.renderRecommendationIconCard("Alphanumeric Memory \n(Medium)", "Image Memory (Hard)", 
+                "numeric", "shape", this.state.username)}
             
-            {this.renderRecommendationCard("Recommendation 3", "Recommentation 4", 
-                require('../../assets/img/brain_exercise.png'), require('../../assets/img/brain_exercise.png'))}
+            {this.renderRecommendationIconCard("Color Match (Medium)", "Read News", 
+                "eyedropper-variant", "book-open-variant")}
             
             <Text style={styles.subTitleText}> Physical Exercises </Text>
 
-            {this.renderRecommendationCard("Recommendation 1", "Recommentation 2", 
-                require('../../assets/img/walking.png'), require('../../assets/img/walking.png'))}
-            
-            {this.renderRecommendationCard("Recommendation 3", "Recommentation 4", 
-                require('../../assets/img/walking.png'), require('../../assets/img/walking.png'))}
+            {this.renderRecommendationImageCard("Walk (10,000 steps)", "Yoga", 
+                require('../../assets/img/walking.png'), require('../../assets/img/yoga.png'))}
             
             
         </ScrollView>

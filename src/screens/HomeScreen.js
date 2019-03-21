@@ -156,6 +156,12 @@ export default class HomeScreen extends React.Component {
         />
 
         <TouchableOpacity
+            onPress={ ()=> navigate('Recommendation', {username: this.state.username})}
+          >
+          <Text style = { styles.textStyle }> Recommendation </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
           style={styles.button}
           onPress={this.onPress}
           onPress={ ()=>{ Linking.openURL('https://www.nia.nih.gov/health/what-alzheimers-disease')}}
@@ -168,12 +174,6 @@ export default class HomeScreen extends React.Component {
           onPress={ ()=> navigate('Settings', {username: this.state.username})}
         >
         <Text style = { styles.textStyle }> Settings </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={ ()=> navigate('Recommendation', {username: this.state.username})}
-        >
-        <Text style = { styles.textStyle }> Recommendation </Text>
         </TouchableOpacity>
       </View>
     )
