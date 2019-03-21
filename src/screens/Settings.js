@@ -38,7 +38,7 @@ export default class Settings extends Component {
 
         </TouchableOpacity>
         <TouchableOpacity 
-            onPress={ ()=>{ Linking.openURL('https://docs.google.com/document/d/1dxtVDFllG4sIjT98ozY0AtZ3eNlqx1uP0h7X_soyTXY/edit?usp=sharing')}}
+            onPress={ ()=>{ Linking.openURL('https://docs.google.com/document/d/1y5rre4nIdC9UctdV5k9Rv8-fM-WpZ9r-MvZ4sEuyDgE/edit?usp=sharing')}}
             style = {styles.ButtonStyle}>
             <Image
                 source={require('../../assets/img/about.png')}

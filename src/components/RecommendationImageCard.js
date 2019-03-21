@@ -1,18 +1,18 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-import RecommendationItem from '../components/RecommendationItem';
+import RecommendationImageItem from './RecommendationImageItem';
 
-const RecommendationCard = ({ item1, item2, image1, image2, backgroundColor, navigate, username }) => {
+const RecommendationImageCard = ({ item1, item2, image1, image2, backgroundColor, navigate, username }) => {
   return (
     <View style={styles.container}>
       <View style={styles.cardItemContainer}>
-        <RecommendationItem
+        <RecommendationImageItem
           title={item1}
           image={image1}
           username={username}
         />
-        <RecommendationItem
+        <RecommendationImageItem
           title={item2}
           image={image2}
           username={username}
@@ -46,4 +46,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default RecommendationCard;
+export default RecommendationImageCard;

@@ -47,10 +47,10 @@ render() {
                 borderRadius:0.5,
             }}/>
 
-            {this.renderPercentageList("Recommendation 1", 100)}
-            {this.renderPercentageList("Recommendation 2", 50)}
-            {this.renderPercentageList("Recommendation 3", 30)}
-            {this.renderPercentageList("Recommendation 4", 0)}
+            {this.renderPercentageList("Alphanumeric Memory (Medium)", 100)}
+            {this.renderPercentageList("Image Memory (Hard)", 50)}
+            {this.renderPercentageList("Color Match (Medium)", 30)}
+            {this.renderPercentageList("Read News", 0)}
 
         </ScrollView>
     );
